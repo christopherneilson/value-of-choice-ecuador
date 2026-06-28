@@ -1,0 +1,11 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.Rhistory
+*.swp
+
+# Build caches / private intermediates (the appendix HTML is the only built artifact we commit)
+_cache.pkl
+*.pkl
+.env
+.env.*
