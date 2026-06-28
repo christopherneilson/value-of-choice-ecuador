@@ -1,7 +1,8 @@
-# The Price of Proximity — project website
+# The Value of Choice in Centralized School Assignment — project website
 
-Public website / online materials for the Manta, Ecuador school-choice study (working title
-*"The Price of Proximity"*). Served as a static site via **GitHub Pages**.
+Public website / online materials for the paper *"The Value of Choice in Centralized School
+Assignment: Welfare Gains from Acting on Family Preferences in Ecuador"* (Elacqua, Jacas, Krussig,
+Méndez & Neilson). Served as a static site via **GitHub Pages**.
 
 ## Structure
 ```
