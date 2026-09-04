@@ -1,0 +1,1475 @@
+{
+ "note": "Real school locations, cantons and per-grade regular seats. Desirability is published as a quintile band only; xi_km is the band's expected value under N(0, sigma_xi^2).",
+ "schools": [
+  {
+   "id": "S01",
+   "lat": -0.96424,
+   "lon": -80.69697,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S02",
+   "lat": -0.95379,
+   "lon": -80.67715,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 60,
+     "xi_band": 5,
+     "xi_km": 0.77
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S03",
+   "lat": -0.96835,
+   "lon": -80.69377,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "3": {
+     "seats": 5,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S04",
+   "lat": -0.95087,
+   "lon": -80.69985,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 6,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S05",
+   "lat": -0.95453,
+   "lon": -80.70014,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 4,
+     "xi_km": 0.285
+    },
+    "3": {
+     "seats": 24,
+     "xi_band": 5,
+     "xi_km": 0.77
+    }
+   }
+  },
+  {
+   "id": "S06",
+   "lat": -0.97955,
+   "lon": -80.68882,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 4,
+     "xi_km": 0.285
+    }
+   }
+  },
+  {
+   "id": "S07",
+   "lat": -0.96977,
+   "lon": -80.67655,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 75,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 2,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S08",
+   "lat": -0.9516,
+   "lon": -80.69498,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 12,
+     "xi_band": 2,
+     "xi_km": -0.293
+    }
+   }
+  },
+  {
+   "id": "S09",
+   "lat": -0.96826,
+   "lon": -80.69605,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 44,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S10",
+   "lat": -0.95202,
+   "lon": -80.70554,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 4,
+     "xi_km": 0.285
+    },
+    "3": {
+     "seats": 9,
+     "xi_band": 4,
+     "xi_km": 0.293
+    }
+   }
+  },
+  {
+   "id": "S11",
+   "lat": -0.95365,
+   "lon": -80.70642,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "3": {
+     "seats": 12,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S12",
+   "lat": -0.96412,
+   "lon": -80.69046,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 39,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S13",
+   "lat": -0.98505,
+   "lon": -80.68976,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 2,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 6,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S14",
+   "lat": -0.95015,
+   "lon": -80.729,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 1,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 6,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S15",
+   "lat": -0.95543,
+   "lon": -80.72903,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 4,
+     "xi_km": 0.285
+    },
+    "3": {
+     "seats": 1,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S16",
+   "lat": -0.94751,
+   "lon": -80.72966,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 3,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S17",
+   "lat": -0.95701,
+   "lon": -80.73488,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 22,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 13,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S18",
+   "lat": -0.99641,
+   "lon": -80.76092,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    }
+   }
+  },
+  {
+   "id": "S19",
+   "lat": -0.94428,
+   "lon": -80.72684,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 2,
+     "xi_band": 5,
+     "xi_km": 0.77
+    }
+   }
+  },
+  {
+   "id": "S20",
+   "lat": -0.94296,
+   "lon": -80.72595,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 2,
+     "xi_band": 5,
+     "xi_km": 0.77
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S21",
+   "lat": -0.94962,
+   "lon": -80.73922,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 5,
+     "xi_band": 5,
+     "xi_km": 0.77
+    }
+   }
+  },
+  {
+   "id": "S22",
+   "lat": -0.96813,
+   "lon": -80.7137,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 60,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 5,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S23",
+   "lat": -0.97381,
+   "lon": -80.70782,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    }
+   }
+  },
+  {
+   "id": "S24",
+   "lat": -0.96967,
+   "lon": -80.72262,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "3": {
+     "seats": 2,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S25",
+   "lat": -0.97046,
+   "lon": -80.71101,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 2,
+     "xi_km": -0.293
+    }
+   }
+  },
+  {
+   "id": "S26",
+   "lat": -0.97567,
+   "lon": -80.71169,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 2,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 6,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S27",
+   "lat": -0.96214,
+   "lon": -80.71292,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 6,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 4,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S28",
+   "lat": -0.96601,
+   "lon": -80.70812,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 4,
+     "xi_km": 0.293
+    }
+   }
+  },
+  {
+   "id": "S29",
+   "lat": -0.95785,
+   "lon": -80.71566,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 24,
+     "xi_band": 4,
+     "xi_km": 0.285
+    },
+    "4": {
+     "seats": 9,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S30",
+   "lat": -0.95767,
+   "lon": -80.71115,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 4,
+     "xi_km": 0.285
+    },
+    "3": {
+     "seats": 9,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 10,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S31",
+   "lat": -0.95816,
+   "lon": -80.71415,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 5,
+     "xi_km": 0.77
+    }
+   }
+  },
+  {
+   "id": "S32",
+   "lat": -0.95353,
+   "lon": -80.71213,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 13,
+     "xi_band": 5,
+     "xi_km": 0.77
+    },
+    "4": {
+     "seats": 3,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S33",
+   "lat": -0.97461,
+   "lon": -80.72014,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 6,
+     "xi_band": 2,
+     "xi_km": -0.293
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S34",
+   "lat": -0.95723,
+   "lon": -80.72526,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 1,
+     "xi_band": 5,
+     "xi_km": 0.77
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S35",
+   "lat": -0.95926,
+   "lon": -80.71949,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 4,
+     "xi_km": 0.285
+    },
+    "3": {
+     "seats": 21,
+     "xi_band": 5,
+     "xi_km": 0.77
+    }
+   }
+  },
+  {
+   "id": "S36",
+   "lat": -0.95638,
+   "lon": -80.7069,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 9,
+     "xi_band": 4,
+     "xi_km": 0.293
+    }
+   }
+  },
+  {
+   "id": "S37",
+   "lat": -0.9989,
+   "lon": -80.73902,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 0,
+     "xi_band": 2,
+     "xi_km": -0.293
+    }
+   }
+  },
+  {
+   "id": "S38",
+   "lat": -0.95081,
+   "lon": -80.73619,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 2,
+     "xi_band": 5,
+     "xi_km": 0.77
+    },
+    "4": {
+     "seats": 4,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S39",
+   "lat": -0.97921,
+   "lon": -80.72707,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 2,
+     "xi_km": -0.293
+    },
+    "4": {
+     "seats": 0,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S40",
+   "lat": -0.98157,
+   "lon": -80.70208,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 6,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S41",
+   "lat": -0.9887,
+   "lon": -80.7122,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S42",
+   "lat": -0.98589,
+   "lon": -80.7014,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    }
+   }
+  },
+  {
+   "id": "S43",
+   "lat": -0.99548,
+   "lon": -80.70596,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "4": {
+     "seats": 35,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S44",
+   "lat": -0.98075,
+   "lon": -80.70543,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 60,
+     "xi_band": 5,
+     "xi_km": 0.77
+    }
+   }
+  },
+  {
+   "id": "S45",
+   "lat": -0.97981,
+   "lon": -80.70012,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 23,
+     "xi_band": 2,
+     "xi_km": -0.293
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S46",
+   "lat": -0.9871,
+   "lon": -80.70779,
+   "canton": "Manta",
+   "grades": {
+    "4": {
+     "seats": 52,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S47",
+   "lat": -0.98915,
+   "lon": -80.70663,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 4,
+     "xi_km": 0.285
+    }
+   }
+  },
+  {
+   "id": "S48",
+   "lat": -0.9751,
+   "lon": -80.7049,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 4,
+     "xi_km": 0.285
+    }
+   }
+  },
+  {
+   "id": "S49",
+   "lat": -0.97814,
+   "lon": -80.70778,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "4": {
+     "seats": 4,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S50",
+   "lat": -0.99016,
+   "lon": -80.70492,
+   "canton": "Manta",
+   "grades": {
+    "3": {
+     "seats": 60,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 11,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S51",
+   "lat": -1.04203,
+   "lon": -80.65453,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 18,
+     "xi_band": 1,
+     "xi_km": -0.77
+    }
+   }
+  },
+  {
+   "id": "S52",
+   "lat": -0.99171,
+   "lon": -80.68822,
+   "canton": "Montecristi",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 2,
+     "xi_km": -0.293
+    }
+   }
+  },
+  {
+   "id": "S53",
+   "lat": -1.0403,
+   "lon": -80.66209,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 22,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 7,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S54",
+   "lat": -1.04255,
+   "lon": -80.66148,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 11,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 3,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S55",
+   "lat": -0.98969,
+   "lon": -80.63141,
+   "canton": "Jaramijo",
+   "grades": {
+    "3": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 20,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S56",
+   "lat": -1.0545,
+   "lon": -80.65889,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 14,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 31,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S57",
+   "lat": -1.04309,
+   "lon": -80.68017,
+   "canton": "Montecristi",
+   "grades": {
+    "4": {
+     "seats": 15,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S58",
+   "lat": -1.0139,
+   "lon": -80.68462,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "3": {
+     "seats": 23,
+     "xi_band": 2,
+     "xi_km": -0.293
+    },
+    "4": {
+     "seats": 18,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S59",
+   "lat": -1.0239,
+   "lon": -80.68078,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 23,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 15,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S60",
+   "lat": -1.01542,
+   "lon": -80.68065,
+   "canton": "Montecristi",
+   "grades": {
+    "4": {
+     "seats": 35,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S61",
+   "lat": -1.05223,
+   "lon": -80.65173,
+   "canton": "Montecristi",
+   "grades": {
+    "4": {
+     "seats": 15,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S62",
+   "lat": -1.02352,
+   "lon": -80.68246,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "3": {
+     "seats": 12,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S63",
+   "lat": -1.0492,
+   "lon": -80.65925,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 100,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S64",
+   "lat": -0.99003,
+   "lon": -80.70009,
+   "canton": "Montecristi",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S65",
+   "lat": -0.99709,
+   "lon": -80.69133,
+   "canton": "Montecristi",
+   "grades": {
+    "4": {
+     "seats": 70,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S66",
+   "lat": -1.04471,
+   "lon": -80.66272,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "3": {
+     "seats": 13,
+     "xi_band": 4,
+     "xi_km": 0.293
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S67",
+   "lat": -1.05095,
+   "lon": -80.661,
+   "canton": "Montecristi",
+   "grades": {
+    "4": {
+     "seats": 75,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S68",
+   "lat": -0.95892,
+   "lon": -80.63872,
+   "canton": "Jaramijo",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "3": {
+     "seats": 1,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 2,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S69",
+   "lat": -0.95941,
+   "lon": -80.63884,
+   "canton": "Jaramijo",
+   "grades": {
+    "2": {
+     "seats": 30,
+     "xi_band": 1,
+     "xi_km": -0.748
+    },
+    "4": {
+     "seats": 8,
+     "xi_band": 2,
+     "xi_km": -0.381
+    }
+   }
+  },
+  {
+   "id": "S70",
+   "lat": -0.95002,
+   "lon": -80.6662,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 5,
+     "xi_km": 0.748
+    },
+    "3": {
+     "seats": 0,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S71",
+   "lat": -0.98148,
+   "lon": -80.7193,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 49,
+     "xi_band": 5,
+     "xi_km": 0.748
+    }
+   }
+  },
+  {
+   "id": "S72",
+   "lat": -1.00462,
+   "lon": -80.71274,
+   "canton": "Montecristi",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 2,
+     "xi_km": -0.293
+    }
+   }
+  },
+  {
+   "id": "S73",
+   "lat": -0.98613,
+   "lon": -80.73001,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "4": {
+     "seats": 5,
+     "xi_band": 4,
+     "xi_km": 0.381
+    }
+   }
+  },
+  {
+   "id": "S74",
+   "lat": -0.994,
+   "lon": -80.69273,
+   "canton": "Montecristi",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 2,
+     "xi_km": -0.293
+    },
+    "4": {
+     "seats": 3,
+     "xi_band": 3,
+     "xi_km": 0.0
+    }
+   }
+  },
+  {
+   "id": "S75",
+   "lat": -0.99298,
+   "lon": -80.68044,
+   "canton": "Montecristi",
+   "grades": {
+    "3": {
+     "seats": 30,
+     "xi_band": 2,
+     "xi_km": -0.293
+    }
+   }
+  },
+  {
+   "id": "S76",
+   "lat": -1.00237,
+   "lon": -80.67243,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "3": {
+     "seats": 21,
+     "xi_band": 1,
+     "xi_km": -0.77
+    },
+    "4": {
+     "seats": 7,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S77",
+   "lat": -0.96682,
+   "lon": -80.71399,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 4,
+     "xi_km": 0.285
+    }
+   }
+  },
+  {
+   "id": "S78",
+   "lat": -1.00413,
+   "lon": -80.69669,
+   "canton": "Montecristi",
+   "grades": {
+    "2": {
+     "seats": 50,
+     "xi_band": 4,
+     "xi_km": 0.285
+    },
+    "3": {
+     "seats": 10,
+     "xi_band": 3,
+     "xi_km": 0.0
+    },
+    "4": {
+     "seats": 1,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  },
+  {
+   "id": "S79",
+   "lat": -1.0418,
+   "lon": -80.6544,
+   "canton": "Montecristi",
+   "grades": {
+    "4": {
+     "seats": 70,
+     "xi_band": 1,
+     "xi_km": -1.0
+    }
+   }
+  },
+  {
+   "id": "S80",
+   "lat": -1.00324,
+   "lon": -80.72705,
+   "canton": "Manta",
+   "grades": {
+    "2": {
+     "seats": 25,
+     "xi_band": 2,
+     "xi_km": -0.285
+    },
+    "4": {
+     "seats": 0,
+     "xi_band": 5,
+     "xi_km": 1.0
+    }
+   }
+  }
+ ]
+}
