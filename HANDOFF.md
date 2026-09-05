@@ -31,9 +31,12 @@ public-ready landing page, appendix rewrite, privacy check · `d62c4ee` June ske
 `eb5eaff` landing generator · `64219c0` fixtures + Python judge · `a04ddcf` synthetic generator ·
 `4f9f43d` cover-letter fix, appendix prose recovered and versioned.
 
-**Intended public URL:** `https://christopherneilson.github.io/value-of-choice-ecuador/`.
-GitHub Pages serves a private repo only on paid plans; on Free the site repo must be public. It
-contains nothing sensitive (see §4).
+**Live since 2026-09-04 at `https://www.christopher-neilson.com/value-of-choice-ecuador/`.** The
+site repo is public and Pages deploys from `main` / root; because the user site
+(`christopherneilson.github.io`) carries the custom domain `www.christopher-neilson.com` with HTTPS
+enforced, project pages are served under it, and `christopherneilson.github.io/value-of-choice-ecuador/`
+redirects there. Every push to `main` redeploys in about 30 s. The repo contains nothing sensitive
+(see §4).
 
 ---
 
@@ -79,9 +82,10 @@ refuses to run without the content file; `--placeholder` is for a first scaffold
 
 ### 2.5 Preview and deploy
 Preview: start the `website` server from the launch config (or `python -m http.server 8012
---directory <site repo>`), open `http://localhost:8012/`. Deploy: Settings → Pages → *Deploy from a
-branch* → `main` / root; make the repo public. Add a `CNAME` only if a custom domain is wanted, and
-then update the URL in `cite.bib`, `index.html` (canonical, `citation_pdf_url`) and README.
+--directory <site repo>`), open `http://localhost:8012/`. Deploy: already configured — Pages builds
+`main` / root on every push (about 30 s; `gh api repos/christopherneilson/value-of-choice-ecuador/pages/builds/latest`
+shows the status). The public URL is a constant, `BASE`, in `code/7_site/make_landing.py` (research
+repo); if the domain ever changes, change it there, regenerate, and update README and this file.
 
 ---
 
@@ -224,9 +228,10 @@ landing page and appendix publication-ready · privacy checks.
 4. **Spanish/English toggle.** Move every string in `simulator/` and `story/` into a `strings.js`
    with `en`/`es`; persist the choice in `localStorage`; translate with a native reviewer (the primary
    audience reads Spanish). *Done when* no English string is visible in the Spanish view.
-5. **Go public.** Enable Pages, make the repo public, verify the live URL renders the simulator and
-   the appendix, add the URL to the paper's title page or acknowledgments only if the authors want it
-   there (it is not there now, deliberately — the submitted PDF says nothing about the site).
+5. **Go public.** *Done 2026-09-04*: repo public, Pages on `main`/root, HTTPS enforced, landing page,
+   simulator and appendix verified live. Still open: whether to add the URL to the paper's title page
+   or acknowledgments (it is not there now, deliberately — the submitted PDF says nothing about the
+   site).
 
 ### Phase 3 — more lenses (after Phase 2)
 6. **Who gains.** Requires the census-block layer. Gains by NBI quintile under the current sliders,

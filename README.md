@@ -6,7 +6,7 @@ the design decisions and their rationale, known gaps, and the roadmap.
 Public website / online materials for the paper *"The Value of Choice in Centralized School
 Assignment: Welfare Gains from Acting on Family Preferences in Ecuador"* (Elacqua, Jacas, Krussig,
 Méndez & Neilson). Served as a static site via **GitHub Pages** at
-<https://christopherneilson.github.io/value-of-choice-ecuador/>.
+<https://www.christopher-neilson.com/value-of-choice-ecuador/>.
 
 ## Structure
 ```
@@ -67,11 +67,12 @@ repo (uses the cached embeddings; `--rebuild` recomputes them), and copy
   exteriors, murals — 327 images) reviewed on contact sheets; no identifiable person. The page
   embeds only these low-resolution thumbnails, so the lightbox has nothing sharper to show.
 
-## Deploy (GitHub Pages)
-1. Settings → Pages → Source: *Deploy from a branch* → `main` / root.
-2. (Optional) add a `CNAME` file for a custom domain and update the URL in `cite.bib`,
-   `index.html` (`canonical` and `citation_pdf_url`) and this README.
-3. Make the repo public.
+## Deployment (GitHub Pages)
+Live at <https://www.christopher-neilson.com/value-of-choice-ecuador/> since 2026-09-04: the repo is
+public and Pages builds `main` / root on every push (about 30 s). Project pages are served under the
+user site's custom domain with HTTPS enforced; `christopherneilson.github.io/value-of-choice-ecuador/`
+redirects there. The public URL is the `BASE` constant in `code/7_site/make_landing.py` (research
+repo) — change it there and regenerate if the domain ever changes.
 
 ## Licensing
 Mixed by asset — see the in-page disclosures in each appendix. Mapillary imagery is CC-BY-SA-4.0;
