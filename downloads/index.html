@@ -1,0 +1,79 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Downloads and teaching kit — The Value of Choice</title>
+<meta name="description" content="The synthetic Manta as JSON, the assignment engine as a standalone module, a notebook that rebuilds the paper's rules from scratch and checks them against the engine, and the paper.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--da:#21918c}
+*{box-sizing:border-box}body{font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:22px 22px 70px;position:relative}
+.crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;padding-right:90px}
+h1{font-size:30px;margin:6px 0 6px;letter-spacing:-.01em;line-height:1.2}
+.lede{color:#333;max-width:820px;margin:0 0 18px}
+.langtoggle{position:absolute;right:22px;top:20px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:#fff}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:28px 0 8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid #f0f0f0;vertical-align:top}th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td.f{white-space:nowrap;font-family:ui-monospace,Consolas,monospace;font-size:13px}
+p{margin:8px 0}
+ul{margin:6px 0 6px 20px;padding:0}li{margin:3px 0}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.links a{font-size:14px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:7px 13px}
+.links a:hover{border-color:#bbb}
+.links a.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.tiny{font-size:12px;color:var(--mut)}
+code{font-family:ui-monospace,Consolas,monospace;font-size:13px;background:#f6f6f6;border-radius:4px;padding:0 4px}
+</style></head><body><div class=wrap>
+
+<div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="dl.crumb.tag">downloads</span></div>
+<div id=langtoggle></div>
+<h1 data-i18n="dl.h1">Downloads and teaching kit</h1>
+<p class=lede data-i18n="dl.lede">Everything on this site that can be reused: the synthetic Manta as JSON, the assignment engine as a standalone module, a notebook that rebuilds the paper's rules from scratch and checks them against the engine, and the paper itself. All of it is synthetic, derived or aggregated; nothing identifies a family. Please cite the paper when you use it.</p>
+
+<h2 data-i18n="dl.nb.h">The teaching notebook</h2>
+<p data-i18n="dl.nb.p">Plain Python, standard library only, about a minute to run. It loads the site's data, writes applicant-proposing deferred acceptance in fifteen lines, reproduces the site engine's assignment for every one of the 1,098 entry-grade families under both rules, averages twenty lotteries to recover the simulator's numbers, then changes the market: takes 30% of the seats away, and asks what the value of choice would be if families only cared about distance. Four exercises at the end, from stable improvement cycles to running it on your own city.</p>
+<div class=links>
+  <a class=primary href="https://colab.research.google.com/github/christopherneilson/value-of-choice-ecuador/blob/main/downloads/value_of_choice_teaching.ipynb" data-i18n="dl.nb.colab">Open in Google Colab →</a>
+  <a href="value_of_choice_teaching.ipynb" download data-i18n="dl.nb.download">Download the notebook (.ipynb)</a>
+  <a href="https://github.com/christopherneilson/value-of-choice-ecuador/blob/main/downloads/value_of_choice_teaching.ipynb" data-i18n="dl.nb.github">Read it on GitHub</a>
+</div>
+
+<h2 data-i18n="dl.data.h">The data</h2>
+<table><thead><tr><th data-i18n="dl.th.file">file</th><th data-i18n="dl.th.contents">contents</th></tr></thead><tbody>
+<tr><td class=f><a href="../data/schools.json">schools.json</a></td><td data-i18n="dl.f.schools">Every in-market school: anonymised id, coordinates, canton, and per grade the regular seats and the desirability band (1–5, with the band's expected value in km-equivalents). Real facts except the band, which replaces the estimated value.</td></tr>
+<tr><td class=f><a href="../data/applicants_g2.json">applicants_g2.json</a><br><a href="../data/applicants_g3.json">applicants_g3.json</a><br><a href="../data/applicants_g4.json">applicants_g4.json</a></td><td data-i18n="dl.f.apps">The synthetic families, one file per entry grade (Preschool 1, Preschool 2, Primary 1; 1,098 / 885 / 389 families). Per family: a synthetic home, its taste for distance, list length, number of schools considered, sibling school, the list it submitted, and its utility for every school. The published parameters of the demand model are in the file header.</td></tr>
+<tr><td class=f><a href="../data/home_density_cells.json">home_density_cells.json</a></td><td data-i18n="dl.f.cells">The 300 m density grid the homes are drawn from: cell centres and counts, cells with fewer than five households removed (187 cells).</td></tr>
+<tr><td class=f><a href="../data/calibration.json">calibration.json</a></td><td data-i18n="dl.f.cal">Every moment of the synthetic market beside its paper target, by grade and pooled; rendered on the <a href="../calibration/">calibration page</a>.</td></tr>
+<tr><td class=f><a href="../data/school_attributes.json">school_attributes.json</a></td><td data-i18n="dl.f.attr">The ten imagery-derived attributes of each in-market school, raw and standardised, with its band and the planner model's leave-one-out guess (the planner game).</td></tr>
+<tr><td class=f><a href="../data/survey_aggregates.json">survey_aggregates.json</a></td><td data-i18n="dl.f.survey">Tabulations of the parent survey by list length and grade: no group below twenty respondents, no count between one and four (the survey explorer).</td></tr>
+</tbody></table>
+<div class=links>
+  <a href="https://github.com/christopherneilson/value-of-choice-ecuador/blob/main/data/README.md" data-i18n="dl.f.readme">Field-by-field documentation</a>
+  <a href="https://github.com/christopherneilson/value-of-choice-ecuador/archive/refs/heads/main.zip" data-i18n="dl.f.zip">Everything as one ZIP (the whole site repository)</a>
+</div>
+
+<h2 data-i18n="dl.engine.h">The engine</h2>
+<p data-i18n="dl.engine.p">The rules the paper compares, as a dependency-free ES module you can import from any page or from Node: deferred acceptance, the distance rule, the stable-improvement-cycles benchmark, the market builder, the parameter rescaler and the seeded simulator. It is validated against the research pipeline's Python engines on one lottery draw per grade, family by family; the fixtures are published with it.</p>
+<div class=links>
+  <a href="../engine/engine.js">engine.js</a>
+  <a href="https://github.com/christopherneilson/value-of-choice-ecuador/blob/main/engine/README.md" data-i18n="dl.engine.readme">How to use it</a>
+  <a href="https://github.com/christopherneilson/value-of-choice-ecuador/tree/main/engine/fixtures" data-i18n="dl.engine.fixtures">Validation fixtures</a>
+</div>
+
+<h2 data-i18n="dl.paper.h">The paper</h2>
+<div class=links>
+  <a href="../value-of-choice-ecuador.pdf">PDF</a>
+  <a href="../cite.bib">BibTeX</a>
+  <a href="../calibration/" data-i18n="dl.cal.link">How the synthetic market compares with it</a>
+</div>
+
+<h2 data-i18n="dl.terms.h">Terms</h2>
+<p data-i18n="dl.terms.p">These files are the authors' derived and synthetic materials, published with the working paper for teaching and research; cite the paper when you use them. The underlying application records and survey responses are confidential Ministry of Education data and individual answers; they are not here and cannot be shared. Questions and requests: <a href="mailto:christopher.neilson@yale.edu">christopher.neilson@yale.edu</a>.</p>
+
+<script type=module>import * as I from "../shared/i18n.js"; I.init(); I.mountToggle("#langtoggle");
+const T = { en: "Downloads and teaching kit — The Value of Choice", es: "Descargas y material didáctico — El valor de elegir" };
+if (I.getLang() === "es") document.title = T.es; window.addEventListener("langchange", e => { document.title = T[e.detail.lang] || T.en; });</script>
+</div></body></html>

@@ -1,0 +1,56 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Does the synthetic market reproduce the paper? — The Value of Choice</title>
+<meta name="description" content="Every number the site's synthetic Manta produces, beside the paper's: which moments the synthetic population reproduces, which it does not, and why.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--da:#21918c;--bad:#b42318;--good:#1a7f37}
+*{box-sizing:border-box}body{font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:22px 22px 70px;position:relative}
+.crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;padding-right:90px}
+h1{font-size:30px;margin:6px 0 6px;letter-spacing:-.01em;line-height:1.2}
+.lede{color:#333;max-width:820px;margin:0 0 18px}
+.langtoggle{position:absolute;right:22px;top:20px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:#fff}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:5px 6px;border-bottom:1px solid #f0f0f0;vertical-align:top}th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.g td{font-weight:700;padding-top:12px;border-bottom:1px solid var(--line)}
+td.ok{color:var(--good)}td.gap{color:var(--bad)}
+.tiny{font-size:12px;color:var(--mut)}
+.src{display:inline-block;font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:0 7px;margin-left:4px;vertical-align:1px}
+.reading{max-width:820px}.reading p{margin:8px 0}
+.reading h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:22px 0 6px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cta{display:inline-block;font-size:14px;text-decoration:none;color:var(--ink);border:1px solid #ccc;border-radius:9px;padding:7px 12px}
+@media (max-width:640px){.wrap{padding:16px 12px 50px}}
+</style></head><body><div class=wrap>
+
+<div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="cal.crumb.tag">calibration</span></div>
+<div id=langtoggle></div>
+<h1 data-i18n="cal.h1">Does the synthetic market reproduce the paper?</h1>
+<p class=lede data-i18n="cal.lede">The simulator and the story run on a synthetic Manta: the real schools, cantons and seats, and families drawn from the paper's estimated demand model because the real families' homes and applications are confidential. This page puts every number that population produces beside the paper's own, from the file the generator writes. Green rows match; red rows are the known gaps, explained below.</p>
+<p class=tiny id=meta></p>
+
+<div class=card><h2 data-i18n="cal.pooled.h">Access, all three grades pooled: distance rule → preference-based assignment</h2><div id=pooled></div></div>
+<div class=card><h2 data-i18n="cal.grade.h">By grade</h2><div id=bygrade></div></div>
+<div class=card><h2 data-i18n="cal.mech.h">The four mechanisms in the synthetic market (synthetic only)</h2><div id=mech></div></div>
+
+<div class=reading>
+  <h2 data-i18n="cal.read.h">How to read this</h2>
+  <p data-i18n="cal.read.p1">What was calibrated, and what was not. Every parameter of the model is the paper's published estimate; school desirability is the band the paper's estimates put each school in; homes are drawn inside a 300 m density grid of applicant homes with cells of fewer than five households removed. One thing was tuned: how many nearby schools a family compares before writing its list, one plus a Poisson draw with mean 1.5, about two and a half schools. Drawn over all 55 schools instead, the model would put the nearest school first for only about 40% of families against 65% observed, and no rescaling of the taste parameters fixes that without breaking the welfare numbers. Small consideration sets are also what the paper's survey says families actually know.</p>
+  <p data-i18n="cal.read.p2">What matches. The access story: the share placed in a listed school and in the first choice under each rule, by grade and pooled, and the way both fall as the market tightens from the entry grade to Primary 1. Distances to the nearest school and the share who rank it first in the two later grades.</p>
+  <p data-i18n="cal.read.p3">What does not. Three gaps are the price of the small consideration sets. Families who choose a school other than their nearest do not go as far out of their way as real ones (about 0.25 km against 0.6), so the welfare gain in kilometres is about 70% of the paper's; in the entry grade the nearest-first share is 58% against 65%. And Primary 1's "share of the range recovered" is not comparable at all: in the paper that ratio is near-undefined for the congested grade (its confidence interval spans −77% to +36%), while in the synthetic world, where preferences are complete, it is well defined. The congestion story lives in the first-choice share, which matches.</p>
+  <p data-i18n="cal.read.p4">Why it matters. Nothing on this site is evidence about Manta beyond what the paper reports; the synthetic market is a device for seeing how the paper's conclusions depend on its ingredients. Where a slider moves a number here, the paper's estimates say by roughly how much it would move there.</p>
+  <div class=ctas>
+    <a class=cta href="../downloads/" data-i18n="cal.cta.dl">Download the data and the notebook →</a>
+    <a class=cta href="../simulator/" data-i18n="cal.cta.sim">Run the simulator →</a>
+  </div>
+</div>
+
+<script type=module src="calibration.js"></script>
+</div></body></html>

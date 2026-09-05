@@ -293,9 +293,20 @@ landing page and appendix publication-ready · privacy checks.
     `check_site_data.py`. Only tabulations that appear in the paper or its online appendix are shown,
     plus one companion (knowledge of *listed* schools, 55% "know well"); two survey items that are
     *not* in the paper were deliberately left out — see §7.
-11. **Downloads and teaching kit.** `data/` as a documented ZIP, the engine as a standalone module, a
-    Colab notebook that reproduces the exhibit's numbers with `matching.py`, and a "the toy reproduces
-    the paper" calibration page built from `calibration.json`.
+11. **Downloads and teaching kit.** *Done 2026-09-05.* `downloads/` lists every reusable file with
+    what it contains (the ZIP is GitHub's archive of the repo, always current, so nothing to rebuild);
+    `data/README.md` documents every file field by field; `engine/README.md` documents the module
+    (import from the site URL or Node). The notebook `downloads/value_of_choice_teaching.ipynb` is
+    built and executed by `python tools/make_notebook.py --execute` (nbformat + jupyter; standard
+    library only inside the notebook): it re-implements DA in fifteen lines, reproduces the fixture
+    assignment for all 1,098 entry-grade families under both rules, recovers the simulator's 20-draw
+    numbers to lottery noise, then runs the congestion (−30% seats) and proximity-only exercises (the
+    value of choice falls from +0.48 to +0.01 km-eq when lists are nearest-first by construction) and
+    ends with four open exercises. It reads local files when run inside the repo, the live site
+    otherwise (Colab link on the page). `calibration/` renders `data/calibration.json` beside the
+    paper's targets, green/red by tolerance; the per-grade paper access numbers (65/43/26, 96/70/46,
+    93/58/33, gains 0.686/0.354/0.012) now live in the generator's `TARGETS` so the page has no
+    hand-typed numbers. Committed with outputs so GitHub renders the run.
 
 ### Phase 4 — hardening
 12. CI: *Done 2026-09-05.* `.github/workflows/test.yml` runs `node engine/test_engine.mjs` and
@@ -311,6 +322,9 @@ landing page and appendix publication-ready · privacy checks.
 - Show school names on the simulator map? They are already public in the appendix; ids are used now.
 - Should the site URL appear in the paper at all, and when — at submission, or once accepted?
 - Spanish first, or English first, on the landing page?
+- A licence for the downloads. `downloads/` says "cite the paper" and nothing more; CC BY 4.0 for the
+  synthetic data, derived attributes and survey tabulations, and MIT for `engine/`, would be the
+  conventional choice. Until one is stated, reuse rests on the page's wording.
 - Two survey items are tabulated nowhere in the paper and were kept off the site until the authors
   decide: (a) "if you added more schools, what do you think would happen?" — 69% of those answering
   ticked "lowers my chance at my first preferences" (1,057 of 1,532), which is false under deferred

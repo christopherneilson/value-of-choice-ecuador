@@ -10,16 +10,26 @@ Méndez & Neilson). Served as a static site via **GitHub Pages** at
 
 ## Structure
 ```
-index.html                          landing page: title, authors, JEL, abstract, links, cards
+index.html                          landing page: title, authors, JEL, abstract, links, cards (generated)
 value-of-choice-ecuador.pdf         the paper (the named build submitted to the journal)
 cite.bib                            BibTeX for the working paper
-simulator/index.html, app.js        "Choose the rule": map, rule toggle, metrics, sliders (Leaflet + OSM tiles)
-engine/engine.js                    the matching engines (DA, distance rule, stable improvement cycles),
-                                    market builder, parameter re-scaler, seeded simulator — ES module, no deps
+story/                              scrollytelling walk through the argument, live model beside it
+simulator/index.html, app.js        "Choose the rule": map, rule toggle, metrics, sliders, awareness, family cards
+toy/                                strategy-proofness toy: Boston vs deferred acceptance, three families
+planner/                            "Could a planner have guessed?": desirability bands from imagery attributes
+survey/                             the parent survey as aggregates, sliced by list length and grade
+ladder/                             the two welfare ladders (Manta vs New York), click-to-explain
+calibration/                        every synthetic-market moment beside its paper target
+downloads/                          downloads page + the teaching notebook (value_of_choice_teaching.ipynb)
+engine/engine.js, README.md         the matching engines (DA, distance rule, stable improvement cycles, Boston),
+                                    market builder, parameter re-scaler, awareness, seeded simulator — ES module, no deps
 engine/test_engine.mjs, fixtures/   validation against Python fixtures:  node engine/test_engine.mjs
-data/                               the synthetic Manta (schools, applicants by grade, density grid, calibration)
+data/, data/README.md               the synthetic Manta + derived attributes + survey tabulations, documented field by field
+shared/i18n.js                      English/Spanish strings and the language toggle
+tools/                              check_links.mjs (CI), make_notebook.py (builds + executes the notebook)
 appendix/
   school-imagery/index.html         interactive online appendix: image types + CLIP embedding map
+.github/workflows/test.yml          CI: engine tests + link check on every push
 .nojekyll                           serve raw HTML (skip Jekyll processing)
 ```
 
