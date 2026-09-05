@@ -54,6 +54,10 @@ python code/7_site/make_fixture.py                          # one lottery draw p
 Copy `output/site_data/{schools,applicants_g2,applicants_g3,applicants_g4,calibration,home_density_cells}.json`
 to the site's `data/` and `output/site_data/fixture_g*.json` to `engine/fixtures/`.
 
+Two further data files have their own generators, run the same way (generate → `check_site_data.py`
+→ copy to `data/`): `python code/7_site/make_school_attributes.py` (planner game) and
+`python code/7_site/make_survey_aggregates.py` (survey explorer).
+
 Useful variants: `--calibrate 1.0 --aware-list 1 1.5 2 all` sweeps the calibration knob without
 writing files (seconds); `--homes kernel` builds from public inputs only; `--scale-n 1.5` is the
 congestion dial at generation time; `--skip-ttc` if you only need DA/SIC.
@@ -164,8 +168,9 @@ continuous desirability value per school, Google imagery tiles. Published: schoo
 seats (public facts), quintile bands, a 300 m density grid with ≥5 households per cell (a reviewed
 decision — switch to `--homes kernel` if the authors prefer no aggregate of real homes at all),
 synthetic families, face-blurred project photos, Mapillary and Sentinel-2 imagery under their
-licences. `check_site_data.py` re-verifies the first three against the private inputs on every
-regeneration; keep it in the loop.
+licences, per-school imagery-derived attributes (never the imagery), and survey *tabulations* (no
+group below 20 respondents, no count between 1 and 4). `check_site_data.py` re-verifies all of this
+against the private inputs on every regeneration; keep it in the loop.
 
 ---
 
@@ -275,8 +280,19 @@ landing page and appendix publication-ready · privacy checks.
    common scale from the figure code's own numbers (NY 6.69/8.54/0.62/3.11 of 18.96 miles; Manta
    levels −0.1036/0.5832/0.5857/0.6807 km-eq.), click a band for what it can and cannot attribute.
    No engine; every number labelled paper or AAP (2017).
-10. **Survey explorer.** Aggregates already in the online appendix (reasons for short lists, knowledge
-    shares, beliefs vs outcomes); no microdata.
+10. **Survey explorer.** *Done 2026-09-05* (`survey/`). The pre-results parent survey as aggregates
+    sliced by two lenses — application-list length (all / one school / two or more) × entry grade —
+    with eight cards: reasons for not listing more (the one information-friction answer highlighted),
+    knowledge of unlisted vs listed schools (stacked bars), beliefs, beliefs vs realised assignment
+    (fixed: the join tables), list length, satisfaction, the 69 families who extended their lists, and
+    representativeness. Verbatim Spanish question under each card (English gloss in the English view).
+    `?lens=&grade=` presets. Data: `data/survey_aggregates.json` from the research repo's
+    `code/7_site/make_survey_aggregates.py` (needs `output/tables/survey_clean_dataSurvey.csv`, the
+    MATLAB export, and `survey_validation/join_*.csv`); disclosure rule: no group tabulated below 20
+    respondents and no published count between 1 and 4 (cells show "n<5"), enforced by
+    `check_site_data.py`. Only tabulations that appear in the paper or its online appendix are shown,
+    plus one companion (knowledge of *listed* schools, 55% "know well"); two survey items that are
+    *not* in the paper were deliberately left out — see §7.
 11. **Downloads and teaching kit.** `data/` as a documented ZIP, the engine as a standalone module, a
     Colab notebook that reproduces the exhibit's numbers with `matching.py`, and a "the toy reproduces
     the paper" calibration page built from `calibration.json`.
@@ -295,6 +311,13 @@ landing page and appendix publication-ready · privacy checks.
 - Show school names on the simulator map? They are already public in the appendix; ids are used now.
 - Should the site URL appear in the paper at all, and when — at submission, or once accepted?
 - Spanish first, or English first, on the landing page?
+- Two survey items are tabulated nowhere in the paper and were kept off the site until the authors
+  decide: (a) "if you added more schools, what do you think would happen?" — 69% of those answering
+  ticked "lowers my chance at my first preferences" (1,057 of 1,532), which is false under deferred
+  acceptance and would read as a strategy-proofness misperception; (b) "which information would you
+  have liked to have?" (admission chances, achievement, applicants, seats, shift). Both are one line
+  in `make_survey_aggregates.py` away, but (a) in particular touches the paper's short-list argument
+  and should be framed in the paper before it is framed on the site.
 
 ## 8. Conventions
 Oxford spelling (−ize, but kilometres/neighbourhood/programme), matching the manuscript. Palette from

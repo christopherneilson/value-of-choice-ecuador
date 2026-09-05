@@ -1,0 +1,1932 @@
+{
+ "meta": {
+  "respondents": 1873,
+  "completed": 1517,
+  "applicants": 3984,
+  "min_cell": 5,
+  "min_base": 20,
+  "grades": {
+   "g2": "Preschool 1",
+   "g3": "Preschool 2",
+   "g4": "Primary 1"
+  },
+  "lenses": [
+   "all",
+   "one",
+   "multi"
+  ],
+  "grade_keys": [
+   "all",
+   "g2",
+   "g3",
+   "g4"
+  ],
+  "generated": "2026-09-05",
+  "source": "pre-results parent survey, Manta pilot 2021-22 (aggregates only; see the paper's online appendix)"
+ },
+ "groups": {
+  "all|all": {
+   "n": 1873,
+   "finished": 1517,
+   "list_length": {
+    "base": 1873,
+    "mean": 2.05,
+    "bins": [
+     {
+      "n": 1035,
+      "pct": 55.3
+     },
+     {
+      "n": 371,
+      "pct": 19.8
+     },
+     {
+      "n": 243,
+      "pct": 13.0
+     },
+     {
+      "n": 91,
+      "pct": 4.9
+     },
+     {
+      "n": 61,
+      "pct": 3.3
+     },
+     {
+      "n": 72,
+      "pct": 3.8
+     }
+    ]
+   },
+   "reasons": {
+    "base": 1639,
+    "blank_pct": 12.5,
+    "scarcity": {
+     "n": 901,
+     "pct": 55.0
+    },
+    "confident": {
+     "n": 543,
+     "pct": 33.1
+    },
+    "hard_to_find": {
+     "n": 103,
+     "pct": 6.3
+    },
+    "prefer_unassigned": {
+     "n": 68,
+     "pct": 4.1
+    },
+    "private": {
+     "n": 24,
+     "pct": 1.5
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 7818,
+    "respondents": 1618,
+    "well": {
+     "n": 605,
+     "pct": 7.7
+    },
+    "name": {
+     "n": 1692,
+     "pct": 21.6
+    },
+    "no": {
+     "n": 5521,
+     "pct": 70.6
+    }
+   },
+   "know_listed": {
+    "pairs": 3161,
+    "respondents": 1661,
+    "well": {
+     "n": 1748,
+     "pct": 55.3
+    },
+    "name": {
+     "n": 1023,
+     "pct": 32.4
+    },
+    "no": {
+     "n": 390,
+     "pct": 12.3
+    }
+   },
+   "beliefs": {
+    "base": 1658,
+    "median": 98.0,
+    "ge80": {
+     "n": 1246,
+     "pct": 75.2
+    },
+    "bins": [
+     {
+      "n": 53,
+      "pct": 3.2
+     },
+     {
+      "n": 118,
+      "pct": 7.1
+     },
+     {
+      "n": 224,
+      "pct": 13.5
+     },
+     {
+      "n": 322,
+      "pct": 19.4
+     },
+     {
+      "n": 941,
+      "pct": 56.8
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 1771,
+    "bands": [
+     {
+      "n": 157,
+      "pct": 8.9
+     },
+     {
+      "n": 160,
+      "pct": 9.0
+     },
+     {
+      "n": 1454,
+      "pct": 82.1
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 69,
+     "pct": 3.7
+    },
+    "needed_info_base": 64,
+    "needed_info_yes": {
+     "n": 42,
+     "pct": 65.6
+    }
+   }
+  },
+  "all|g2": {
+   "n": 804,
+   "finished": 659,
+   "list_length": {
+    "base": 804,
+    "mean": 1.98,
+    "bins": [
+     {
+      "n": 451,
+      "pct": 56.1
+     },
+     {
+      "n": 157,
+      "pct": 19.5
+     },
+     {
+      "n": 101,
+      "pct": 12.6
+     },
+     {
+      "n": 42,
+      "pct": 5.2
+     },
+     {
+      "n": 21,
+      "pct": 2.6
+     },
+     {
+      "n": 32,
+      "pct": 4.0
+     }
+    ]
+   },
+   "reasons": {
+    "base": 711,
+    "blank_pct": 11.6,
+    "scarcity": {
+     "n": 410,
+     "pct": 57.7
+    },
+    "confident": {
+     "n": 212,
+     "pct": 29.8
+    },
+    "hard_to_find": {
+     "n": 47,
+     "pct": 6.6
+    },
+    "prefer_unassigned": {
+     "n": 30,
+     "pct": 4.2
+    },
+    "private": {
+     "n": 12,
+     "pct": 1.7
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 3302,
+    "respondents": 696,
+    "well": {
+     "n": 256,
+     "pct": 7.8
+    },
+    "name": {
+     "n": 774,
+     "pct": 23.4
+    },
+    "no": {
+     "n": 2272,
+     "pct": 68.8
+    }
+   },
+   "know_listed": {
+    "pairs": 1359,
+    "respondents": 718,
+    "well": {
+     "n": 752,
+     "pct": 55.3
+    },
+    "name": {
+     "n": 442,
+     "pct": 32.5
+    },
+    "no": {
+     "n": 165,
+     "pct": 12.1
+    }
+   },
+   "beliefs": {
+    "base": 717,
+    "median": 96.0,
+    "ge80": {
+     "n": 540,
+     "pct": 75.3
+    },
+    "bins": [
+     {
+      "n": 22,
+      "pct": 3.1
+     },
+     {
+      "n": 45,
+      "pct": 6.3
+     },
+     {
+      "n": 100,
+      "pct": 13.9
+     },
+     {
+      "n": 146,
+      "pct": 20.4
+     },
+     {
+      "n": 404,
+      "pct": 56.3
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 763,
+    "bands": [
+     {
+      "n": 61,
+      "pct": 8.0
+     },
+     {
+      "n": 59,
+      "pct": 7.7
+     },
+     {
+      "n": 643,
+      "pct": 84.3
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 19,
+     "pct": 2.4
+    },
+    "needed_info_base": 16,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  },
+  "all|g3": {
+   "n": 833,
+   "finished": 690,
+   "list_length": {
+    "base": 833,
+    "mean": 2.09,
+    "bins": [
+     {
+      "n": 447,
+      "pct": 53.7
+     },
+     {
+      "n": 170,
+      "pct": 20.4
+     },
+     {
+      "n": 116,
+      "pct": 13.9
+     },
+     {
+      "n": 38,
+      "pct": 4.6
+     },
+     {
+      "n": 34,
+      "pct": 4.1
+     },
+     {
+      "n": 28,
+      "pct": 3.4
+     }
+    ]
+   },
+   "reasons": {
+    "base": 733,
+    "blank_pct": 12.0,
+    "scarcity": {
+     "n": 390,
+     "pct": 53.2
+    },
+    "confident": {
+     "n": 271,
+     "pct": 37.0
+    },
+    "hard_to_find": {
+     "n": 37,
+     "pct": 5.0
+    },
+    "prefer_unassigned": {
+     "n": 27,
+     "pct": 3.7
+    },
+    "private": {
+     "n": 8,
+     "pct": 1.1
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 3570,
+    "respondents": 730,
+    "well": {
+     "n": 289,
+     "pct": 8.1
+    },
+    "name": {
+     "n": 745,
+     "pct": 20.9
+    },
+    "no": {
+     "n": 2536,
+     "pct": 71.0
+    }
+   },
+   "know_listed": {
+    "pairs": 1440,
+    "respondents": 743,
+    "well": {
+     "n": 839,
+     "pct": 58.3
+    },
+    "name": {
+     "n": 442,
+     "pct": 30.7
+    },
+    "no": {
+     "n": 159,
+     "pct": 11.0
+    }
+   },
+   "beliefs": {
+    "base": 741,
+    "median": 100.0,
+    "ge80": {
+     "n": 562,
+     "pct": 75.8
+    },
+    "bins": [
+     {
+      "n": 27,
+      "pct": 3.6
+     },
+     {
+      "n": 53,
+      "pct": 7.2
+     },
+     {
+      "n": 92,
+      "pct": 12.4
+     },
+     {
+      "n": 138,
+      "pct": 18.6
+     },
+     {
+      "n": 431,
+      "pct": 58.2
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 787,
+    "bands": [
+     {
+      "n": 76,
+      "pct": 9.7
+     },
+     {
+      "n": 76,
+      "pct": 9.7
+     },
+     {
+      "n": 635,
+      "pct": 80.7
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 40,
+     "pct": 4.8
+    },
+    "needed_info_base": 38,
+    "needed_info_yes": {
+     "n": 24,
+     "pct": 63.2
+    }
+   }
+  },
+  "all|g4": {
+   "n": 236,
+   "finished": 168,
+   "list_length": {
+    "base": 236,
+    "mean": 2.16,
+    "bins": [
+     {
+      "n": 137,
+      "pct": 58.1
+     },
+     {
+      "n": 44,
+      "pct": 18.6
+     },
+     {
+      "n": 26,
+      "pct": 11.0
+     },
+     {
+      "n": 11,
+      "pct": 4.7
+     },
+     {
+      "n": 6,
+      "pct": 2.5
+     },
+     {
+      "n": 12,
+      "pct": 5.1
+     }
+    ]
+   },
+   "reasons": {
+    "base": 195,
+    "blank_pct": 17.4,
+    "scarcity": {
+     "n": 101,
+     "pct": 51.8
+    },
+    "confident": {
+     "n": 60,
+     "pct": 30.8
+    },
+    "hard_to_find": {
+     "n": 19,
+     "pct": 9.7
+    },
+    "prefer_unassigned": {
+     "n": 11,
+     "pct": 5.6
+    },
+    "private": {
+     "n": null,
+     "pct": null
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 946,
+    "respondents": 192,
+    "well": {
+     "n": 60,
+     "pct": 6.3
+    },
+    "name": {
+     "n": 173,
+     "pct": 18.3
+    },
+    "no": {
+     "n": 713,
+     "pct": 75.4
+    }
+   },
+   "know_listed": {
+    "pairs": 362,
+    "respondents": 200,
+    "well": {
+     "n": 157,
+     "pct": 43.4
+    },
+    "name": {
+     "n": 139,
+     "pct": 38.4
+    },
+    "no": {
+     "n": 66,
+     "pct": 18.2
+    }
+   },
+   "beliefs": {
+    "base": 200,
+    "median": 94.0,
+    "ge80": {
+     "n": 144,
+     "pct": 72.0
+    },
+    "bins": [
+     {
+      "n": null,
+      "pct": null
+     },
+     {
+      "n": 20,
+      "pct": 10.0
+     },
+     {
+      "n": 32,
+      "pct": 16.0
+     },
+     {
+      "n": 38,
+      "pct": 19.0
+     },
+     {
+      "n": 106,
+      "pct": 53.0
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 221,
+    "bands": [
+     {
+      "n": 20,
+      "pct": 9.0
+     },
+     {
+      "n": 25,
+      "pct": 11.3
+     },
+     {
+      "n": 176,
+      "pct": 79.6
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 10,
+     "pct": 4.2
+    },
+    "needed_info_base": 10,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  },
+  "one|all": {
+   "n": 1035,
+   "finished": 838,
+   "list_length": {
+    "base": 1035,
+    "mean": 1.0,
+    "bins": [
+     {
+      "n": 1035,
+      "pct": 100.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     }
+    ]
+   },
+   "reasons": {
+    "base": 898,
+    "blank_pct": 13.2,
+    "scarcity": {
+     "n": 521,
+     "pct": 58.0
+    },
+    "confident": {
+     "n": 257,
+     "pct": 28.6
+    },
+    "hard_to_find": {
+     "n": 61,
+     "pct": 6.8
+    },
+    "prefer_unassigned": {
+     "n": 48,
+     "pct": 5.3
+    },
+    "private": {
+     "n": 11,
+     "pct": 1.2
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 4187,
+    "respondents": 885,
+    "well": {
+     "n": 334,
+     "pct": 8.0
+    },
+    "name": {
+     "n": 921,
+     "pct": 22.0
+    },
+    "no": {
+     "n": 2932,
+     "pct": 70.0
+    }
+   },
+   "know_listed": {
+    "pairs": 906,
+    "respondents": 906,
+    "well": {
+     "n": 756,
+     "pct": 83.4
+    },
+    "name": {
+     "n": 123,
+     "pct": 13.6
+    },
+    "no": {
+     "n": 27,
+     "pct": 3.0
+    }
+   },
+   "beliefs": {
+    "base": 904,
+    "median": 100.0,
+    "ge80": {
+     "n": 723,
+     "pct": 80.0
+    },
+    "bins": [
+     {
+      "n": 17,
+      "pct": 1.9
+     },
+     {
+      "n": 51,
+      "pct": 5.6
+     },
+     {
+      "n": 103,
+      "pct": 11.4
+     },
+     {
+      "n": 172,
+      "pct": 19.0
+     },
+     {
+      "n": 561,
+      "pct": 62.1
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 974,
+    "bands": [
+     {
+      "n": 101,
+      "pct": 10.4
+     },
+     {
+      "n": 87,
+      "pct": 8.9
+     },
+     {
+      "n": 786,
+      "pct": 80.7
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": null,
+     "pct": null
+    },
+    "needed_info_base": 2,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  },
+  "one|g2": {
+   "n": 451,
+   "finished": 368,
+   "list_length": {
+    "base": 451,
+    "mean": 1.0,
+    "bins": [
+     {
+      "n": 451,
+      "pct": 100.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     }
+    ]
+   },
+   "reasons": {
+    "base": 396,
+    "blank_pct": 12.2,
+    "scarcity": {
+     "n": 240,
+     "pct": 60.6
+    },
+    "confident": {
+     "n": 104,
+     "pct": 26.3
+    },
+    "hard_to_find": {
+     "n": 25,
+     "pct": 6.3
+    },
+    "prefer_unassigned": {
+     "n": 20,
+     "pct": 5.1
+    },
+    "private": {
+     "n": 7,
+     "pct": 1.8
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 1765,
+    "respondents": 385,
+    "well": {
+     "n": 139,
+     "pct": 7.9
+    },
+    "name": {
+     "n": 436,
+     "pct": 24.7
+    },
+    "no": {
+     "n": 1190,
+     "pct": 67.4
+    }
+   },
+   "know_listed": {
+    "pairs": 398,
+    "respondents": 398,
+    "well": {
+     "n": 332,
+     "pct": 83.4
+    },
+    "name": {
+     "n": 53,
+     "pct": 13.3
+    },
+    "no": {
+     "n": 13,
+     "pct": 3.3
+    }
+   },
+   "beliefs": {
+    "base": 398,
+    "median": 100.0,
+    "ge80": {
+     "n": 312,
+     "pct": 78.4
+    },
+    "bins": [
+     {
+      "n": 9,
+      "pct": 2.3
+     },
+     {
+      "n": 23,
+      "pct": 5.8
+     },
+     {
+      "n": 47,
+      "pct": 11.8
+     },
+     {
+      "n": 79,
+      "pct": 19.8
+     },
+     {
+      "n": 240,
+      "pct": 60.3
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 425,
+    "bands": [
+     {
+      "n": 41,
+      "pct": 9.6
+     },
+     {
+      "n": 33,
+      "pct": 7.8
+     },
+     {
+      "n": 351,
+      "pct": 82.6
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": null,
+     "pct": null
+    },
+    "needed_info_base": 1,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  },
+  "one|g3": {
+   "n": 447,
+   "finished": 370,
+   "list_length": {
+    "base": 447,
+    "mean": 1.0,
+    "bins": [
+     {
+      "n": 447,
+      "pct": 100.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     }
+    ]
+   },
+   "reasons": {
+    "base": 388,
+    "blank_pct": 13.2,
+    "scarcity": {
+     "n": 221,
+     "pct": 57.0
+    },
+    "confident": {
+     "n": 122,
+     "pct": 31.4
+    },
+    "hard_to_find": {
+     "n": 24,
+     "pct": 6.2
+    },
+    "prefer_unassigned": {
+     "n": 19,
+     "pct": 4.9
+    },
+    "private": {
+     "n": null,
+     "pct": null
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 1869,
+    "respondents": 387,
+    "well": {
+     "n": 147,
+     "pct": 7.9
+    },
+    "name": {
+     "n": 383,
+     "pct": 20.5
+    },
+    "no": {
+     "n": 1339,
+     "pct": 71.6
+    }
+   },
+   "know_listed": {
+    "pairs": 392,
+    "respondents": 392,
+    "well": {
+     "n": 338,
+     "pct": 86.2
+    },
+    "name": {
+     "n": 44,
+     "pct": 11.2
+    },
+    "no": {
+     "n": 10,
+     "pct": 2.6
+    }
+   },
+   "beliefs": {
+    "base": 390,
+    "median": 100.0,
+    "ge80": {
+     "n": 323,
+     "pct": 82.8
+    },
+    "bins": [
+     {
+      "n": 7,
+      "pct": 1.8
+     },
+     {
+      "n": 20,
+      "pct": 5.1
+     },
+     {
+      "n": 37,
+      "pct": 9.5
+     },
+     {
+      "n": 68,
+      "pct": 17.4
+     },
+     {
+      "n": 258,
+      "pct": 66.2
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 422,
+    "bands": [
+     {
+      "n": 48,
+      "pct": 11.4
+     },
+     {
+      "n": 43,
+      "pct": 10.2
+     },
+     {
+      "n": 331,
+      "pct": 78.4
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": null,
+     "pct": null
+    },
+    "needed_info_base": 1,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  },
+  "one|g4": {
+   "n": 137,
+   "finished": 100,
+   "list_length": {
+    "base": 137,
+    "mean": 1.0,
+    "bins": [
+     {
+      "n": 137,
+      "pct": 100.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 0,
+      "pct": 0.0
+     }
+    ]
+   },
+   "reasons": {
+    "base": 114,
+    "blank_pct": 16.8,
+    "scarcity": {
+     "n": 60,
+     "pct": 52.6
+    },
+    "confident": {
+     "n": 31,
+     "pct": 27.2
+    },
+    "hard_to_find": {
+     "n": 12,
+     "pct": 10.5
+    },
+    "prefer_unassigned": {
+     "n": 9,
+     "pct": 7.9
+    },
+    "private": {
+     "n": null,
+     "pct": null
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 553,
+    "respondents": 113,
+    "well": {
+     "n": 48,
+     "pct": 8.7
+    },
+    "name": {
+     "n": 102,
+     "pct": 18.4
+    },
+    "no": {
+     "n": 403,
+     "pct": 72.9
+    }
+   },
+   "know_listed": {
+    "pairs": 116,
+    "respondents": 116,
+    "well": {
+     "n": 86,
+     "pct": 74.1
+    },
+    "name": {
+     "n": 26,
+     "pct": 22.4
+    },
+    "no": {
+     "n": null,
+     "pct": null
+    }
+   },
+   "beliefs": {
+    "base": 116,
+    "median": 94.5,
+    "ge80": {
+     "n": 88,
+     "pct": 75.9
+    },
+    "bins": [
+     {
+      "n": null,
+      "pct": null
+     },
+     {
+      "n": 8,
+      "pct": 6.9
+     },
+     {
+      "n": 19,
+      "pct": 16.4
+     },
+     {
+      "n": 25,
+      "pct": 21.6
+     },
+     {
+      "n": 63,
+      "pct": 54.3
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 127,
+    "bands": [
+     {
+      "n": 12,
+      "pct": 9.4
+     },
+     {
+      "n": 11,
+      "pct": 8.7
+     },
+     {
+      "n": 104,
+      "pct": 81.9
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 0,
+     "pct": 0.0
+    },
+    "needed_info_base": 0,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  },
+  "multi|all": {
+   "n": 838,
+   "finished": 679,
+   "list_length": {
+    "base": 838,
+    "mean": 3.34,
+    "bins": [
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 371,
+      "pct": 44.3
+     },
+     {
+      "n": 243,
+      "pct": 29.0
+     },
+     {
+      "n": 91,
+      "pct": 10.9
+     },
+     {
+      "n": 61,
+      "pct": 7.3
+     },
+     {
+      "n": 72,
+      "pct": 8.6
+     }
+    ]
+   },
+   "reasons": {
+    "base": 741,
+    "blank_pct": 11.6,
+    "scarcity": {
+     "n": 380,
+     "pct": 51.3
+    },
+    "confident": {
+     "n": 286,
+     "pct": 38.6
+    },
+    "hard_to_find": {
+     "n": 42,
+     "pct": 5.7
+    },
+    "prefer_unassigned": {
+     "n": 20,
+     "pct": 2.7
+    },
+    "private": {
+     "n": 13,
+     "pct": 1.8
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 3631,
+    "respondents": 733,
+    "well": {
+     "n": 271,
+     "pct": 7.5
+    },
+    "name": {
+     "n": 771,
+     "pct": 21.2
+    },
+    "no": {
+     "n": 2589,
+     "pct": 71.3
+    }
+   },
+   "know_listed": {
+    "pairs": 2255,
+    "respondents": 755,
+    "well": {
+     "n": 992,
+     "pct": 44.0
+    },
+    "name": {
+     "n": 900,
+     "pct": 39.9
+    },
+    "no": {
+     "n": 363,
+     "pct": 16.1
+    }
+   },
+   "beliefs": {
+    "base": 754,
+    "median": 91.0,
+    "ge80": {
+     "n": 523,
+     "pct": 69.4
+    },
+    "bins": [
+     {
+      "n": 36,
+      "pct": 4.8
+     },
+     {
+      "n": 67,
+      "pct": 8.9
+     },
+     {
+      "n": 121,
+      "pct": 16.0
+     },
+     {
+      "n": 150,
+      "pct": 19.9
+     },
+     {
+      "n": 380,
+      "pct": 50.4
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 797,
+    "bands": [
+     {
+      "n": 56,
+      "pct": 7.0
+     },
+     {
+      "n": 73,
+      "pct": 9.2
+     },
+     {
+      "n": 668,
+      "pct": 83.8
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 67,
+     "pct": 8.0
+    },
+    "needed_info_base": 62,
+    "needed_info_yes": {
+     "n": 40,
+     "pct": 64.5
+    }
+   }
+  },
+  "multi|g2": {
+   "n": 353,
+   "finished": 291,
+   "list_length": {
+    "base": 353,
+    "mean": 3.22,
+    "bins": [
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 157,
+      "pct": 44.5
+     },
+     {
+      "n": 101,
+      "pct": 28.6
+     },
+     {
+      "n": 42,
+      "pct": 11.9
+     },
+     {
+      "n": 21,
+      "pct": 5.9
+     },
+     {
+      "n": 32,
+      "pct": 9.1
+     }
+    ]
+   },
+   "reasons": {
+    "base": 315,
+    "blank_pct": 10.8,
+    "scarcity": {
+     "n": 170,
+     "pct": 54.0
+    },
+    "confident": {
+     "n": 108,
+     "pct": 34.3
+    },
+    "hard_to_find": {
+     "n": 22,
+     "pct": 7.0
+    },
+    "prefer_unassigned": {
+     "n": 10,
+     "pct": 3.2
+    },
+    "private": {
+     "n": 5,
+     "pct": 1.6
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 1537,
+    "respondents": 311,
+    "well": {
+     "n": 117,
+     "pct": 7.6
+    },
+    "name": {
+     "n": 338,
+     "pct": 22.0
+    },
+    "no": {
+     "n": 1082,
+     "pct": 70.4
+    }
+   },
+   "know_listed": {
+    "pairs": 961,
+    "respondents": 320,
+    "well": {
+     "n": 420,
+     "pct": 43.7
+    },
+    "name": {
+     "n": 389,
+     "pct": 40.5
+    },
+    "no": {
+     "n": 152,
+     "pct": 15.8
+    }
+   },
+   "beliefs": {
+    "base": 319,
+    "median": 92.0,
+    "ge80": {
+     "n": 228,
+     "pct": 71.5
+    },
+    "bins": [
+     {
+      "n": 13,
+      "pct": 4.1
+     },
+     {
+      "n": 22,
+      "pct": 6.9
+     },
+     {
+      "n": 53,
+      "pct": 16.6
+     },
+     {
+      "n": 67,
+      "pct": 21.0
+     },
+     {
+      "n": 164,
+      "pct": 51.4
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 338,
+    "bands": [
+     {
+      "n": 20,
+      "pct": 5.9
+     },
+     {
+      "n": 26,
+      "pct": 7.7
+     },
+     {
+      "n": 292,
+      "pct": 86.4
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 18,
+     "pct": 5.1
+    },
+    "needed_info_base": 15,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  },
+  "multi|g3": {
+   "n": 386,
+   "finished": 320,
+   "list_length": {
+    "base": 386,
+    "mean": 3.34,
+    "bins": [
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 170,
+      "pct": 44.0
+     },
+     {
+      "n": 116,
+      "pct": 30.1
+     },
+     {
+      "n": 38,
+      "pct": 9.8
+     },
+     {
+      "n": 34,
+      "pct": 8.8
+     },
+     {
+      "n": 28,
+      "pct": 7.3
+     }
+    ]
+   },
+   "reasons": {
+    "base": 345,
+    "blank_pct": 10.6,
+    "scarcity": {
+     "n": 169,
+     "pct": 49.0
+    },
+    "confident": {
+     "n": 149,
+     "pct": 43.2
+    },
+    "hard_to_find": {
+     "n": 13,
+     "pct": 3.8
+    },
+    "prefer_unassigned": {
+     "n": 8,
+     "pct": 2.3
+    },
+    "private": {
+     "n": 6,
+     "pct": 1.7
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 1701,
+    "respondents": 343,
+    "well": {
+     "n": 142,
+     "pct": 8.3
+    },
+    "name": {
+     "n": 362,
+     "pct": 21.3
+    },
+    "no": {
+     "n": 1197,
+     "pct": 70.4
+    }
+   },
+   "know_listed": {
+    "pairs": 1048,
+    "respondents": 351,
+    "well": {
+     "n": 501,
+     "pct": 47.8
+    },
+    "name": {
+     "n": 398,
+     "pct": 38.0
+    },
+    "no": {
+     "n": 149,
+     "pct": 14.2
+    }
+   },
+   "beliefs": {
+    "base": 351,
+    "median": 90.0,
+    "ge80": {
+     "n": 239,
+     "pct": 68.1
+    },
+    "bins": [
+     {
+      "n": 20,
+      "pct": 5.7
+     },
+     {
+      "n": 33,
+      "pct": 9.4
+     },
+     {
+      "n": 55,
+      "pct": 15.7
+     },
+     {
+      "n": 70,
+      "pct": 19.9
+     },
+     {
+      "n": 173,
+      "pct": 49.3
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 365,
+    "bands": [
+     {
+      "n": 28,
+      "pct": 7.7
+     },
+     {
+      "n": 33,
+      "pct": 9.0
+     },
+     {
+      "n": 304,
+      "pct": 83.3
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 39,
+     "pct": 10.1
+    },
+    "needed_info_base": 37,
+    "needed_info_yes": {
+     "n": 23,
+     "pct": 62.2
+    }
+   }
+  },
+  "multi|g4": {
+   "n": 99,
+   "finished": 68,
+   "list_length": {
+    "base": 99,
+    "mean": 3.76,
+    "bins": [
+     {
+      "n": 0,
+      "pct": 0.0
+     },
+     {
+      "n": 44,
+      "pct": 44.4
+     },
+     {
+      "n": 26,
+      "pct": 26.3
+     },
+     {
+      "n": 11,
+      "pct": 11.1
+     },
+     {
+      "n": 6,
+      "pct": 6.1
+     },
+     {
+      "n": 12,
+      "pct": 12.1
+     }
+    ]
+   },
+   "reasons": {
+    "base": 81,
+    "blank_pct": 18.2,
+    "scarcity": {
+     "n": 41,
+     "pct": 50.6
+    },
+    "confident": {
+     "n": 29,
+     "pct": 35.8
+    },
+    "hard_to_find": {
+     "n": 7,
+     "pct": 8.6
+    },
+    "prefer_unassigned": {
+     "n": null,
+     "pct": null
+    },
+    "private": {
+     "n": null,
+     "pct": null
+    },
+    "other": {
+     "n": 0,
+     "pct": 0.0
+    }
+   },
+   "know_unlisted": {
+    "pairs": 393,
+    "respondents": 79,
+    "well": {
+     "n": 12,
+     "pct": 3.1
+    },
+    "name": {
+     "n": 71,
+     "pct": 18.1
+    },
+    "no": {
+     "n": 310,
+     "pct": 78.9
+    }
+   },
+   "know_listed": {
+    "pairs": 246,
+    "respondents": 84,
+    "well": {
+     "n": 71,
+     "pct": 28.9
+    },
+    "name": {
+     "n": 113,
+     "pct": 45.9
+    },
+    "no": {
+     "n": 62,
+     "pct": 25.2
+    }
+   },
+   "beliefs": {
+    "base": 84,
+    "median": 92.0,
+    "ge80": {
+     "n": 56,
+     "pct": 66.7
+    },
+    "bins": [
+     {
+      "n": null,
+      "pct": null
+     },
+     {
+      "n": 12,
+      "pct": 14.3
+     },
+     {
+      "n": 13,
+      "pct": 15.5
+     },
+     {
+      "n": 13,
+      "pct": 15.5
+     },
+     {
+      "n": 43,
+      "pct": 51.2
+     }
+    ]
+   },
+   "satisfaction": {
+    "base": 94,
+    "bands": [
+     {
+      "n": 8,
+      "pct": 8.5
+     },
+     {
+      "n": 14,
+      "pct": 14.9
+     },
+     {
+      "n": 72,
+      "pct": 76.6
+     }
+    ]
+   },
+   "extended": {
+    "added": {
+     "n": 10,
+     "pct": 10.1
+    },
+    "needed_info_base": 10,
+    "needed_info_yes": {
+     "n": null,
+     "pct": null
+    }
+   }
+  }
+ },
+ "calibration": [
+  {
+   "bucket": "<=49",
+   "n": 103,
+   "stated": 27,
+   "placed_listed": 87.4
+  },
+  {
+   "bucket": "50-79",
+   "n": 309,
+   "stated": 61,
+   "placed_listed": 79.3
+  },
+  {
+   "bucket": "80-99",
+   "n": 436,
+   "stated": 87,
+   "placed_listed": 79.8
+  },
+  {
+   "bucket": "100",
+   "n": 806,
+   "stated": 100,
+   "placed_listed": 78.7
+  }
+ ],
+ "outcomes": [
+  {
+   "group": "All matched respondents",
+   "n": 1869,
+   "placed_listed": 79.8,
+   "placed_first": 69.8
+  },
+  {
+   "group": "Listed exactly one school",
+   "n": 1031,
+   "placed_listed": 72.4,
+   "placed_first": 72.4
+  },
+  {
+   "group": "Confident (P>=90% of a seat)",
+   "n": 1011,
+   "placed_listed": 78.7,
+   "placed_first": 70.2
+  },
+  {
+   "group": "Confident AND listed one school",
+   "n": 598,
+   "placed_listed": 72.1,
+   "placed_first": 72.1
+  }
+ ],
+ "representativeness": [
+  {
+   "key": "manta_origin",
+   "surveyed": 70,
+   "not_surveyed": 61
+  },
+  {
+   "key": "block_nbi",
+   "surveyed": 42.6,
+   "not_surveyed": 47.8
+  },
+  {
+   "key": "list_length",
+   "surveyed": 2.05,
+   "not_surveyed": 1.77
+  },
+  {
+   "key": "admission_risk",
+   "surveyed": 23.4,
+   "not_surveyed": 25.5
+  },
+  {
+   "key": "placed_listed",
+   "surveyed": 79,
+   "not_surveyed": 78
+  }
+ ]
+}

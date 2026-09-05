@@ -1,0 +1,85 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>What families said — The Value of Choice</title>
+<meta name="description" content="The pre-results parent survey behind the paper, as aggregates you can slice by list length and grade: why lists were short, how well families knew the schools they did not list, how confident they were, and whether they were right.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--da:#21918c;--bad:#b42318;--good:#1a7f37}
+*{box-sizing:border-box}body{font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:22px 22px 70px;position:relative}
+.crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;padding-right:90px}
+h1{font-size:30px;margin:6px 0 6px;letter-spacing:-.01em;line-height:1.2}
+.lede{color:#333;max-width:860px;margin:0 0 18px}
+.langtoggle{position:absolute;right:22px;top:20px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:#fff}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:0 0 16px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:2;border-bottom:1px solid var(--line)}
+.seg{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg .seglab{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:0 10px;display:flex;align-items:center}
+.seg button{font:inherit;font-size:13px;padding:6px 11px;border:0;border-left:1px solid var(--line);background:#fff;color:#333;cursor:pointer}
+.seg button.on{background:var(--ink);color:#fff}
+.nline{font-size:13px;color:var(--mut)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+.sub{font-size:13px;color:var(--mut)}
+.row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr) 64px;gap:8px;align-items:center;font-size:13px;padding:3px 0;border-bottom:1px solid #f3f3f3}
+.row .bar{height:12px;background:#f2f2f2;border-radius:6px;overflow:hidden}.row .bar i{display:block;height:100%;background:var(--da);border-radius:6px}
+.row.info .bar i{background:var(--bad)}.row.info span:first-child{color:var(--bad)}
+.row .val{text-align:right;font-variant-numeric:tabular-nums}
+.stack{display:flex;height:16px;border-radius:8px;overflow:hidden;background:#f2f2f2;margin:4px 0 6px}
+.stack i{display:block;height:100%}
+.well{background:var(--da)}.name{background:#9ad5d2}.no{background:#ddd}
+.legend{display:flex;gap:14px;font-size:12px;color:#333;flex-wrap:wrap}.legend b{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.q{font-size:12px;color:var(--mut);margin:8px 0 0;font-style:italic}
+.tiny{font-size:12px;color:var(--mut)}
+.sup,.src{display:inline-block;font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:0 7px;margin-left:4px;vertical-align:1px}
+.big{font-size:26px;font-weight:700;line-height:1.1;margin:2px 0 4px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:4px 6px;border-bottom:1px solid #f0f0f0}th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.reading{margin-top:26px;border-top:1px solid var(--line);padding-top:14px;max-width:860px}
+.reading h2{font-size:15px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:0 0 6px}
+.reading p{margin:8px 0}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.cta{display:inline-block;font-size:14px;text-decoration:none;color:var(--ink);border:1px solid #ccc;border-radius:9px;padding:7px 12px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}.controls{position:static}}
+</style></head><body><div class=wrap>
+
+<div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="sv.crumb.tag">the survey</span></div>
+<div id=langtoggle></div>
+<h1 data-i18n="sv.h1">What families said</h1>
+<p class=lede data-i18n="sv.lede">In the weeks between applying and receiving an assignment, 1,873 families (47% of applicants) answered a survey about how they had chosen. Every number below is an aggregate of that survey, with no cell smaller than five families. Pick a lens to see how families who listed one school differ from those who listed several, and how the three entry grades compare.</p>
+
+<div class=controls>
+  <div class=seg id=lens role=group aria-label="Families"><span class=seglab data-i18n="sv.lens">Families</span><button data-v=all data-i18n="sv.lens.all">All</button><button data-v=one data-i18n="sv.lens.one">Listed one school</button><button data-v=multi data-i18n="sv.lens.multi">Listed two or more</button></div>
+  <div class=seg id=grade role=group aria-label="Grade"><span class=seglab data-i18n="sv.grade">Grade</span><button data-v=all data-i18n="sv.grade.all">All</button><button data-v=g2 data-i18n="sv.grade.g2">Preschool 1</button><button data-v=g3 data-i18n="sv.grade.g3">Preschool 2</button><button data-v=g4 data-i18n="sv.grade.g4">Primary 1</button></div>
+  <div class=nline id=nline></div>
+</div>
+
+<div class=grid>
+  <div class=card><h2 data-i18n="sv.reasons.h">Why didn't they list more schools?</h2><div id=reasons></div></div>
+  <div class=card><h2 data-i18n="sv.know.h">How well do they know the schools?</h2><div id=know></div></div>
+  <div class=card><h2 data-i18n="sv.belief.h">How confident were they of a seat?</h2><div id=belief></div></div>
+  <div class=card><h2 data-i18n="sv.right.h">Were they right?</h2><div id=right></div></div>
+  <div class=card><h2 data-i18n="sv.len.h">How long were the lists?</h2><div id=len></div></div>
+  <div class=card><h2 data-i18n="sv.sat.h">Did they like the process?</h2><div id=sat></div></div>
+  <div class=card><h2 data-i18n="sv.ext.h">When lists did lengthen</h2><div id=ext></div></div>
+  <div class=card><h2 data-i18n="sv.who.h">Who answered</h2><div id=who></div></div>
+</div>
+
+<div class=reading>
+  <h2 data-i18n="sv.read.h">What this means for the welfare comparison</h2>
+  <p data-i18n="sv.read.p1">Short lists are not a failure to find alternatives. Most single-school families say no acceptable public school is close enough, or that they are sure of a seat; only about 6% cite difficulty finding schools. That is what lets the paper read short lists as scarcity of acceptable nearby options rather than ignorance, and treat the estimated welfare gain as a lower bound on the value of acting on preferences.</p>
+  <p data-i18n="sv.read.p2">But knowledge of the schools families did not list is thin: they know only 8% of them well. The demand model reads an omitted school as less wanted than any listed one, and some omissions are surely a matter of awareness rather than preference. The paper says so plainly; the simulator's awareness slider shows what happens to the comparison when families consider more or fewer of the schools around them.</p>
+  <p data-i18n="sv.read.p3">Beliefs were conservative and the process was well rated, which is consistent with a system acting on preferences families already held. It is not an independent measure of the welfare gain: the survey was fielded under deferred acceptance only, so there is no distance-rule counterpart to compare it with.</p>
+  <div class=ctas>
+    <a class=cta href="../simulator/" data-i18n="sv.cta.sim">Try the awareness slider →</a>
+    <a class=cta href="../story/" data-i18n="sv.cta.story">Read the argument step by step →</a>
+    <a class=cta href="../toy/" data-i18n="sv.cta.toy">Does lying pay? →</a>
+  </div>
+</div>
+
+<script type=module src="survey.js"></script>
+</div></body></html>
