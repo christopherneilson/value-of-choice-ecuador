@@ -1,0 +1,112 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Choose the rule — The Value of Choice</title>
+<meta name="description" content="Run the school-assignment rules yourself on a synthetic Manta: a distance rule, deferred acceptance on family preferences, and the constrained-efficient benchmark.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--dc:#7b3294;--da:#21918c;--sic:#5ec962;--grey:#b8b8b8}
+*{box-sizing:border-box}body{font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+a{color:inherit}
+header{padding:18px 22px 10px;max-width:1240px;margin:0 auto}
+header .crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase}
+header h1{font-size:26px;margin:4px 0 4px;letter-spacing:-.01em}
+header p{margin:0;color:#333;max-width:900px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;max-width:1240px;margin:0 auto;padding:8px 22px 40px}
+#map{height:600px;border:1px solid var(--line);border-radius:12px;background:#f4f4f4}
+aside{display:flex;flex-direction:column;gap:14px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid #ccc;background:#fafafa;border-radius:8px;cursor:pointer}
+.seg button.on{color:#fff;border-color:transparent}
+.seg button.on[data-rule=dc]{background:var(--dc)}.seg button.on[data-rule=da]{background:var(--da)}.seg button.on[data-rule=sic]{background:var(--sic);color:#123}
+.seg button.on[data-grade]{background:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:4px 4px;border-bottom:1px solid #f0f0f0}th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td.cur{font-weight:700}
+.big{font-size:30px;font-weight:700;line-height:1.1;margin:2px 0}
+.sub{font-size:12px;color:var(--mut)}
+.slider{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;margin:6px 0}
+.slider label{font-size:13px}.slider output{font-size:12px;color:var(--mut);font-variant-numeric:tabular-nums;min-width:46px;text-align:right}
+.slider input{grid-column:1/-1;width:100%}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:#333}
+.legend span i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.tiny{font-size:11px;color:var(--mut)}
+.btn{font:inherit;font-size:12px;padding:5px 9px;border:1px solid #ccc;background:#fafafa;border-radius:8px;cursor:pointer}
+label.chk{font-size:13px;display:flex;gap:6px;align-items:center}
+.try{max-width:1240px;margin:0 auto;padding:0 22px 50px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.try .card p{margin:4px 0 0;font-size:14px;color:#333}
+footer{max-width:1240px;margin:0 auto;padding:0 22px 60px;font-size:12px;color:var(--mut)}
+@media (max-width:900px){.layout{grid-template-columns:1fr}#map{height:460px}}
+</style></head><body>
+
+<header>
+  <div class=crumb><a href="../">The Value of Choice in Centralized School Assignment</a> · interactive</div>
+  <h1>Choose the rule</h1>
+  <p>Manta's real schools, a synthetic population of families drawn from the paper's estimated model, and the three rules the paper compares.
+  Switch the rule and watch who is placed where; then tighten the seats or change how families' tastes are distributed.</p>
+</header>
+
+<div class=layout>
+  <div id=map></div>
+  <aside>
+    <div class=card>
+      <h2>Grade</h2>
+      <div class=seg id=grades>
+        <button data-grade=2 class=on>Preschool 1</button><button data-grade=3>Preschool 2</button><button data-grade=4>Primary 1</button>
+      </div>
+      <div class=tiny id=gradeinfo style="margin-top:6px"></div>
+    </div>
+    <div class=card>
+      <h2>Assignment rule</h2>
+      <div class=seg id=rules>
+        <button data-rule=dc>Distance rule</button><button data-rule=da class=on>Deferred acceptance</button><button data-rule=sic>Benchmark</button>
+      </div>
+      <div class=tiny id=ruleinfo style="margin-top:6px"></div>
+    </div>
+    <div class=card>
+      <h2>Outcome under this rule</h2>
+      <div class=big id=headline>—</div>
+      <div class=sub id=headsub></div>
+      <table style="margin-top:8px"><thead><tr><th></th><th>Distance</th><th>DA</th><th>Benchmark</th></tr></thead>
+      <tbody id=metrics></tbody></table>
+      <div class=tiny id=recovered style="margin-top:8px"></div>
+      <div class=tiny id=paper style="margin-top:4px"></div>
+    </div>
+    <div class=card>
+      <h2>Play with the model</h2>
+      <div class=slider><label for=seats>Seats (congestion dial)</label><output id=seats_o>×1.00</output><input type=range id=seats min=0.4 max=2 step=0.05 value=1></div>
+      <div class=slider><label for=sxi>How different schools are (σ<sub>ξ</sub>)</label><output id=sxi_o></output><input type=range id=sxi min=0 max=3 step=0.05 value=1></div>
+      <div class=slider><label for=seps>Idiosyncratic taste (σ<sub>ε</sub>)</label><output id=seps_o></output><input type=range id=seps min=0.2 max=3 step=0.05 value=1></div>
+      <div class=slider><label for=sgam>Distance-taste heterogeneity (σ<sub>γ</sub>)</label><output id=sgam_o></output><input type=range id=sgam min=0 max=2 step=0.05 value=1></div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
+        <button class=btn id=reset>Reset</button>
+        <label class=chk><input type=checkbox id=lines checked> show a sample of home→school links</label>
+      </div>
+      <div class=tiny style="margin-top:6px">Sliders multiply the paper's estimates (×1 = Table 9). Utilities are re-composed from each family's own taste draws, so the same families are re-assigned under new tastes.</div>
+    </div>
+    <div class=card>
+      <h2>Legend</h2>
+      <div class=legend>
+        <span><i style="background:#333"></i>family placed in its first choice</span>
+        <span><i style="background:#999"></i>placed in another listed school</span>
+        <span><i style="background:#ddd;border:1px solid #bbb"></i>placed in an unlisted school</span>
+        <span><i style="background:#fff;border:2px solid #444"></i>school (size = seats, colour = desirability band)</span>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class=try>
+  <div class=card><h2>Try: switch the rule</h2><p>Go from the distance rule to deferred acceptance. The share of families placed in a school they asked for jumps; the share placed in their first choice jumps more. Then switch to the benchmark and notice how little changes — that gap is the value of the <em>algorithm</em>, and it is small.</p></div>
+  <div class=card><h2>Try: tighten the seats</h2><p>Drag seats below ×1. As congestion rises, the first-choice share under deferred acceptance falls and the gain over the distance rule shrinks. This is why Primary 1, the most congested grade, gains least in the paper.</p></div>
+  <div class=card><h2>Try: make schools alike</h2><p>Set σ<sub>ξ</sub> to 0 so every school is equally desirable. Choice now matters only through idiosyncratic and distance tastes — and the distance rule looks much better than it did. The value of choice grows with how much schools differ.</p></div>
+</div>
+
+<footer>Families are synthetic: drawn from the paper's estimated demand model over the real schools, with homes sampled from a coarse density grid — no real applicant appears. School desirability is shown as a quintile band only.
+Rules follow the deployed design: deferred acceptance runs on the reported list with the remaining schools appended in distance order (priorities: sibling, reported, appended; one lottery per applicant–school pair); the distance rule assigns in distance order with one lottery per applicant; the benchmark applies stable improvement cycles to deferred acceptance (paper, Proposition 2). Basemap © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script type=module src="app.js"></script>
+</body></html>
