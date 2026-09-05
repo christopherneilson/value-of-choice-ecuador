@@ -211,14 +211,16 @@ Synthetic Manta · validated engine · "Choose the rule" with the seats dial and
 landing page and appendix publication-ready · privacy checks.
 
 ### Phase 2 — the story (next; roughly two weeks of focused work)
-1. **Scrollytelling spine** (`story/`). One guided page: most families want the nearest school → but
-   28% don't and pay ~0.6 km for it → what a distance rule does to them → what acting on preferences
-   does → the algorithm barely matters (DA vs benchmark) → congestion is what matters (seats dial) →
-   who gains (needs SES, so a static panel from the paper until Phase 3) → a planner could not have
-   guessed (imagery, link to the appendix). Each step drives a small widget built from the simulator's
-   pieces (factor `app.js` into `map.js`, `panel.js`, `state.js` first). *Done when* a reader with no
-   background reaches the last step understanding why "act on preferences" beats "pick a better
-   algorithm", and every number shown is either from the paper (labelled) or from the engine (labelled).
+1. **Scrollytelling spine** (`story/`). *Done 2026-09-04.* Nine steps (setting → most want the nearest
+   school but a quarter don't → the distance rule → acting on preferences → the algorithm barely
+   matters → seats are what matter, with a live sweep chart → who gains, quoting the paper's quartile
+   gains → could a planner have guessed → try it), a sticky map + readout driven by the engine
+   (Preschool 1; scenarios precomputed on load, ~2 s), every number labelled *engine, synthetic* or
+   *paper, real data*. `story/story.js` duplicates the simulator's map rendering rather than sharing a
+   module — factor `simulator/app.js` and `story/story.js` into a shared `render.js` when the next
+   exhibit needs it. Gotcha recorded in the code: SVG built via `innerHTML` needs quoted attributes
+   and explicit closing tags. Still owed: the "who gains" step shows no synthetic map colouring until
+   the SES layer exists (Phase 3, item 6).
 2. **Awareness slider** in the simulator, client-side as described in §5; default 1.5 with the survey's
    knowledge shares quoted beside it. *Done when* dragging it from "nearest only" to "all schools"
    moves nearest-first from ~100% down to ~40% and the welfare gain rises, and the test still passes.
