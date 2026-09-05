@@ -221,12 +221,19 @@ landing page and appendix publication-ready · privacy checks.
    exhibit needs it. Gotcha recorded in the code: SVG built via `innerHTML` needs quoted attributes
    and explicit closing tags. Still owed: the "who gains" step shows no synthetic map colouring until
    the SES layer exists (Phase 3, item 6).
-2. **Awareness slider** in the simulator, client-side as described in §5; default 1.5 with the survey's
-   knowledge shares quoted beside it. *Done when* dragging it from "nearest only" to "all schools"
-   moves nearest-first from ~100% down to ~40% and the welfare gain rises, and the test still passes.
-3. **"Walk a mile."** Click a family: its list, distances, sibling link, and where each rule places it,
-   with the km-equivalent utility of each outcome. *Done when* a clicked family's panel matches the
-   map's colouring under all three rules.
+2. **Awareness slider.** *Done 2026-09-04.* `withAwareness()` in the engine gives each family a uniform
+   inside the CDF bin of its generated Poisson draw, so consideration sets are monotone in the slider
+   and reproduce the generated sets exactly at the default (tested). Nearest-first runs 79% → 58% → 39%
+   in Preschool 1 from "the nearest few" to "every school". Semantics worth knowing: at the default
+   awareness the published list is ground truth (returned untouched at Table 9 tastes; listed schools
+   stay in the known set when only tastes move); away from it the known set is exactly the M nearest
+   schools plus the sibling's. Utilities ship at 3 decimals, so `rescale()` breaks ties toward the
+   published list, then distance.
+3. **"Walk a mile."** *Done 2026-09-04.* Click any family (or `?family=N`, 1-based): its list with
+   distances, nearest school, sibling link, schools known, and where each rule places it on the last
+   draw with the shortfall from its first choice in km-equivalent; dashed line to the first choice,
+   solid lines per rule. Family 16 is the showcase (170 m from a school, wants one 590 m away, fourth
+   choice under the distance rule, first under DA). `familyCard()` in the engine supplies the numbers.
 4. **Spanish/English toggle.** Move every string in `simulator/` and `story/` into a `strings.js`
    with `en`/`es`; persist the choice in `localStorage`; translate with a native reviewer (the primary
    audience reads Spanish). *Done when* no English string is visible in the Spanish view.

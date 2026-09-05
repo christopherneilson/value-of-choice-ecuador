@@ -7,7 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { buildMarket, daStructure, deferredAcceptance, stableImprovementCycles, distanceRule, simulate, metricsOf } from "./engine.js";
+import { buildMarket, daStructure, deferredAcceptance, stableImprovementCycles, distanceRule, simulate, metricsOf, withAwareness, rescale } from "./engine.js";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const data = p => JSON.parse(fs.readFileSync(path.join(here, "..", "data", p), "utf8"));
@@ -72,6 +72,20 @@ for (const g of [2, 3, 4]) {
     `10-draw simulation matches Python calibration within 2.5 pts: DA first ${sim.rules.da.first.toFixed(1)} (py ${c.da.first.toFixed(1)}), ` +
     `DA listed ${sim.rules.da.listed.toFixed(1)} (py ${c.da.listed.toFixed(1)}), DC listed ${sim.rules.dc.listed.toFixed(1)} (py ${c.dc.listed.toFixed(1)}) — ${tSim.toFixed(0)} ms`);
   console.log(`       recovered share ${sim.recoveredShare.toFixed(1)}% (py ${c.recovered_share.toFixed(1)}), gain ${sim.gainKmDaOverDc.toFixed(3)} km (py ${c.gain_km_da_over_dc.toFixed(3)}), nearest-first ${(100 * sim.nearestFirst).toFixed(0)}% (py ${(100 * c.nearest_first).toFixed(0)})`);
+
+  // awareness: identity at the generated default, monotone in the slider, lists re-form identically at default
+  const mSame = withAwareness(m, m.baseAware);
+  let sameM = 0; for (let i = 0; i < m.n; i++) if (mSame.M[i] === m.M[i]) sameM++;
+  check(sameM === m.n, `awareness at the generated default reproduces every family's consideration set (${sameM}/${m.n})`);
+  const m0 = withAwareness(m, 0), m3 = withAwareness(m, 3), mAll = withAwareness(m, null);
+  let mono = true; for (let i = 0; i < m.n; i++) if (!(m0.M[i] <= m.M[i] && m.M[i] <= m3.M[i] && m3.M[i] <= mAll.M[i])) mono = false;
+  check(mono, `consideration sets grow monotonically with awareness (0 ≤ default ≤ 3 ≤ all)`);
+  const re = rescale(mSame, { ...m.base });
+  let sameRol = 0; for (let i = 0; i < m.n; i++) if (re.rol[i].length === m.rol[i].length && re.rol[i].every((j, k) => j === m.rol[i][k])) sameRol++;
+  check(sameRol === m.n, `re-forming lists at default parameters reproduces every list (${sameRol}/${m.n})`);
+  const sAll = simulate(rescale(mAll, { ...m.base }), { draws: 3, seed: 7 }), s0 = simulate(rescale(m0, { ...m.base }), { draws: 3, seed: 7 });
+  check(s0.nearestFirst > sim.nearestFirst && sim.nearestFirst > sAll.nearestFirst,
+    `nearest-first falls as awareness rises: ${(100 * s0.nearestFirst).toFixed(0)}% (nearest only) → ${(100 * sim.nearestFirst).toFixed(0)}% (default) → ${(100 * sAll.nearestFirst).toFixed(0)}% (all)`);
 }
 console.log(`\nRESULT: ${failures ? failures + " FAILURE(S)" : "ALL CHECKS PASSED"}`);
 process.exitCode = failures ? 1 : 0;

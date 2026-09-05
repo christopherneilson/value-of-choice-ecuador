@@ -63,17 +63,60 @@ export function buildMarket(schoolsJson, appJson) {
   for (let i = 0; i < n; i++)
     for (let j = 0; j < J; j++)
       eps[i * J + j] = u[i * J + j] - xi[j] - (-1 + gamma[i]) * d[i * J + j] - (sib[i] === j ? P.lam : 0);
+  // rank of each school in the PUBLISHED list (J = unlisted): the tie-breaker when re-forming lists,
+  // because utilities ship at 3 decimals and the generator ordered them at full precision.
+  const rank0 = new Int32Array(n * J).fill(J);
+  for (let i = 0; i < n; i++) rol[i].forEach((j, k) => { rank0[i * J + j] = k; });
   return { grade: appJson.grade, name: appJson.name, n, J, ids, sLat, sLon, caps, xi, aLat, aLon,
-           gamma, K, M, sib, d, u, eps, distOrder, rol, params: { ...P }, base: { ...P },
-           gammaCap: appJson.gamma_cap ?? 1.0 };
+           gamma, K, M, sib, d, u, eps, distOrder, rol, rank0, params: { ...P }, base: { ...P },
+           gammaCap: appJson.gamma_cap ?? 1.0, aware: appJson.aware ?? 1.5, baseAware: appJson.aware ?? 1.5 };
+}
+
+// Poisson CDF table F[p] = P(X <= p), p = 0..maxP
+function poissonCdf(lambda, maxP) {
+  const F = new Float64Array(maxP + 1);
+  let term = Math.exp(-lambda), acc = term;
+  F[0] = acc;
+  for (let p = 1; p <= maxP; p++) { term *= lambda / p; acc += term; F[p] = Math.min(1, acc); }
+  return F;
+}
+
+// Awareness: how many schools a family considers. The generator drew M_i = max(K_i, 1 + Poisson(1.5)).
+// To move that with a slider without a discontinuity, give each family a uniform u_i inside the CDF
+// bin of its generated draw; then M_i(aware) = max(K_i, 1 + F_aware^{-1}(u_i)) is monotone in `aware`
+// and reproduces the generated M exactly at the default. aware = null means every school is considered.
+// Call rescale() afterwards to re-form the lists inside the new consideration sets.
+export function withAwareness(market, aware, seed = 11) {
+  const { n, J, K, M, baseAware } = market;
+  const rng = mulberry32(seed);
+  const Fb = poissonCdf(baseAware, J + 1);
+  const newM = new Int32Array(n);
+  const F = aware === null ? null : poissonCdf(aware, J + 1);
+  for (let i = 0; i < n; i++) {
+    const p0 = Math.max(0, M[i] - 1);
+    const lo = p0 > 0 ? Fb[p0 - 1] : 0, hi = Fb[p0];
+    const u = lo + rng() * (hi - lo);
+    if (F === null) { newM[i] = J; continue; }
+    let p = 0;
+    while (p < F.length - 1 && F[p] < u) p++;
+    newM[i] = Math.min(J, Math.max(K[i], 1 + p));
+  }
+  return { ...market, M: newM, aware };
 }
 
 // New parameters → new utilities, and lists re-formed within each family's consideration set
 // (its M nearest schools plus the sibling's), exactly as the generator formed them.
 export function rescale(market, p) {
-  const { n, J, d, eps, xi, gamma, sib, base, distOrder, K, M, gammaCap } = market;
+  const { n, J, d, eps, xi, gamma, sib, base, distOrder, K, M, gammaCap, rank0, rol: rol0 } = market;
   const sxi = p.sxi ?? base.sxi, seps = p.seps ?? base.seps, sgam = p.sgam ?? base.sgam, lam = p.lam ?? base.lam;
   const fx = sxi / base.sxi, fe = seps / base.seps, fg = sgam / base.sgam;
+  const atBase = fx === 1 && fe === 1 && fg === 1 && lam === base.lam;
+  // At the generated awareness the published list is ground truth: return it untouched when tastes are
+  // at their estimates, and keep the listed schools inside the known set when only tastes move (the
+  // generator floored M at K, and two schools at equal distance can straddle the M-th slot differently
+  // here than in numpy's ordering). Away from the default awareness the known set is exactly the M
+  // nearest schools plus the sibling's, so the slider's low end really is "the nearest few".
+  const keepListed = market.aware === market.baseAware;
   const u = new Float64Array(n * J);
   const rol = new Array(n);
   const cons = [];
@@ -81,14 +124,37 @@ export function rescale(market, p) {
     const g = Math.min(gamma[i] * fg, gammaCap);
     for (let j = 0; j < J; j++)
       u[i * J + j] = xi[j] * fx + (-1 + g) * d[i * J + j] + (sib[i] === j ? lam : 0) + eps[i * J + j] * fe;
+    if (atBase && keepListed) { rol[i] = rol0[i]; continue; }
     cons.length = 0;
     const m = Math.min(M[i], J);
     for (let k = 0; k < m; k++) cons.push(distOrder[i * J + k]);
     if (sib[i] >= 0 && !cons.includes(sib[i])) cons.push(sib[i]);
-    cons.sort((x, y) => u[i * J + y] - u[i * J + x]);
+    if (keepListed) for (const k of rol0[i]) { if (!cons.includes(k)) cons.push(k); }
+    // utility descending; exact ties (3-decimal publication) resolved by the published list, then distance
+    cons.sort((x, y) => (u[i * J + y] - u[i * J + x]) || (rank0[i * J + x] - rank0[i * J + y]) || (d[i * J + x] - d[i * J + y]));
     rol[i] = Int32Array.from(cons.slice(0, Math.min(K[i], cons.length)));
   }
   return { ...market, u, rol, params: { sxi, seps, sgam, lam } };
+}
+
+// Everything the "walk a mile" panel needs about one family, given the last draw's assignments.
+export function familyCard(market, i, last) {
+  const { J, d, u, rol, sib, K, M, distOrder, ids } = market;
+  const jn = distOrder[i * J];
+  const first = rol[i][0];
+  const out = {
+    id: i, nearest: { school: ids[jn], km: d[i * J + jn] }, K: K[i], M: M[i], sib: sib[i] >= 0 ? ids[sib[i]] : null,
+    list: Array.from(rol[i], j => ({ school: ids[j], km: d[i * J + j], u: u[i * J + j] })),
+    outcomes: {},
+  };
+  for (const r of Object.keys(last)) {
+    const p = last[r][i];
+    if (p < 0) { out.outcomes[r] = { school: null }; continue; }
+    const rank = rol[i].indexOf(p);
+    out.outcomes[r] = { school: ids[p], km: d[i * J + p], rank: rank < 0 ? null : rank + 1,
+                        lossKm: u[i * J + first] - u[i * J + p] };   // km-equivalent short of the first choice
+  }
+  return out;
 }
 
 // DA structure: prefs[i] = reported list then the rest in distance order; coarse priority per pair.

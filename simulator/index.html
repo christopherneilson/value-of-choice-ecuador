@@ -2,6 +2,7 @@
 <meta name=viewport content="width=device-width,initial-scale=1">
 <title>Choose the rule — The Value of Choice</title>
 <meta name="description" content="Run the school-assignment rules yourself on a synthetic Manta: a distance rule, deferred acceptance on family preferences, and the constrained-efficient benchmark.">
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 <style>
 :root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--dc:#7b3294;--da:#21918c;--sic:#5ec962;--grey:#b8b8b8}
@@ -80,11 +81,16 @@ footer{max-width:1240px;margin:0 auto;padding:0 22px 60px;font-size:12px;color:v
       <div class=slider><label for=sxi>How different schools are (σ<sub>ξ</sub>)</label><output id=sxi_o></output><input type=range id=sxi min=0 max=3 step=0.05 value=1></div>
       <div class=slider><label for=seps>Idiosyncratic taste (σ<sub>ε</sub>)</label><output id=seps_o></output><input type=range id=seps min=0.2 max=3 step=0.05 value=1></div>
       <div class=slider><label for=sgam>Distance-taste heterogeneity (σ<sub>γ</sub>)</label><output id=sgam_o></output><input type=range id=sgam min=0 max=2 step=0.05 value=1></div>
+      <div class=slider><label for=aware>How many schools families know (awareness)</label><output id=aware_o></output><input type=range id=aware min=0 max=9 step=0.5 value=1.5></div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
         <button class=btn id=reset>Reset</button>
         <label class=chk><input type=checkbox id=lines checked> show a sample of home→school links</label>
       </div>
-      <div class=tiny style="margin-top:6px">Sliders multiply the paper's estimates (×1 = Table 9). Utilities are re-composed from each family's own taste draws, so the same families are re-assigned under new tastes.</div>
+      <div class=tiny style="margin-top:6px">Sliders multiply the paper's estimates (×1 = Table 9). Utilities are re-composed from each family's own taste draws, so the same families are re-assigned under new tastes. Awareness sets how many of its nearest schools each family compares before listing (the survey suggests only a few); at the far right every family knows every school.</div>
+    </div>
+    <div class=card>
+      <h2>Follow one family</h2>
+      <div id=family></div>
     </div>
     <div class=card>
       <h2>Legend</h2>
@@ -102,6 +108,7 @@ footer{max-width:1240px;margin:0 auto;padding:0 22px 60px;font-size:12px;color:v
   <div class=card><h2>Try: switch the rule</h2><p>Go from the <a href="?grade=2&rule=dc">distance rule</a> to <a href="?grade=2&rule=da">deferred acceptance</a>. The share of families placed in a school they asked for jumps; the share placed in their first choice jumps more. Then switch to the <a href="?grade=2&rule=sic">benchmark</a> and notice how little changes — that gap is the value of the <em>algorithm</em>, and it is small.</p></div>
   <div class=card><h2>Try: tighten the seats</h2><p>Drag seats below ×1 — or jump to <a href="?grade=2&rule=da&seats=0.6">seats ×0.6</a>. As congestion rises, the first-choice share under deferred acceptance falls and the gain over the distance rule shrinks. This is why <a href="?grade=4&rule=da">Primary 1</a>, the most congested grade, gains least in the paper.</p></div>
   <div class=card><h2>Try: make families alike</h2><p>Turn idiosyncratic taste σ<sub>ε</sub> down to <a href="?grade=2&rule=da&seps=0.2">×0.2</a>: most families now want their nearest school, the distance rule nearly matches deferred acceptance, and the gain from choice shrinks from about 0.5 to 0.1 km per family. Turn it up to <a href="?grade=2&rule=da&seps=3">×3</a> and the gain triples. Now try σ<sub>ξ</sub> instead — making every school <a href="?grade=2&rule=dc&sxi=0">equally desirable</a> changes almost nothing, because families compare only a few nearby schools. The value of choice lives in what each family wants, not in a ranking of schools a planner could observe — the paper's imagery result, in one slider.</p></div>
+  <div class=card><h2>Try: follow one family</h2><p>Click any dot, or <a href="?grade=2&rule=dc&family=16">open family 16</a>, which lives 170 m from a school but wants one 590 m away: the distance rule sends it to its fourth choice, deferred acceptance to its first. Each family's card shows its list, the school next door, and where each rule sends it — with the shortfall from its first choice in km-equivalent. Then <a href="?grade=2&rule=da&aware=0">make families know only their nearest school</a> and watch nearly everyone ask for it, or <a href="?grade=2&rule=da&aware=all">let every family know every school</a> and watch the value of choice grow as lists reach further.</p></div>
 </div>
 
 <footer>Families are synthetic: drawn from the paper's estimated demand model over the real schools, with homes sampled from a coarse density grid — no real applicant appears. School desirability is shown as a quintile band only.
