@@ -1,5 +1,8 @@
 # The Value of Choice in Centralized School Assignment — project website
 
+**New here? Read [HANDOFF.md](HANDOFF.md)** — current state, how to regenerate and verify every piece,
+the design decisions and their rationale, known gaps, and the roadmap.
+
 Public website / online materials for the paper *"The Value of Choice in Centralized School
 Assignment: Welfare Gains from Acting on Family Preferences in Ecuador"* (Elacqua, Jacas, Krussig,
 Méndez & Neilson). Served as a static site via **GitHub Pages** at
