@@ -74,6 +74,7 @@ const ES = {
   "fam.first": "primera opción", "fam.choice": "opción n.º {r}", "fam.unlisted": "fuera de su lista", "fam.unassigned": "sin asignar",
   "fam.note": "Último sorteo. «vs. 1.ª» es cuánto le falta a la asignación respecto de la primera opción de la familia, en utilidad equivalente en km. Línea punteada: primera opción; líneas continuas: adónde la envía cada regla.",
 
+  "sim.loading": "cargando…", "fam.number": "Número de familia", "fam.go": "Ir",
   // ----------------------------------------------------------------- story
   "story.crumb.tag": "el argumento, paso a paso",
   "story.h1": "Por qué importa elegir — aunque la mayoría de las familias quiera la escuela de al lado",

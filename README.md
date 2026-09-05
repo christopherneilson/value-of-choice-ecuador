@@ -15,6 +15,7 @@ value-of-choice-ecuador.pdf         the paper (the named build submitted to the 
 cite.bib                            BibTeX for the working paper
 story/                              scrollytelling walk through the argument, live model beside it
 simulator/index.html, app.js        "Choose the rule": map, rule toggle, metrics, sliders, awareness, family cards
+simulator/sim.worker.js, market.js  the lotteries run in a module worker; market.js derives "the market under the sliders"
 toy/                                strategy-proofness toy: Boston vs deferred acceptance, three families
 planner/                            "Could a planner have guessed?": desirability bands from imagery attributes
 survey/                             the parent survey as aggregates, sliced by list length and grade

@@ -35,8 +35,8 @@ function stack(o) {
 
 function render() {
   const g = D.groups[`${lens}|${grade}`], all = D.groups["all|all"];
-  document.querySelectorAll("#lens button").forEach(b => b.classList.toggle("on", b.dataset.v === lens));
-  document.querySelectorAll("#grade button").forEach(b => b.classList.toggle("on", b.dataset.v === grade));
+  document.querySelectorAll("#lens button").forEach(b => { const on = b.dataset.v === lens; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
+  document.querySelectorAll("#grade button").forEach(b => { const on = b.dataset.v === grade; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on); });
   $("#nline").textContent = t("sv.n", "{n} respondents · {f} completed the full instrument", { n: nf(g.n), f: nf(g.finished) });
   const few = `<p class=tiny>${t("sv.toofew", "Too few respondents in this group to tabulate.")}</p>`;
 

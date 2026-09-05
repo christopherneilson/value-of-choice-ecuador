@@ -1,5 +1,6 @@
 // app.js — "Choose the rule": map + rule toggle + metrics + sliders + one-family panel, on ../engine/engine.js
-import { buildMarket, rescale, simulate, withAwareness, familyCard } from "../engine/engine.js";
+import { buildMarket, simulate, familyCard } from "../engine/engine.js";
+import { deriveMarket } from "./market.js";
 import { t, nf, init as i18nInit, mountToggle, getLang } from "../shared/i18n.js";
 
 const GRADE_EN = { 2: "Preschool 1", 3: "Preschool 2", 4: "Primary 1" };
@@ -22,28 +23,47 @@ const AWARE_ALL = 9;   // slider position meaning "every school"
 const $ = s => document.querySelector(s);
 
 const state = { grade: 2, rule: "da", draws: 10, seed: 7, seats: 1, sxi: 1, seps: 1, sgam: 1, aware: 1.5, lines: true, family: null };
-const markets = {}, schoolsJson = { ref: null };
+const markets = {}, loading = {}, schoolsJson = { ref: null };
 let map, schoolLayer, homeLayer, lineLayer, familyLayer, lastRes = null, lastMarket = null, busy = false, pending = false;
+let worker = null, jobId = 0, inflight = null;
 
-async function loadData() {
-  const [schools, a2, a3, a4] = await Promise.all(
-    ["schools.json", "applicants_g2.json", "applicants_g3.json", "applicants_g4.json"].map(f => fetch(`../data/${f}`).then(r => r.json())));
-  schoolsJson.ref = schools;
-  markets[2] = buildMarket(schools, a2); markets[3] = buildMarket(schools, a3); markets[4] = buildMarket(schools, a4);
+// Grades load on demand (the entry grade first; the others when chosen), and each is handed to the worker once.
+function loadGrade(g) {
+  if (markets[g]) return Promise.resolve(markets[g]);
+  if (!loading[g]) loading[g] = (async () => {
+    if (!schoolsJson.ref) schoolsJson.ref = await fetch("../data/schools.json").then(r => r.json());
+    const apps = await fetch(`../data/applicants_g${g}.json`).then(r => r.json());
+    markets[g] = buildMarket(schoolsJson.ref, apps);
+    if (worker) worker.postMessage({ type: "load", grade: g, schools: schoolsJson.ref, apps });
+    return markets[g];
+  })();
+  return loading[g];
+}
+
+// The lotteries run in a module worker so dragging a slider never freezes the page; if the worker cannot
+// start (old browser, ?worker=0), everything runs on the main thread exactly as before.
+function startWorker() {
+  window.VOC = { get worker() { return !!worker; } };   // for tests and debugging: is the worker in use?
+  if (typeof Worker === "undefined" || new URLSearchParams(location.search).get("worker") === "0") return;
+  try {
+    worker = new Worker(new URL("./sim.worker.js", import.meta.url), { type: "module" });
+    worker.onmessage = e => {
+      const d = e.data;
+      if (d.type === "result") finishRun(d);
+      else if (d.type === "error") { console.error("simulation worker:", d.message); dropWorker(); }
+    };
+    worker.onerror = e => { console.warn("simulation worker unavailable, running on the main thread:", e.message); dropWorker(); };
+  } catch (e) { worker = null; }
+}
+function dropWorker() {
+  if (worker) worker.terminate();
+  worker = null; inflight = null; busy = false;
+  run();
 }
 
 function awareValue() { return state.aware >= AWARE_ALL ? null : state.aware; }
-
-function currentMarket() {
-  let m = markets[state.grade];
-  const b = m.base;
-  const awareChanged = awareValue() !== m.baseAware;
-  if (awareChanged) m = withAwareness(m, awareValue());
-  if (awareChanged || state.sxi !== 1 || state.seps !== 1 || state.sgam !== 1)
-    m = rescale(m, { sxi: b.sxi * state.sxi, seps: b.seps * state.seps, sgam: b.sgam * state.sgam, lam: b.lam });
-  if (state.seats !== 1) m = { ...m, caps: Int32Array.from(m.caps, c => Math.max(0, Math.round(c * state.seats))) };
-  return m;
-}
+const params = () => ({ grade: state.grade, aware: awareValue(), sxi: state.sxi, seps: state.seps, sgam: state.sgam, seats: state.seats });
+function currentMarket() { return deriveMarket(markets[state.grade], params()); }
 
 const fmt = (x, d = 1) => nf(x, d);
 
@@ -156,26 +176,31 @@ function renderFamily(m, res) {
 }
 
 function run(draws) {
+  if (!markets[state.grade]) return;                 // grade still loading; the loader calls run() when done
   if (busy) { pending = true; return; }
   busy = true;
-  setTimeout(() => {
-    try {
-      const m = currentMarket();
-      lastRes = simulate(m, { draws: draws ?? state.draws, seed: state.seed });
-      lastMarket = m;
-      renderMetrics(m, lastRes); renderMap(m, lastRes);
-    } finally {
-      busy = false;
-      if (pending) { pending = false; run(); }
-    }
-  }, 0);
+  const d = draws ?? state.draws;
+  const m = currentMarket();                         // the page's copy, for the map and the family card
+  if (worker) {
+    inflight = { id: ++jobId, m };
+    worker.postMessage({ type: "run", id: inflight.id, ...params(), draws: d, seed: state.seed });
+    return;
+  }
+  setTimeout(() => { try { finish(m, simulate(m, { draws: d, seed: state.seed })); } finally { done(); } }, 0);
 }
+function finishRun(d) {
+  if (!inflight || d.id !== inflight.id) return;     // a stale result (grade changed, worker restarted)
+  const m = inflight.m; inflight = null;
+  try { finish(m, d.res); } finally { done(); }
+}
+function finish(m, res) { lastRes = res; lastMarket = m; renderMetrics(m, res); renderMap(m, res); }
+function done() { busy = false; if (pending) { pending = false; run(); } }
 
 function initMap() {
   map = L.map("map", { preferCanvas: true, zoomControl: true });
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
   lineLayer = L.layerGroup().addTo(map); homeLayer = L.layerGroup().addTo(map); schoolLayer = L.layerGroup().addTo(map); familyLayer = L.layerGroup().addTo(map);
-  const m = markets[2];
+  const m = markets[state.grade];
   const pts = []; for (let j = 0; j < m.J; j++) pts.push([m.sLat[j], m.sLon[j]]);
   map.fitBounds(L.latLngBounds(pts).pad(0.08));
 }
@@ -197,12 +222,19 @@ function showSliders() {
   $("#aware_o").textContent = awareLabel();
 }
 
+const setOn = (group, b) => [...$(group).children].forEach(x => { const on = x === b; x.classList.toggle("on", on); x.setAttribute("aria-pressed", on); });
+
 function wire() {
   $("#grades").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
-    state.grade = +b.dataset.grade; state.family = null; [...$("#grades").children].forEach(x => x.classList.toggle("on", x === b)); showSliders(); run(); });
+    state.grade = +b.dataset.grade; state.family = null; inflight = null; setOn("#grades", b);
+    if (!markets[state.grade]) { $("#headline").textContent = t("sim.loading", "loading…"); $("#headsub").textContent = ""; }
+    loadGrade(state.grade).then(() => { $("#famno").max = markets[state.grade].n; showSliders(); run(); }); });
   $("#rules").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
-    state.rule = b.dataset.rule; [...$("#rules").children].forEach(x => x.classList.toggle("on", x === b));
+    state.rule = b.dataset.rule; setOn("#rules", b);
     if (lastRes) { renderMetrics(lastMarket, lastRes); renderMap(lastMarket, lastRes); } });
+  $("#famform").addEventListener("submit", e => { e.preventDefault(); const v = Math.round(+$("#famno").value);
+    if (lastMarket && v >= 1 && v <= lastMarket.n) selectFamily(v - 1); });
+  $("#famno").max = markets[state.grade].n;
   for (const k of ["seats", "sxi", "seps", "sgam", "aware"]) {
     const el = $("#" + k);
     el.addEventListener("input", () => { state[k] = +el.value; showSliders(); run(4); });
@@ -225,12 +257,13 @@ function applyPresets() {
   $("#aware").value = state.aware;
   const fam = num("family", 1, 5000); if (fam !== null) state.family = Math.round(fam) - 1;
   if (q.get("lines") === "0") { state.lines = false; $("#lines").checked = false; }
-  [...$("#grades").children].forEach(b => b.classList.toggle("on", +b.dataset.grade === state.grade));
-  [...$("#rules").children].forEach(b => b.classList.toggle("on", b.dataset.rule === state.rule));
+  setOn("#grades", [...$("#grades").children].find(b => +b.dataset.grade === state.grade));
+  setOn("#rules", [...$("#rules").children].find(b => b.dataset.rule === state.rule));
 }
 
 i18nInit(); mountToggle("#langtoggle");
 document.title = getLang() === "es" ? "Elige la regla — El valor de elegir" : document.title;
-loadData().then(() => { applyPresets(); initMap(); wire(); run(); }).catch(err => {
+applyPresets(); startWorker();
+loadGrade(state.grade).then(() => { initMap(); wire(); run(); }).catch(err => {
   $("#headline").textContent = t("load.fail", "Could not load data"); $("#headsub").textContent = String(err); console.error(err);
 });

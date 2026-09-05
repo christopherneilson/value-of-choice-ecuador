@@ -58,21 +58,21 @@ footer{max-width:1240px;margin:0 auto;padding:0 22px 60px;font-size:12px;color:v
   <aside>
     <div class=card>
       <h2 data-i18n="sim.grade">Grade</h2>
-      <div class=seg id=grades>
-        <button data-grade=2 class=on data-i18n="grade.2">Preschool 1</button><button data-grade=3 data-i18n="grade.3">Preschool 2</button><button data-grade=4 data-i18n="grade.4">Primary 1</button>
+      <div class=seg id=grades role=group aria-label="Grade">
+        <button data-grade=2 class=on aria-pressed=true data-i18n="grade.2">Preschool 1</button><button data-grade=3 aria-pressed=false data-i18n="grade.3">Preschool 2</button><button data-grade=4 aria-pressed=false data-i18n="grade.4">Primary 1</button>
       </div>
       <div class=tiny id=gradeinfo style="margin-top:6px"></div>
     </div>
     <div class=card>
       <h2 data-i18n="sim.rule">Assignment rule</h2>
-      <div class=seg id=rules>
-        <button data-rule=dc data-i18n="rule.dc">Distance rule</button><button data-rule=da class=on data-i18n="rule.da">Deferred acceptance</button><button data-rule=sic data-i18n="rule.sic">Benchmark</button>
+      <div class=seg id=rules role=group aria-label="Assignment rule">
+        <button data-rule=dc aria-pressed=false data-i18n="rule.dc">Distance rule</button><button data-rule=da class=on aria-pressed=true data-i18n="rule.da">Deferred acceptance</button><button data-rule=sic aria-pressed=false data-i18n="rule.sic">Benchmark</button>
       </div>
       <div class=tiny id=ruleinfo style="margin-top:6px"></div>
     </div>
     <div class=card>
       <h2 data-i18n="sim.outcome">Outcome under this rule</h2>
-      <div class=big id=headline>—</div>
+      <div class=big id=headline aria-live=polite>—</div>
       <div class=sub id=headsub></div>
       <table style="margin-top:8px"><thead><tr><th></th><th data-i18n="sim.th.dc">Distance</th><th data-i18n="sim.th.da">DA</th><th data-i18n="sim.th.sic">Benchmark</th></tr></thead>
       <tbody id=metrics></tbody></table>
@@ -94,7 +94,8 @@ footer{max-width:1240px;margin:0 auto;padding:0 22px 60px;font-size:12px;color:v
     </div>
     <div class=card>
       <h2 data-i18n="sim.family">Follow one family</h2>
-      <div id=family></div>
+      <form id=famform class=tiny style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><label for=famno data-i18n="fam.number">Family number</label><input type=number id=famno min=1 step=1 style="width:70px;font:inherit;font-size:12px;padding:3px 5px;border:1px solid #ccc;border-radius:6px"><button class=btn type=submit data-i18n="fam.go">Go</button></form>
+      <div id=family aria-live=polite></div>
     </div>
     <div class=card>
       <h2 data-i18n="sim.legend">Legend</h2>

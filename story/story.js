@@ -1,5 +1,6 @@
 // story.js — scrollytelling: a sticky map + readout driven by the engine, steps that scroll past.
-import { buildMarket, rescale, simulate } from "../engine/engine.js";
+import { buildMarket } from "../engine/engine.js";
+import { runJobs } from "../shared/simjobs.js";
 import { t, nf, init as i18nInit, mountToggle, getLang } from "../shared/i18n.js";
 
 const $ = s => document.querySelector(s);
@@ -14,15 +15,16 @@ async function load() {
   const [schools, a2] = await Promise.all(["schools.json", "applicants_g2.json"].map(f => fetch(`../data/${f}`).then(r => r.json())));
   S.schools = schools;
   S.m = buildMarket(schools, a2);
-  S.res = simulate(S.m, { draws: 10, seed: 7 });
-  // congestion sweep (only where every family is seated), sigma_eps cases, and the x0.6 scene
-  const scale = k => ({ ...S.m, caps: Int32Array.from(S.m.caps, c => Math.max(0, Math.round(c * k))) });
-  S.sweep = [1.6, 1.4, 1.2, 1.0, 0.9, 0.8, 0.7, 0.6].map(k => ({ k, r: simulate(scale(k), { draws: 6, seed: 7 }) }));
-  S.congested = simulate(scale(0.6), { draws: 10, seed: 7 });
-  const b = S.m.base;
-  S.alike = simulate(rescale(S.m, { sxi: b.sxi, seps: b.seps * 0.2, sgam: b.sgam, lam: b.lam }), { draws: 10, seed: 7 });
-  S.diverse = simulate(rescale(S.m, { sxi: b.sxi, seps: b.seps * 3, sgam: b.sgam, lam: b.lam }), { draws: 10, seed: 7 });
+  // All the scenes' lotteries run in the simulator's worker (main thread if it cannot start): the base
+  // scene, the congestion sweep (only where every family is seated), the x0.6 scene, and the sigma_eps cases.
+  const KS = [1.6, 1.4, 1.2, 1.0, 0.9, 0.8, 0.7, 0.6];
+  const jobs = { base: { draws: 10 }, congested: { seats: 0.6, draws: 10 }, alike: { seps: 0.2, draws: 10 }, diverse: { seps: 3, draws: 10 } };
+  for (const k of KS) jobs["sweep" + k] = { seats: k, draws: 6 };
+  const out = await runJobs(schools, a2, S.m, jobs);
+  S.res = out.base; S.congested = out.congested; S.alike = out.alike; S.diverse = out.diverse;
+  S.sweep = KS.map(k => ({ k, r: out["sweep" + k] }));
   S.ready = true;
+  window.VOC = { story: true };
 }
 
 function initMap() {

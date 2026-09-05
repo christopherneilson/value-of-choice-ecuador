@@ -198,10 +198,9 @@ against the private inputs on every regeneration; keep it in the loop.
   `rescale()` re-form the lists — without regenerating data.
 - Tiles: OSM's usage policy is fine for a small academic site; if traffic grows, move to a keyed
   provider (MapTiler, Stadia) or self-hosted tiles.
-- The simulator's `simulate()` runs on the main thread; Preschool 2 at ten draws is ~0.4 s, so
-  dragging feels slightly sticky. A Web Worker would fix it.
-- Mobile layout has only CSS breakpoints and has not been tested on a device; the Leaflet map is not
-  keyboard-navigable (default Leaflet behaviour).
+- Mobile layout has CSS breakpoints and passes a headless 375 px sweep (no overflow, no console
+  errors on any page) but has not been tested on a real device. The Leaflet map's markers are canvas
+  circles and cannot take focus; keyboard users reach a family through the family-number field.
 - The site repo has `core.autocrlf` on this machine, so Git warns about LF→CRLF; harmless.
 - The "Last updated" date in `make_landing.py` is a constant.
 
@@ -312,8 +311,18 @@ landing page and appendix publication-ready · privacy checks.
 12. CI: *Done 2026-09-05.* `.github/workflows/test.yml` runs `node engine/test_engine.mjs` and
     `node tools/check_links.mjs` (every local href/src in the HTML must resolve; scripts and styles
     are stripped first because the appendix's template literals look like links) on every push and PR.
-13. Web Worker for `simulate()`; lazy-load `data/` per grade; mobile pass on real devices;
-    keyboard access for the map's essential actions; analytics only if privacy-preserving.
+13. *Done 2026-09-05, except the two items that need a person or a decision.* The lotteries run in a
+    module worker (`simulator/sim.worker.js`; `simulator/market.js` is the one derivation of "the
+    market under the current sliders", shared by page and worker so both agree exactly; results are
+    identical to the main-thread path, which `?worker=0` forces and which is the automatic fallback
+    if the worker cannot start). The story's twelve scene simulations go through the same worker via
+    `shared/simjobs.js`, so the page renders before they finish. Grades load on demand (the entry
+    grade at start; ~0.7 MB less on first paint). Keyboard: a family-number field in "Follow one
+    family" (the canvas markers are not focusable), `aria-pressed` on every toggle group here and in
+    the survey explorer, `aria-live` on the headline and the family card; sliders are native. Mobile:
+    every page checked headlessly at 375 px for horizontal overflow and console errors (the
+    calibration tables now scroll inside their card); **not yet on a real device**. Analytics: none,
+    by default — an author decision (§7).
 
 ---
 
@@ -322,6 +331,8 @@ landing page and appendix publication-ready · privacy checks.
 - Show school names on the simulator map? They are already public in the appendix; ids are used now.
 - Should the site URL appear in the paper at all, and when — at submission, or once accepted?
 - Spanish first, or English first, on the landing page?
+- Analytics? None are installed. If wanted, a cookie-less, self-hosted counter (Plausible, GoatCounter)
+  keeps the "nothing identifies a visitor" promise; anything Google-hosted would need a banner.
 - A licence for the downloads. `downloads/` says "cite the paper" and nothing more; CC BY 4.0 for the
   synthetic data, derived attributes and survey tabulations, and MIT for `engine/`, would be the
   conventional choice. Until one is stated, reuse rests on the page's wording.
