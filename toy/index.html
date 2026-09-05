@@ -1,0 +1,79 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Does lying pay? — The Value of Choice</title>
+<meta name="description" content="A three-school toy market: submit a ranking under the Boston mechanism and under deferred acceptance, and see when misreporting helps and when it cannot.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--bos:#c2410c;--da:#21918c;--good:#1a7f37;--bad:#b42318}
+*{box-sizing:border-box}body{font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:980px;margin:0 auto;padding:22px 22px 70px;position:relative}
+.crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;padding-right:90px}
+h1{font-size:30px;margin:6px 0 6px;letter-spacing:-.01em;line-height:1.2}
+.lede{color:#333;max-width:820px;margin:0 0 18px}
+.langtoggle{position:absolute;right:22px;top:20px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:5px 6px;border-bottom:1px solid #f0f0f0;vertical-align:top}
+th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+.you{font-weight:700}
+.perms{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.perms button{font:inherit;font-size:14px;padding:8px 12px;border:1px solid #ccc;background:#fafafa;border-radius:9px;cursor:pointer}
+.perms button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.perms button .truth{font-size:11px;color:var(--mut)}.perms button.on .truth{color:#ddd}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px}
+.res .card h2 span{font-size:16px;text-transform:none;letter-spacing:0;font-weight:700}
+.res .bos h2 span{color:var(--bos)}.res .da h2 span{color:var(--da)}
+.big{font-size:22px;font-weight:700;margin:4px 0 6px}
+.log{font-size:13px;color:#333;margin:6px 0 0;padding-left:18px}
+.log li{margin:2px 0}
+.verdict{margin-top:16px;padding:12px 14px;border-radius:12px;background:#f6f6f6;font-size:15px}
+.verdict b.good{color:var(--good)}.verdict b.bad{color:var(--bad)}
+.all td.best{font-weight:700}
+.tiny{font-size:12px;color:var(--mut)}
+.cta{display:inline-block;margin-top:14px;font-size:14px;text-decoration:none;color:var(--ink);border:1px solid #ccc;border-radius:9px;padding:7px 12px}
+@media (max-width:760px){.grid,.res{grid-template-columns:1fr}}
+</style></head><body><div class=wrap>
+
+<div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="toy.crumb.tag">a toy market</span></div>
+<div id=langtoggle></div>
+<h1 data-i18n="toy.h1">Does lying pay?</h1>
+<p class=lede data-i18n="toy.lede">Three families, three schools, one seat each. Rank the schools for <b>your</b> family and see where two assignment rules send you. Under the <b>Boston mechanism</b> a school fills its seat as soon as someone ranks it first, so a family that aims high and misses can lose its safe option too — and may do better by <em>not</em> telling the truth. Under <b>deferred acceptance</b> nothing is locked in until the end, and no list ever does better than the truth. That is why the paper can treat Manta's lists as what families actually want.</p>
+
+<div class=grid>
+  <div class=card>
+    <h2 data-i18n="toy.market">The market</h2>
+    <table>
+      <thead><tr><th data-i18n="toy.th.family">Family</th><th data-i18n="toy.th.prefs">True preferences</th><th data-i18n="toy.th.prio">Priority</th></tr></thead>
+      <tbody id=market></tbody>
+    </table>
+    <p class=tiny data-i18n="toy.market.note">Each school has one seat. A school admits applicants in priority order; ties are broken by a fixed lottery. Ana has a sibling at A; you live in B's walk zone.</p>
+  </div>
+  <div class=card>
+    <h2 data-i18n="toy.submit">Your submitted ranking</h2>
+    <div class=perms id=perms></div>
+    <p class=tiny data-i18n="toy.submit.note">Your true preference is A, then B, then C. Pick the list you hand in; the other two families always tell the truth.</p>
+  </div>
+</div>
+
+<div class=res>
+  <div class="card bos"><h2><span data-i18n="toy.boston">Boston mechanism</span> · <span class=tiny data-i18n="toy.boston.sub">immediate acceptance</span></h2><div class=big id=bos_you></div><div id=bos_others class=tiny></div><ol class=log id=bos_log></ol></div>
+  <div class="card da"><h2><span data-i18n="toy.da">Deferred acceptance</span> · <span class=tiny data-i18n="toy.da.sub">the rule Manta adopted</span></h2><div class=big id=da_you></div><div id=da_others class=tiny></div><ol class=log id=da_log></ol></div>
+</div>
+
+<div class=verdict id=verdict></div>
+
+<div class=card style="margin-top:16px">
+  <h2 data-i18n="toy.all">Every list you could submit</h2>
+  <table class=all><thead><tr><th data-i18n="toy.th.list">Your list</th><th data-i18n="toy.th.bos">Boston gives you</th><th data-i18n="toy.th.da">DA gives you</th></tr></thead><tbody id=all></tbody></table>
+  <p class=tiny data-i18n="toy.all.note">Under deferred acceptance the truthful list is always among the best you can submit — that is what "strategy-proof" means, and it holds for any preferences, priorities and seats, not just this example (the paper's Proposition 1 states the form it takes with Manta's priorities). Under Boston, whether lying pays depends on what everyone else does, which is exactly the guessing game a good mechanism removes.</p>
+</div>
+
+<a class=cta href="../simulator/" data-i18n="toy.cta">Back to the full simulator →</a>
+
+<script type=module src="toy.js"></script>
+</div></body></html>

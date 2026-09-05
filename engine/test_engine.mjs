@@ -87,5 +87,22 @@ for (const g of [2, 3, 4]) {
   check(s0.nearestFirst > sim.nearestFirst && sim.nearestFirst > sAll.nearestFirst,
     `nearest-first falls as awareness rises: ${(100 * s0.nearestFirst).toFixed(0)}% (nearest only) → ${(100 * sim.nearestFirst).toFixed(0)}% (default) → ${(100 * sAll.nearestFirst).toFixed(0)}% (all)`);
 }
+// Boston mechanism (toy only): the textbook case where a truthful report is punished.
+{
+  const { bostonMechanism } = await import("./engine.js");
+  // schools A=0, B=1, C=2, one seat each. You=0 (true A>B>C), Ana=1 (A>B>C), Beto=2 (B>A>C).
+  // priorities (lower better): at A Ana 0, Beto 1, You 2; at B You 0, Beto 1, Ana 2; at C all equal.
+  const J = 3, caps = Int32Array.from([1, 1, 1]);
+  const score = Float64Array.from([2, 0, 0.5, 0, 2, 0.5, 1, 1, 0.5]);   // [a*J+p]
+  const truthful = [Int32Array.from([0, 1, 2]), Int32Array.from([0, 1, 2]), Int32Array.from([1, 0, 2])];
+  const lie = [Int32Array.from([1, 0, 2]), truthful[1], truthful[2]];
+  const bT = bostonMechanism(truthful, score, caps, J), bL = bostonMechanism(lie, score, caps, J);
+  const dT = deferredAcceptance(truthful, score, caps, J), dL = deferredAcceptance(lie, score, caps, J);
+  console.log("\nBoston toy market");
+  check(bT.get(0) === 2 && bL.get(0) === 1, `Boston: truthful You gets C (${bT.get(0)}), lying B-first gets B (${bL.get(0)}) — lying pays`);
+  check(dT.get(0) === 1 && dL.get(0) === 1, `DA: truthful You gets B (${dT.get(0)}), lying gets B (${dL.get(0)}) — truth is safe`);
+  check([...bT.values()].length === 3 && new Set(bT.values()).size === 3, "Boston: everyone seated, no seat double-booked");
+}
+
 console.log(`\nRESULT: ${failures ? failures + " FAILURE(S)" : "ALL CHECKS PASSED"}`);
 process.exitCode = failures ? 1 : 0;

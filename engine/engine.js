@@ -216,6 +216,37 @@ export function deferredAcceptance(prefs, score, caps, J) {
   return assigned;
 }
 
+// ------------------------------------------------------------------------ Boston
+// Immediate acceptance ("Boston" mechanism), for the strategy-proofness toy — NOT part of the
+// pipeline. Round k: every unassigned applicant applies to the k-th school on her list; each school
+// permanently admits applicants in score order up to its remaining seats; the rest go to round k+1.
+// Same `score`/`caps` conventions as deferredAcceptance. Returns Map applicant → program, plus a
+// round-by-round log when `log` is given.
+export function bostonMechanism(prefs, score, caps, J, log) {
+  const n = prefs.length;
+  const left = Int32Array.from(caps);
+  const assigned = new Map();
+  let maxLen = 0; for (const p of prefs) maxLen = Math.max(maxLen, p.length);
+  for (let k = 0; k < maxLen; k++) {
+    const applicants = new Map();   // school -> applicants applying this round
+    for (let a = 0; a < n; a++) {
+      if (assigned.has(a) || k >= prefs[a].length) continue;
+      const p = prefs[a][k];
+      let arr = applicants.get(p); if (!arr) { arr = []; applicants.set(p, arr); }
+      arr.push(a);
+    }
+    if (!applicants.size) break;
+    for (const [p, arr] of applicants) {
+      arr.sort((x, y) => (score[x * J + p] - score[y * J + p]) || (x - y));
+      const take = arr.slice(0, Math.max(0, left[p]));
+      for (const a of take) assigned.set(a, p);
+      left[p] -= take.length;
+      if (log) log.push({ round: k + 1, school: p, applied: arr.slice(), accepted: take, rejected: arr.slice(take.length) });
+    }
+  }
+  return assigned;
+}
+
 // --------------------------------------------------------------------------- SIC
 function findCycle(adj) {
   const WHITE = 0, GRAY = 1, BLACK = 2;

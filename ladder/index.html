@@ -1,0 +1,57 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Two welfare ladders — The Value of Choice</title>
+<meta name="description" content="The paper's Figure 6, live: New York's move to coordinated assignment beside Manta's move from a distance rule to preferences, on a common scale — and what each band can and cannot attribute.">
+<link rel="icon" href="data:,">
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--reform:#21918c;--algo:#5ec962;--other:#c9c9c9}
+*{box-sizing:border-box}body{font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+a{color:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:22px 22px 70px;position:relative}
+.crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;padding-right:90px}
+h1{font-size:30px;margin:6px 0 6px;letter-spacing:-.01em;line-height:1.2}
+.lede{color:#333;max-width:820px;margin:0 0 18px}
+.langtoggle{position:absolute;right:22px;top:20px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:#fff}
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+.fig{border:1px solid var(--line);border-radius:12px;padding:10px}
+.fig svg{width:100%;height:auto;display:block}
+.band{cursor:pointer}.band:hover{filter:brightness(.92)}.band.on{stroke:#111;stroke-width:2}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+.big{font-size:22px;font-weight:700;line-height:1.2;margin:0 0 6px}
+.sub{font-size:14px;color:#333}
+.src{display:inline-block;font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:0 7px;margin-left:4px;vertical-align:1px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:#333;margin-top:10px}
+.legend span i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.tiny{font-size:12px;color:var(--mut)}
+.cta{display:inline-block;margin-top:14px;font-size:14px;text-decoration:none;color:var(--ink);border:1px solid #ccc;border-radius:9px;padding:7px 12px}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
+</style></head><body><div class=wrap>
+
+<div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="lad.crumb.tag">two welfare ladders</span></div>
+<div id=langtoggle></div>
+<h1 data-i18n="lad.h1">Two reforms, two ladders — and what each rung can claim</h1>
+<p class=lede data-i18n="lad.lede">New York City moved <em>out of</em> an uncoordinated system into coordinated assignment; Manta moved from one coordinated rule to another, changing only the objective. Put the two welfare decompositions on a common scale and the biggest bands look alike — but they are not the same object. Click a band.</p>
+
+<div class=grid>
+  <div class=fig id=fig></div>
+  <aside>
+    <div class=card>
+      <h2 data-i18n="lad.selected">Selected band</h2>
+      <div class=big id=sel_title data-i18n="lad.sel.hint">Click a band</div>
+      <div class=sub id=sel_body></div>
+    </div>
+    <div class=card style="margin-top:14px">
+      <h2 data-i18n="lad.point">The point</h2>
+      <div class=sub data-i18n="lad.point.body">New York's 45.0% band <b>bundles</b> coordination, digitization and acting on preferences — none of the three can be separated out. Manta held the first two fixed and changed only the objective, so its 87.6% band is <b>acting on preferences alone</b>. Read the small green bands too: what a cleverer algorithm adds among coordinated mechanisms is 3.3% of the range in New York and 0.3% in Manta.</div>
+    </div>
+    <div class=legend><span><i style="background:#21918c"></i><span data-i18n="lad.leg.reform">the band each setting is about</span></span><span><i style="background:#5ec962"></i><span data-i18n="lad.leg.algo">algorithm refinements</span></span><span><i style="background:#c9c9c9"></i><span data-i18n="lad.leg.other">scaffolding neither setting claims</span></span></div>
+    <p class=tiny data-i18n="lad.sources">Manta: the paper's Table 7 levels (distance rule −0.104, deferred acceptance 0.583, constrained-efficient benchmark 0.586, unconstrained maximum 0.681 km-equivalent; Preschool 1). New York: redrawn from the span totals published in Abdulkadiroğlu, Agarwal and Pathak (2017), 18.96 miles of willingness to travel; their single 3.73-mile "potential algorithm improvements" band is split into its two printed components so the columns compare like with like.</p>
+    <a class=cta href="../story/" data-i18n="lad.cta">Read the argument step by step →</a>
+  </aside>
+</div>
+
+<script type=module src="ladder.js"></script>
+</div></body></html>

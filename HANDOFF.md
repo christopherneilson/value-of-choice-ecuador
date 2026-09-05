@@ -259,11 +259,15 @@ landing page and appendix publication-ready · privacy checks.
    pipeline's `06_attributes.csv`, public-derived values), ask the visitor to guess its band, reveal
    it and the paper's finding that most desirability stays unexplained. Bands only, never names beside
    scores.
-8. **Strategy-proofness toy.** A hand-made five-school market with a Boston-mechanism implementation
-   added to `engine.js` (not in the pipeline; write and unit-test it), letting a visitor submit a list
-   under Boston vs DA and see whether misreporting helps.
-9. **Welfare ladder, live.** Figure 6 as an interactive with the NY bands' bundling explained on hover;
-   numbers from the paper, no engine.
+8. **Strategy-proofness toy.** *Done 2026-09-05* (`toy/`). Three schools, one seat each; you (true
+   A › B › C) against Ana (sibling at A) and Beto; `bostonMechanism()` added to the engine (toy only,
+   not in the pipeline) with a round log and a unit test of the textbook case: truthful Boston sends
+   you to C, ranking B first gets B; under DA the truth already gets B and no list beats it. The page
+   shows both mechanisms' outcomes, the Boston rounds, a verdict, and every one of the six lists.
+9. **Welfare ladder, live.** *Done 2026-09-05* (`ladder/`). Figure 6 as two stacked bars on a
+   common scale from the figure code's own numbers (NY 6.69/8.54/0.62/3.11 of 18.96 miles; Manta
+   levels −0.1036/0.5832/0.5857/0.6807 km-eq.), click a band for what it can and cannot attribute.
+   No engine; every number labelled paper or AAP (2017).
 10. **Survey explorer.** Aggregates already in the online appendix (reasons for short lists, knowledge
     shares, beliefs vs outcomes); no microdata.
 11. **Downloads and teaching kit.** `data/` as a documented ZIP, the engine as a standalone module, a
@@ -271,7 +275,9 @@ landing page and appendix publication-ready · privacy checks.
     the paper" calibration page built from `calibration.json`.
 
 ### Phase 4 — hardening
-12. CI: a GitHub Action running `node engine/test_engine.mjs` and a link check on every push.
+12. CI: *Done 2026-09-05.* `.github/workflows/test.yml` runs `node engine/test_engine.mjs` and
+    `node tools/check_links.mjs` (every local href/src in the HTML must resolve; scripts and styles
+    are stripped first because the appendix's template literals look like links) on every push and PR.
 13. Web Worker for `simulate()`; lazy-load `data/` per grade; mobile pass on real devices;
     keyboard access for the map's essential actions; analytics only if privacy-preserving.
 
