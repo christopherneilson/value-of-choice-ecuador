@@ -16,7 +16,7 @@ async function load() {
   S.res = simulate(S.m, { draws: 10, seed: 7 });
   // congestion sweep (light draws), sigma_eps cases, and the x0.6 scene for the map
   const scale = k => ({ ...S.m, caps: Int32Array.from(S.m.caps, c => Math.max(0, Math.round(c * k))) });
-  S.sweep = [1.6, 1.4, 1.2, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5].map(k => ({ k, r: simulate(scale(k), { draws: 3, seed: 7 }) }));
+  S.sweep = [1.6, 1.4, 1.2, 1.0, 0.9, 0.8, 0.7, 0.6].map(k => ({ k, r: simulate(scale(k), { draws: 6, seed: 7 }) }));
   S.congested = simulate(scale(0.6), { draws: 10, seed: 7 });
   const b = S.m.base;
   S.alike = simulate(rescale(S.m, { sxi: b.sxi, seps: b.seps * 0.2, sgam: b.sgam, lam: b.lam }), { draws: 10, seed: 7 });
@@ -87,13 +87,13 @@ const src = (s) => `<span class=src>${s}</span>`;
 function chartSweep() {
   // small inline SVG: DA first-choice share and share of gap closed vs seats factor
   const W = 340, H = 150, L0 = 36, R0 = 10, T0 = 12, B0 = 26;
-  const xs = S.sweep.map(s => s.k), x = k => L0 + (W - L0 - R0) * (1.6 - k) / (1.6 - 0.5);
+  const xs = S.sweep.map(s => s.k), x = k => L0 + (W - L0 - R0) * (1.6 - k) / (1.6 - 0.6);
   const y = v => T0 + (H - T0 - B0) * (1 - Math.max(0, Math.min(100, v)) / 100);
   // NB: inside innerHTML, unquoted SVG attribute values swallow a trailing "/" (stroke=#eee/> parses
   // as stroke="#eee/" with no self-close), so every attribute is quoted and every tag closed explicitly.
   const line = (vals, col) => `<polyline fill="none" stroke="${col}" stroke-width="2.2" points="${vals.map((v, i) => `${x(xs[i])},${y(v)}`).join(" ")}"></polyline>`;
   const first = S.sweep.map(s => s.r.rules.da.first), rec = S.sweep.map(s => Math.max(0, s.r.recoveredShare));
-  const ticks = [1.5, 1.0, 0.75, 0.5].map(k => `<text x="${x(k)}" y="${H - 8}" font-size="10" text-anchor="middle" fill="#666">×${k}</text>`).join("");
+  const ticks = [1.5, 1.0, 0.75, 0.6].map(k => `<text x="${x(k)}" y="${H - 8}" font-size="10" text-anchor="middle" fill="#666">×${k}</text>`).join("");
   const grid = [0, 50, 100].map(v => `<line x1="${L0}" x2="${W - R0}" y1="${y(v)}" y2="${y(v)}" stroke="#eee"></line><text x="${L0 - 4}" y="${y(v) + 3}" font-size="10" text-anchor="end" fill="#666">${v}</text>`).join("");
   return `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="First-choice share and share of the gap closed as seats shrink">${grid}${line(first, C.da)}${line(rec, "#333")}${ticks}
   <text x="${L0}" y="10" font-size="10" fill="${C.da}">DA: % in first choice</text><text x="${L0 + 140}" y="10" font-size="10" fill="#333">% of the gap DA closes</text></svg>`;
