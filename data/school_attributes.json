@@ -1,0 +1,1936 @@
+{
+ "grade": 2,
+ "attributes": [
+  "building_footprint_m2",
+  "building_count",
+  "built_up_density",
+  "greenery_ndvi_mean",
+  "open_recreation_space",
+  "building_condition",
+  "sidewalk_quality",
+  "road_pavement",
+  "street_safety_cues",
+  "visible_commercial_activity"
+ ],
+ "encoding": {
+  "building_condition": {
+   "fair": 0,
+   "good": 1
+  },
+  "sidewalk_quality": {
+   "none": 0,
+   "poor": 1,
+   "fair": 2,
+   "good": 3
+  },
+  "road_pavement": {
+   "unpaved": 0,
+   "partially_paved": 1,
+   "paved": 2
+  },
+  "street_safety_cues": {
+   "none": 0,
+   "minimal": 1,
+   "moderate": 2
+  }
+ },
+ "booleans": [
+  "open_recreation_space",
+  "visible_commercial_activity"
+ ],
+ "note": "Derived attributes only (no imagery). Six categorical attributes are on the site's documented ordinal scales; the estimation's own encoded design matrix was not available when this was built. Standardized within the in-market schools.",
+ "model": {
+  "kind": "OLS of desirability band (1-5) on the ten standardized attributes",
+  "n": 55,
+  "r2": 0.304,
+  "r2_loo": -0.189,
+  "within1": 0.691,
+  "exact": 0.2,
+  "chance_within1": 0.6,
+  "chance_exact": 0.2,
+  "coef": {
+   "building_footprint_m2": 0.614,
+   "building_count": -0.435,
+   "built_up_density": -0.453,
+   "greenery_ndvi_mean": -0.528,
+   "open_recreation_space": 0.006,
+   "building_condition": 0.048,
+   "sidewalk_quality": 0.279,
+   "road_pavement": 0.138,
+   "street_safety_cues": -0.026,
+   "visible_commercial_activity": -0.032
+  }
+ },
+ "schools": [
+  {
+   "id": "S01",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1041.4137,
+    "building_count": 50.0,
+    "built_up_density": 0.0657,
+    "greenery_ndvi_mean": 0.0515,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -0.169,
+    "building_count": -0.278,
+    "built_up_density": 0.298,
+    "greenery_ndvi_mean": -1.164,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.86,
+    "band": 4
+   }
+  },
+  {
+   "id": "S03",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 807.5255,
+    "building_count": 56.0,
+    "built_up_density": 0.05,
+    "greenery_ndvi_mean": 0.1154,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -0.823,
+    "building_count": 0.003,
+    "built_up_density": -0.498,
+    "greenery_ndvi_mean": 0.492,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 2.24,
+    "band": 2
+   }
+  },
+  {
+   "id": "S04",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1667.8728,
+    "building_count": 72.0,
+    "built_up_density": 0.0913,
+    "greenery_ndvi_mean": 0.0233,
+    "open_recreation_space": false,
+    "building_condition": "good",
+    "sidewalk_quality": "none",
+    "road_pavement": "partially_paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 1.583,
+    "building_count": 0.753,
+    "built_up_density": 1.596,
+    "greenery_ndvi_mean": -1.895,
+    "open_recreation_space": -1.225,
+    "building_condition": 1.337,
+    "sidewalk_quality": -1.563,
+    "road_pavement": -1.808,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.42,
+    "band": 3
+   }
+  },
+  {
+   "id": "S05",
+   "canton": "Manta",
+   "seats": 50,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1191.4867,
+    "building_count": 85.0,
+    "built_up_density": 0.0702,
+    "greenery_ndvi_mean": 0.0605,
+    "open_recreation_space": false,
+    "building_condition": "good",
+    "sidewalk_quality": "good",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.251,
+    "building_count": 1.362,
+    "built_up_density": 0.529,
+    "greenery_ndvi_mean": -0.93,
+    "open_recreation_space": -1.225,
+    "building_condition": 1.337,
+    "sidewalk_quality": 1.625,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.15,
+    "band": 3
+   }
+  },
+  {
+   "id": "S06",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1514.6746,
+    "building_count": 99.0,
+    "built_up_density": 0.0842,
+    "greenery_ndvi_mean": 0.0508,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 1.155,
+    "building_count": 2.018,
+    "built_up_density": 1.237,
+    "greenery_ndvi_mean": -1.182,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.92,
+    "band": 3
+   }
+  },
+  {
+   "id": "S07",
+   "canton": "Manta",
+   "seats": 75,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 1370.7698,
+    "building_count": 44.0,
+    "built_up_density": 0.0616,
+    "greenery_ndvi_mean": 0.0916,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "poor",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.752,
+    "building_count": -0.559,
+    "built_up_density": 0.089,
+    "greenery_ndvi_mean": -0.124,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": -0.5,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.41,
+    "band": 3
+   }
+  },
+  {
+   "id": "S08",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 1109.8297,
+    "building_count": 77.0,
+    "built_up_density": 0.0554,
+    "greenery_ndvi_mean": 0.1155,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.023,
+    "building_count": 0.987,
+    "built_up_density": -0.221,
+    "greenery_ndvi_mean": 0.495,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.81,
+    "band": 3
+   }
+  },
+  {
+   "id": "S10",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1416.2492,
+    "building_count": 48.0,
+    "built_up_density": 0.0808,
+    "greenery_ndvi_mean": 0.0592,
+    "open_recreation_space": false,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.88,
+    "building_count": -0.371,
+    "built_up_density": 1.066,
+    "greenery_ndvi_mean": -0.964,
+    "open_recreation_space": -1.225,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.91,
+    "band": 4
+   }
+  },
+  {
+   "id": "S11",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 1209.974,
+    "building_count": 75.0,
+    "built_up_density": 0.096,
+    "greenery_ndvi_mean": 0.1253,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "partially_paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.303,
+    "building_count": 0.893,
+    "built_up_density": 1.835,
+    "greenery_ndvi_mean": 0.748,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": -1.808,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 1.06,
+    "band": 1
+   }
+  },
+  {
+   "id": "S13",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 1416.052,
+    "building_count": 32.0,
+    "built_up_density": 0.0756,
+    "greenery_ndvi_mean": 0.0617,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "poor",
+    "road_pavement": "partially_paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.879,
+    "building_count": -1.121,
+    "built_up_density": 0.802,
+    "greenery_ndvi_mean": -0.9,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": -0.5,
+    "road_pavement": -1.808,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 4.37,
+    "band": 4
+   }
+  },
+  {
+   "id": "S14",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 2120.2659,
+    "building_count": 78.0,
+    "built_up_density": 0.1042,
+    "greenery_ndvi_mean": 0.0204,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 2.849,
+    "building_count": 1.034,
+    "built_up_density": 2.251,
+    "greenery_ndvi_mean": -1.971,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 4.36,
+    "band": 4
+   }
+  },
+  {
+   "id": "S15",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1069.1345,
+    "building_count": 44.0,
+    "built_up_density": 0.0609,
+    "greenery_ndvi_mean": 0.0984,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.091,
+    "building_count": -0.559,
+    "built_up_density": 0.055,
+    "greenery_ndvi_mean": 0.052,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.2,
+    "band": 3
+   }
+  },
+  {
+   "id": "S16",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1607.6249,
+    "building_count": 64.0,
+    "built_up_density": 0.0821,
+    "greenery_ndvi_mean": null,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 1.415,
+    "building_count": 0.378,
+    "built_up_density": 1.128,
+    "greenery_ndvi_mean": 0.0,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.35,
+    "band": 3
+   }
+  },
+  {
+   "id": "S17",
+   "canton": "Manta",
+   "seats": 50,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1256.0167,
+    "building_count": 68.0,
+    "built_up_density": 0.0683,
+    "greenery_ndvi_mean": 0.0477,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.431,
+    "building_count": 0.565,
+    "built_up_density": 0.432,
+    "greenery_ndvi_mean": -1.262,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.7,
+    "band": 4
+   }
+  },
+  {
+   "id": "S18",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 844.6807,
+    "building_count": 43.0,
+    "built_up_density": 0.0376,
+    "greenery_ndvi_mean": null,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -0.719,
+    "building_count": -0.606,
+    "built_up_density": -1.126,
+    "greenery_ndvi_mean": 0.0,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.4,
+    "band": 3
+   }
+  },
+  {
+   "id": "S19",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 1590.9855,
+    "building_count": 54.0,
+    "built_up_density": 0.085,
+    "greenery_ndvi_mean": null,
+    "open_recreation_space": false,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 1.368,
+    "building_count": -0.09,
+    "built_up_density": 1.276,
+    "greenery_ndvi_mean": 0.0,
+    "open_recreation_space": -1.225,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.96,
+    "band": 3
+   }
+  },
+  {
+   "id": "S20",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 1072.255,
+    "building_count": 40.0,
+    "built_up_density": 0.0628,
+    "greenery_ndvi_mean": 0.0711,
+    "open_recreation_space": false,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.082,
+    "building_count": -0.746,
+    "built_up_density": 0.154,
+    "greenery_ndvi_mean": -0.656,
+    "open_recreation_space": -1.225,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.56,
+    "band": 4
+   }
+  },
+  {
+   "id": "S21",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 571.3688,
+    "building_count": 12.0,
+    "built_up_density": 0.0355,
+    "greenery_ndvi_mean": 0.1545,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -1.483,
+    "building_count": -2.058,
+    "built_up_density": -1.233,
+    "greenery_ndvi_mean": 1.506,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.4,
+    "band": 2
+   }
+  },
+  {
+   "id": "S23",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 1219.6796,
+    "building_count": 59.0,
+    "built_up_density": 0.0668,
+    "greenery_ndvi_mean": 0.1094,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.33,
+    "building_count": 0.144,
+    "built_up_density": 0.352,
+    "greenery_ndvi_mean": 0.336,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 2.68,
+    "band": 3
+   }
+  },
+  {
+   "id": "S24",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 1148.2438,
+    "building_count": 63.0,
+    "built_up_density": 0.0608,
+    "greenery_ndvi_mean": 0.0946,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.13,
+    "building_count": 0.331,
+    "built_up_density": 0.05,
+    "greenery_ndvi_mean": -0.046,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.23,
+    "band": 3
+   }
+  },
+  {
+   "id": "S26",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 971.7342,
+    "building_count": 59.0,
+    "built_up_density": 0.0559,
+    "greenery_ndvi_mean": 0.0621,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.364,
+    "building_count": 0.144,
+    "built_up_density": -0.197,
+    "greenery_ndvi_mean": -0.889,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.47,
+    "band": 3
+   }
+  },
+  {
+   "id": "S27",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1356.707,
+    "building_count": 66.0,
+    "built_up_density": 0.0797,
+    "greenery_ndvi_mean": 0.0817,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": "good",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.713,
+    "building_count": 0.472,
+    "built_up_density": 1.006,
+    "greenery_ndvi_mean": -0.381,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": 1.625,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.53,
+    "band": 4
+   }
+  },
+  {
+   "id": "S29",
+   "canton": "Manta",
+   "seats": 24,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1526.0673,
+    "building_count": 60.0,
+    "built_up_density": 0.0872,
+    "greenery_ndvi_mean": 0.0656,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 1.187,
+    "building_count": 0.191,
+    "built_up_density": 1.388,
+    "greenery_ndvi_mean": -0.8,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.58,
+    "band": 4
+   }
+  },
+  {
+   "id": "S30",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1486.0831,
+    "building_count": 71.0,
+    "built_up_density": 0.084,
+    "greenery_ndvi_mean": 0.0473,
+    "open_recreation_space": false,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "partially_paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 1.075,
+    "building_count": 0.706,
+    "built_up_density": 1.229,
+    "greenery_ndvi_mean": -1.272,
+    "open_recreation_space": -1.225,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": -1.808,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.21,
+    "band": 3
+   }
+  },
+  {
+   "id": "S32",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 1155.3409,
+    "building_count": 43.0,
+    "built_up_density": 0.0612,
+    "greenery_ndvi_mean": 0.0703,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.15,
+    "building_count": -0.606,
+    "built_up_density": 0.071,
+    "greenery_ndvi_mean": -0.677,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 3.67,
+    "band": 4
+   }
+  },
+  {
+   "id": "S33",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 1116.5161,
+    "building_count": 71.0,
+    "built_up_density": 0.0569,
+    "greenery_ndvi_mean": 0.0952,
+    "open_recreation_space": false,
+    "building_condition": "fair",
+    "sidewalk_quality": "none",
+    "road_pavement": "partially_paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.041,
+    "building_count": 0.706,
+    "built_up_density": -0.148,
+    "greenery_ndvi_mean": -0.031,
+    "open_recreation_space": -1.225,
+    "building_condition": -1.082,
+    "sidewalk_quality": -1.563,
+    "road_pavement": -1.808,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 2.34,
+    "band": 2
+   }
+  },
+  {
+   "id": "S34",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 1165.9232,
+    "building_count": 70.0,
+    "built_up_density": 0.0487,
+    "greenery_ndvi_mean": 0.0955,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "none",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.179,
+    "building_count": 0.659,
+    "built_up_density": -0.564,
+    "greenery_ndvi_mean": -0.023,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -2.711,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 1.91,
+    "band": 2
+   }
+  },
+  {
+   "id": "S35",
+   "canton": "Manta",
+   "seats": 50,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 902.4613,
+    "building_count": 46.0,
+    "built_up_density": 0.0535,
+    "greenery_ndvi_mean": 0.0831,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -0.557,
+    "building_count": -0.465,
+    "built_up_density": -0.319,
+    "greenery_ndvi_mean": -0.346,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.22,
+    "band": 3
+   }
+  },
+  {
+   "id": "S36",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1446.6575,
+    "building_count": 103.0,
+    "built_up_density": 0.085,
+    "greenery_ndvi_mean": 0.0399,
+    "open_recreation_space": false,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.965,
+    "building_count": 2.205,
+    "built_up_density": 1.278,
+    "greenery_ndvi_mean": -1.466,
+    "open_recreation_space": -1.225,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.18,
+    "band": 3
+   }
+  },
+  {
+   "id": "S37",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 760.6346,
+    "building_count": 72.0,
+    "built_up_density": 0.034,
+    "greenery_ndvi_mean": 0.1311,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.954,
+    "building_count": 0.753,
+    "built_up_density": -1.31,
+    "greenery_ndvi_mean": 0.899,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.24,
+    "band": 2
+   }
+  },
+  {
+   "id": "S38",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 1378.6061,
+    "building_count": 42.0,
+    "built_up_density": 0.0731,
+    "greenery_ndvi_mean": 0.1026,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.774,
+    "building_count": -0.652,
+    "built_up_density": 0.673,
+    "greenery_ndvi_mean": 0.16,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.38,
+    "band": 3
+   }
+  },
+  {
+   "id": "S42",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 1116.1796,
+    "building_count": 76.0,
+    "built_up_density": 0.0625,
+    "greenery_ndvi_mean": 0.1014,
+    "open_recreation_space": false,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.04,
+    "building_count": 0.94,
+    "built_up_density": 0.134,
+    "greenery_ndvi_mean": 0.13,
+    "open_recreation_space": -1.225,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 2.92,
+    "band": 3
+   }
+  },
+  {
+   "id": "S43",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 1226.178,
+    "building_count": 65.0,
+    "built_up_density": 0.0641,
+    "greenery_ndvi_mean": 0.096,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "none",
+    "road_pavement": "unpaved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.348,
+    "building_count": 0.425,
+    "built_up_density": 0.218,
+    "greenery_ndvi_mean": -0.01,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": -1.563,
+    "road_pavement": -4.003,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 1.92,
+    "band": 2
+   }
+  },
+  {
+   "id": "S45",
+   "canton": "Manta",
+   "seats": 50,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1146.5788,
+    "building_count": 94.0,
+    "built_up_density": 0.0697,
+    "greenery_ndvi_mean": 0.0769,
+    "open_recreation_space": false,
+    "building_condition": "good",
+    "sidewalk_quality": "good",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.125,
+    "building_count": 1.783,
+    "built_up_density": 0.501,
+    "greenery_ndvi_mean": -0.506,
+    "open_recreation_space": -1.225,
+    "building_condition": 1.337,
+    "sidewalk_quality": 1.625,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 2.86,
+    "band": 3
+   }
+  },
+  {
+   "id": "S47",
+   "canton": "Manta",
+   "seats": 50,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 781.6384,
+    "building_count": 50.0,
+    "built_up_density": 0.0453,
+    "greenery_ndvi_mean": 0.0834,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -0.895,
+    "building_count": -0.278,
+    "built_up_density": -0.736,
+    "greenery_ndvi_mean": -0.338,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 2.18,
+    "band": 2
+   }
+  },
+  {
+   "id": "S48",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1269.6525,
+    "building_count": 76.0,
+    "built_up_density": 0.0761,
+    "greenery_ndvi_mean": 0.0792,
+    "open_recreation_space": false,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": 0.47,
+    "building_count": 0.94,
+    "built_up_density": 0.824,
+    "greenery_ndvi_mean": -0.445,
+    "open_recreation_space": -1.225,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.74,
+    "band": 3
+   }
+  },
+  {
+   "id": "S49",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 865.2151,
+    "building_count": 71.0,
+    "built_up_density": 0.0407,
+    "greenery_ndvi_mean": 0.1609,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -0.662,
+    "building_count": 0.706,
+    "built_up_density": -0.969,
+    "greenery_ndvi_mean": 1.672,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 1.74,
+    "band": 2
+   }
+  },
+  {
+   "id": "S51",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 875.1763,
+    "building_count": 58.0,
+    "built_up_density": 0.0399,
+    "greenery_ndvi_mean": 0.1821,
+    "open_recreation_space": true,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.634,
+    "building_count": 0.097,
+    "built_up_density": -1.007,
+    "greenery_ndvi_mean": 2.223,
+    "open_recreation_space": 0.816,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.25,
+    "band": 2
+   }
+  },
+  {
+   "id": "S53",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 619.7048,
+    "building_count": 43.0,
+    "built_up_density": 0.0436,
+    "greenery_ndvi_mean": 0.1295,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": "poor",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -1.348,
+    "building_count": -0.606,
+    "built_up_density": -0.821,
+    "greenery_ndvi_mean": 0.857,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": -0.5,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.48,
+    "band": 2
+   }
+  },
+  {
+   "id": "S54",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 1075.2857,
+    "building_count": 91.0,
+    "built_up_density": 0.0574,
+    "greenery_ndvi_mean": 0.1291,
+    "open_recreation_space": false,
+    "building_condition": "fair",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.074,
+    "building_count": 1.643,
+    "built_up_density": -0.123,
+    "greenery_ndvi_mean": 0.847,
+    "open_recreation_space": -1.225,
+    "building_condition": -1.082,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.19,
+    "band": 2
+   }
+  },
+  {
+   "id": "S56",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 716.1332,
+    "building_count": 60.0,
+    "built_up_density": 0.0323,
+    "greenery_ndvi_mean": 0.2083,
+    "open_recreation_space": false,
+    "building_condition": "fair",
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -1.078,
+    "building_count": 0.191,
+    "built_up_density": -1.397,
+    "greenery_ndvi_mean": 2.9,
+    "open_recreation_space": -1.225,
+    "building_condition": -1.082,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 0.95,
+    "band": 1
+   }
+  },
+  {
+   "id": "S58",
+   "canton": "Montecristi",
+   "seats": 50,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 1179.9318,
+    "building_count": 67.0,
+    "built_up_density": 0.0559,
+    "greenery_ndvi_mean": 0.0866,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": null,
+    "road_pavement": null,
+    "street_safety_cues": null,
+    "visible_commercial_activity": null
+   },
+   "z": {
+    "building_footprint_m2": 0.219,
+    "building_count": 0.519,
+    "built_up_density": -0.198,
+    "greenery_ndvi_mean": -0.254,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.0,
+    "road_pavement": 0.0,
+    "street_safety_cues": 0.0,
+    "visible_commercial_activity": 0.0
+   },
+   "planner": {
+    "loo": 3.23,
+    "band": 3
+   }
+  },
+  {
+   "id": "S59",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 871.3782,
+    "building_count": 48.0,
+    "built_up_density": 0.0606,
+    "greenery_ndvi_mean": 0.1391,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": null,
+    "road_pavement": null,
+    "street_safety_cues": null,
+    "visible_commercial_activity": null
+   },
+   "z": {
+    "building_footprint_m2": -0.644,
+    "building_count": -0.371,
+    "built_up_density": 0.042,
+    "greenery_ndvi_mean": 1.107,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.0,
+    "road_pavement": 0.0,
+    "street_safety_cues": 0.0,
+    "visible_commercial_activity": 0.0
+   },
+   "planner": {
+    "loo": 2.34,
+    "band": 2
+   }
+  },
+  {
+   "id": "S62",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 986.1411,
+    "building_count": 29.0,
+    "built_up_density": 0.0614,
+    "greenery_ndvi_mean": 0.1237,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": null,
+    "road_pavement": null,
+    "street_safety_cues": null,
+    "visible_commercial_activity": null
+   },
+   "z": {
+    "building_footprint_m2": -0.323,
+    "building_count": -1.261,
+    "built_up_density": 0.082,
+    "greenery_ndvi_mean": 0.708,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.0,
+    "road_pavement": 0.0,
+    "street_safety_cues": 0.0,
+    "visible_commercial_activity": 0.0
+   },
+   "planner": {
+    "loo": 3.08,
+    "band": 3
+   }
+  },
+  {
+   "id": "S63",
+   "canton": "Montecristi",
+   "seats": 100,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 1425.4731,
+    "building_count": 74.0,
+    "built_up_density": 0.0783,
+    "greenery_ndvi_mean": 0.0858,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.905,
+    "building_count": 0.847,
+    "built_up_density": 0.935,
+    "greenery_ndvi_mean": -0.276,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.18,
+    "band": 3
+   }
+  },
+  {
+   "id": "S66",
+   "canton": "Montecristi",
+   "seats": 50,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 1709.1999,
+    "building_count": 23.0,
+    "built_up_density": 0.0751,
+    "greenery_ndvi_mean": null,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 1.699,
+    "building_count": -1.542,
+    "built_up_density": 0.775,
+    "greenery_ndvi_mean": 0.0,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 6.13,
+    "band": 5
+   }
+  },
+  {
+   "id": "S68",
+   "canton": "Jaramijo",
+   "seats": 25,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 733.8732,
+    "building_count": 38.0,
+    "built_up_density": 0.0381,
+    "greenery_ndvi_mean": 0.1356,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -1.029,
+    "building_count": -0.84,
+    "built_up_density": -1.1,
+    "greenery_ndvi_mean": 1.016,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.54,
+    "band": 3
+   }
+  },
+  {
+   "id": "S69",
+   "canton": "Jaramijo",
+   "seats": 30,
+   "band": 1,
+   "raw": {
+    "building_footprint_m2": 982.3623,
+    "building_count": 47.0,
+    "built_up_density": 0.0482,
+    "greenery_ndvi_mean": 0.1095,
+    "open_recreation_space": false,
+    "building_condition": "fair",
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.334,
+    "building_count": -0.418,
+    "built_up_density": -0.586,
+    "greenery_ndvi_mean": 0.341,
+    "open_recreation_space": -1.225,
+    "building_condition": -1.082,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.9,
+    "band": 3
+   }
+  },
+  {
+   "id": "S70",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 1104.817,
+    "building_count": 20.0,
+    "built_up_density": 0.042,
+    "greenery_ndvi_mean": 0.1505,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": 0.009,
+    "building_count": -1.683,
+    "built_up_density": -0.905,
+    "greenery_ndvi_mean": 1.404,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.26,
+    "band": 3
+   }
+  },
+  {
+   "id": "S71",
+   "canton": "Manta",
+   "seats": 49,
+   "band": 5,
+   "raw": {
+    "building_footprint_m2": 696.2929,
+    "building_count": 25.0,
+    "built_up_density": 0.0264,
+    "greenery_ndvi_mean": 0.0922,
+    "open_recreation_space": false,
+    "building_condition": null,
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -1.134,
+    "building_count": -1.449,
+    "built_up_density": -1.696,
+    "greenery_ndvi_mean": -0.11,
+    "open_recreation_space": -1.225,
+    "building_condition": 0.0,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.85,
+    "band": 3
+   }
+  },
+  {
+   "id": "S73",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 327.28,
+    "building_count": 29.0,
+    "built_up_density": 0.0193,
+    "greenery_ndvi_mean": 0.1323,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "good",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -2.166,
+    "building_count": -1.261,
+    "built_up_density": -2.053,
+    "greenery_ndvi_mean": 0.93,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": 1.625,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 3.68,
+    "band": 4
+   }
+  },
+  {
+   "id": "S76",
+   "canton": "Montecristi",
+   "seats": 25,
+   "band": 3,
+   "raw": {
+    "building_footprint_m2": 597.7615,
+    "building_count": 56.0,
+    "built_up_density": 0.0309,
+    "greenery_ndvi_mean": 0.1539,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": "none",
+    "road_pavement": "unpaved",
+    "street_safety_cues": "minimal",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -1.41,
+    "building_count": 0.003,
+    "built_up_density": -1.469,
+    "greenery_ndvi_mean": 1.49,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": -1.563,
+    "road_pavement": -4.003,
+    "street_safety_cues": -0.584,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": -0.26,
+    "band": 1
+   }
+  },
+  {
+   "id": "S77",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 1050.8218,
+    "building_count": 42.0,
+    "built_up_density": 0.0556,
+    "greenery_ndvi_mean": 0.1323,
+    "open_recreation_space": true,
+    "building_condition": "good",
+    "sidewalk_quality": "fair",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": true
+   },
+   "z": {
+    "building_footprint_m2": -0.142,
+    "building_count": -0.652,
+    "built_up_density": -0.212,
+    "greenery_ndvi_mean": 0.932,
+    "open_recreation_space": 0.816,
+    "building_condition": 1.337,
+    "sidewalk_quality": 0.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": 1.018
+   },
+   "planner": {
+    "loo": 2.83,
+    "band": 3
+   }
+  },
+  {
+   "id": "S78",
+   "canton": "Montecristi",
+   "seats": 50,
+   "band": 4,
+   "raw": {
+    "building_footprint_m2": 251.9332,
+    "building_count": 7.0,
+    "built_up_density": 0.0308,
+    "greenery_ndvi_mean": 0.0596,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": "none",
+    "road_pavement": "paved",
+    "street_safety_cues": "moderate",
+    "visible_commercial_activity": false
+   },
+   "z": {
+    "building_footprint_m2": -2.377,
+    "building_count": -2.292,
+    "built_up_density": -1.471,
+    "greenery_ndvi_mean": -0.953,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": -1.563,
+    "road_pavement": 0.387,
+    "street_safety_cues": 1.543,
+    "visible_commercial_activity": -1.059
+   },
+   "planner": {
+    "loo": 2.91,
+    "band": 3
+   }
+  },
+  {
+   "id": "S80",
+   "canton": "Manta",
+   "seats": 25,
+   "band": 2,
+   "raw": {
+    "building_footprint_m2": 474.2595,
+    "building_count": 21.0,
+    "built_up_density": 0.0214,
+    "greenery_ndvi_mean": 0.0434,
+    "open_recreation_space": true,
+    "building_condition": null,
+    "sidewalk_quality": null,
+    "road_pavement": null,
+    "street_safety_cues": null,
+    "visible_commercial_activity": null
+   },
+   "z": {
+    "building_footprint_m2": -1.755,
+    "building_count": -1.636,
+    "built_up_density": -1.946,
+    "greenery_ndvi_mean": -1.374,
+    "open_recreation_space": 0.816,
+    "building_condition": 0.0,
+    "sidewalk_quality": 0.0,
+    "road_pavement": 0.0,
+    "street_safety_cues": 0.0,
+    "visible_commercial_activity": 0.0
+   },
+   "planner": {
+    "loo": 5.14,
+    "band": 5
+   }
+  }
+ ]
+}

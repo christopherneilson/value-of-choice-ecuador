@@ -255,10 +255,17 @@ landing page and appendix publication-ready · privacy checks.
 6. **Who gains.** Requires the census-block layer. Gains by NBI quintile under the current sliders,
    reproducing the paper's progressivity result on the synthetic population; *done when* the ordering
    of quintile gains matches the paper's at default settings.
-7. **"What can a planner see?"** Show a school's photos and derived attributes (from the imagery
-   pipeline's `06_attributes.csv`, public-derived values), ask the visitor to guess its band, reveal
-   it and the paper's finding that most desirability stays unexplained. Bands only, never names beside
-   scores.
+7. **"Could a planner have guessed?"** *Done 2026-09-05* (`planner/`). Ten rounds: a real in-market
+   school's ten imagery-derived attributes (bars relative to the market, raw values beside), guess its
+   band, reveal, then a summary against a "planner model" (OLS of band on the ten attributes,
+   leave-one-out) and against always guessing the middle. Data from
+   `code/7_site/make_school_attributes.py` → `data/school_attributes.json` (anonymised ids, bands,
+   raw + standardized attributes, model predictions; the privacy checker covers it). Two honest
+   caveats recorded in the file's `note`: the estimation's own encoded design matrix
+   (`X_Manta_imagery.csv`) is not on this machine, so the six categorical attributes use the site's
+   documented ordinal scales; and the planner model's fit is R² 0.30 in-sample, **negative
+   leave-one-out**, 69% within one band vs 60% for the middle band — which is the paper's point, and
+   the page says so. Coefficient signs agree with Table 14 (footprint +0.61, count −0.43).
 8. **Strategy-proofness toy.** *Done 2026-09-05* (`toy/`). Three schools, one seat each; you (true
    A › B › C) against Ana (sibling at A) and Beto; `bostonMechanism()` added to the engine (toy only,
    not in the pipeline) with a round log and a unit test of the textbook case: truthful Boston sends
