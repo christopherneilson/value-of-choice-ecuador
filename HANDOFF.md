@@ -171,6 +171,12 @@ regeneration; keep it in the loop.
   families who choose a non-nearest school go ~0.25 km out of their way, not 0.6. All three are the
   price of small consideration sets and are documented in `code/7_site/README.md`. They do not affect
   the access story, which is the exhibit's headline.
+- **Which sliders move anything.** In the synthetic world σ_ε is the lever: ×0.2 collapses the gain
+  from choice (0.48 → 0.10 km, 70% pick their nearest school), ×3 triples it. σ_ξ barely matters
+  (identical schools: distance-rule first choice 54.9 → 53.7%) because families compare only their
+  ~2.5 nearest schools, where band differences are small next to ε; σ_γ does nothing visible. The
+  "Try" cards were written to this, not to the intuition that school differences drive the result
+  (the first draft said so and was wrong). Check with the engine before promising an effect in text.
 - Primary 1's "share of the range recovered" is not comparable to the paper's 3.9% (a convention-
   dependent, near-undefined ratio there; a well-defined one in the synthetic world). The congestion
   story is told by the first-choice share, which matches.

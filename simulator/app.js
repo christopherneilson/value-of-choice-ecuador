@@ -143,6 +143,18 @@ function wire() {
   show();
 }
 
-loadData().then(() => { initMap(); wire(); run(); }).catch(err => {
+// Scenario presets via the URL, e.g. ?grade=2&rule=dc&seats=0.6&sxi=0&lines=0
+function applyPresets() {
+  const q = new URLSearchParams(location.search);
+  const num = (k, lo, hi) => { const v = parseFloat(q.get(k)); return Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : null; };
+  const g = num("grade", 2, 4); if (g !== null && [2, 3, 4].includes(g)) state.grade = g;
+  if (["dc", "da", "sic"].includes(q.get("rule"))) state.rule = q.get("rule");
+  for (const [k, lo, hi] of [["seats", 0.4, 2], ["sxi", 0, 3], ["seps", 0.2, 3], ["sgam", 0, 2]]) { const v = num(k, lo, hi); if (v !== null) { state[k] = v; $("#" + k).value = v; } }
+  if (q.get("lines") === "0") { state.lines = false; $("#lines").checked = false; }
+  [...$("#grades").children].forEach(b => b.classList.toggle("on", +b.dataset.grade === state.grade));
+  [...$("#rules").children].forEach(b => b.classList.toggle("on", b.dataset.rule === state.rule));
+}
+
+loadData().then(() => { applyPresets(); initMap(); wire(); run(); }).catch(err => {
   $("#headline").textContent = "Could not load data"; $("#headsub").textContent = String(err); console.error(err);
 });
