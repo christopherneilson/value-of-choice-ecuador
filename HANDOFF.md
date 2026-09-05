@@ -234,9 +234,18 @@ landing page and appendix publication-ready · privacy checks.
    draw with the shortfall from its first choice in km-equivalent; dashed line to the first choice,
    solid lines per rule. Family 16 is the showcase (170 m from a school, wants one 590 m away, fourth
    choice under the distance rule, first under DA). `familyCard()` in the engine supplies the numbers.
-4. **Spanish/English toggle.** Move every string in `simulator/` and `story/` into a `strings.js`
-   with `en`/`es`; persist the choice in `localStorage`; translate with a native reviewer (the primary
-   audience reads Spanish). *Done when* no English string is visible in the Spanish view.
+4. **Spanish/English toggle.** *Built 2026-09-04; Spanish needs a native review before it becomes the
+   default.* `shared/i18n.js`: English stays in markup and code, Spanish is a keyed override table;
+   `data-i18n` attributes translate static text (`applyStatic()` caches the English innerHTML and swaps),
+   `t(key, english, vars)` translates dynamic strings, `nf()` formats numbers per locale (es: comma
+   decimals, dot thousands). Language comes from `?lang=`, then `localStorage` (`voc.lang`), then the
+   browser; `mountToggle()` adds EN/ES to every header and `init()` propagates `?lang=es` to same-site
+   links. Covers the landing page (including an unofficial translation of the abstract, flagged as such),
+   the simulator and the story; `<title>`s switch; the toggle re-renders live. Verified: no English UI
+   string left in the Spanish view of any page, toggle round-trips, numbers reformat. Grade names use
+   the Ecuadorian forms (Inicial 1 (3 años), Inicial 2 (4 años), Primero de básica) and "cupos" for
+   seats. Not translated: the paper's title, author names, the imagery appendix (built artifact), the
+   PDF. To add a string: put English in the markup/code and one `"key": "español"` line in `ES`.
 5. **Go public.** *Done 2026-09-04*: repo public, Pages on `main`/root, HTTPS enforced, landing page,
    simulator and appendix verified live. Still open: whether to add the URL to the paper's title page
    or acknowledgments (it is not there now, deliberately — the submitted PDF says nothing about the

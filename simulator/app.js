@@ -1,18 +1,22 @@
 // app.js — "Choose the rule": map + rule toggle + metrics + sliders + one-family panel, on ../engine/engine.js
 import { buildMarket, rescale, simulate, withAwareness, familyCard } from "../engine/engine.js";
+import { t, nf, init as i18nInit, mountToggle, getLang } from "../shared/i18n.js";
 
-const GRADE_NAME = { 2: "Preschool 1", 3: "Preschool 2", 4: "Primary 1" };
+const GRADE_EN = { 2: "Preschool 1", 3: "Preschool 2", 4: "Primary 1" };
+const gradeName = g => t(`grade.${g}`, GRADE_EN[g]);
 // the paper's real-data numbers by grade, for context (assignment shares from the grade tables)
 const PAPER = {
   2: { dc_listed: 64.7, da_listed: 96.1, da_first: 93.2, rec: "99.6%", near: 65 },
   3: { dc_listed: 43.2, da_listed: 70.4, da_first: 58.2, rec: "82.3%", near: 63 },
   4: { dc_listed: 26.1, da_listed: 46.4, da_first: 32.6, rec: "near zero (sensitive to conventions)", near: 54 },
 };
-const RULE = {
+const RULE_EN = {
   dc: { name: "Distance rule", color: "#7b3294", info: "The status quo: each family is offered its nearest school with a seat; ties by one lottery per family. Families' stated preferences play no role." },
   da: { name: "Deferred acceptance", color: "#21918c", info: "The deployed rule: families' reported lists, with the remaining schools appended in distance order; priorities sibling > reported > appended, one lottery per family–school pair." },
   sic: { name: "Benchmark", color: "#5ec962", info: "Constrained-efficient benchmark: stable improvement cycles applied to the deferred-acceptance outcome — the most a priority-respecting mechanism can add." },
 };
+const ruleName = r => t(`rule.${r}`, RULE_EN[r].name);
+const ruleInfo = r => t(`rule.${r}.info`, RULE_EN[r].info);
 const BAND_COLORS = ["#440154", "#3b528b", "#21918c", "#5ec962", "#fde725"];
 const AWARE_ALL = 9;   // slider position meaning "every school"
 const $ = s => document.querySelector(s);
@@ -41,34 +45,39 @@ function currentMarket() {
   return m;
 }
 
-function fmt(x, d = 1) { return Number.isFinite(x) ? x.toFixed(d) : "—"; }
+const fmt = (x, d = 1) => nf(x, d);
 
 function renderMetrics(m, res) {
   const r = res.rules, cur = state.rule;
   const rows = [
-    ["Placed in a listed school, %", r.dc.listed, r.da.listed, r.sic.listed, 1],
-    ["Placed in first choice, %", r.dc.first, r.da.first, r.sic.first, 1],
-    ["Mean distance to school, km", r.dc.km, r.da.km, r.sic.km, 2],
-    ["Mean welfare, km-equivalent", r.dc.utility, r.da.utility, r.sic.utility, 2],
+    [t("sim.row.listed", "Placed in a listed school, %"), r.dc.listed, r.da.listed, r.sic.listed, 1],
+    [t("sim.row.first", "Placed in first choice, %"), r.dc.first, r.da.first, r.sic.first, 1],
+    [t("sim.row.km", "Mean distance to school, km"), r.dc.km, r.da.km, r.sic.km, 2],
+    [t("sim.row.welfare", "Mean welfare, km-equivalent"), r.dc.utility, r.da.utility, r.sic.utility, 2],
   ];
   $("#metrics").innerHTML = rows.map(([lab, a, b, c, d]) =>
     `<tr><td>${lab}</td><td class="${cur === "dc" ? "cur" : ""}">${fmt(a, d)}</td><td class="${cur === "da" ? "cur" : ""}">${fmt(b, d)}</td><td class="${cur === "sic" ? "cur" : ""}">${fmt(c, d)}</td></tr>`).join("");
   const R = r[cur];
   const seatsTot = Array.from(m.caps).reduce((s, c) => s + c, 0);
-  $("#headline").textContent = `${fmt(R.first, 0)}% in their first choice`;
-  $("#headline").style.color = RULE[cur].color;
-  $("#headsub").textContent = `${fmt(R.listed, 0)}% in a school they listed · mean ${fmt(R.km, 2)} km to school · ${m.n.toLocaleString()} families, ${seatsTot.toLocaleString()} seats · mean of ${res.draws} lottery draws`;
+  $("#headline").textContent = t("sim.headline", "{n}% in their first choice", { n: fmt(R.first, 0) });
+  $("#headline").style.color = RULE_EN[cur].color;
+  $("#headsub").textContent = t("sim.headsub", "{listed}% in a school they listed · mean {km} km to school · {n} families, {seats} seats · mean of {draws} lottery draws",
+    { listed: fmt(R.listed, 0), km: fmt(R.km, 2), n: nf(m.n), seats: nf(seatsTot), draws: res.draws });
   let meanM = 0; for (let i = 0; i < m.n; i++) meanM += m.M[i]; meanM /= m.n;
-  $("#recovered").innerHTML = `Deferred acceptance closes <b>${fmt(res.recoveredShare, 1)}%</b> of the welfare gap between the distance rule and the benchmark (gain ${fmt(res.gainKmDaOverDc, 2)} km-equivalent per family). ` +
-    `${fmt(100 * res.nearestFirst, 0)}% of families rank their nearest school first; those who don't accept a median ${fmt(res.medianExtraKm, 2)} km more travel. Families consider ${fmt(meanM, 1)} schools on average.`;
+  $("#recovered").innerHTML = t("sim.recovered",
+    "Deferred acceptance closes <b>{rec}%</b> of the welfare gap between the distance rule and the benchmark (gain {gain} km-equivalent per family). {near}% of families rank their nearest school first; those who don't accept a median {extra} km more travel. Families consider {m} schools on average.",
+    { rec: fmt(res.recoveredShare, 1), gain: fmt(res.gainKmDaOverDc, 2), near: fmt(100 * res.nearestFirst, 0), extra: fmt(res.medianExtraKm, 2), m: fmt(meanM, 1) });
   const P = PAPER[state.grade];
-  $("#paper").innerHTML = `<b>Paper, real data (${GRADE_NAME[state.grade]}):</b> distance rule ${P.dc_listed}% listed · DA ${P.da_listed}% listed, ${P.da_first}% first choice · DA closes ${P.rec} of the range · ${P.near}% rank nearest first.`;
-  $("#gradeinfo").textContent = `${m.n.toLocaleString()} families · ${m.J} schools · ${seatsTot.toLocaleString()} seats (${(seatsTot / m.n).toFixed(2)} per family)`;
-  $("#ruleinfo").textContent = RULE[cur].info;
+  const rec = state.grade === 4 ? t("sim.paper.rec.4", P.rec) : P.rec;
+  $("#paper").innerHTML = t("sim.paper", "<b>Paper, real data ({grade}):</b> distance rule {dcl}% listed · DA {dal}% listed, {daf}% first choice · DA closes {rec} of the range · {near}% rank nearest first.",
+    { grade: gradeName(state.grade), dcl: nf(P.dc_listed, 1), dal: nf(P.da_listed, 1), daf: nf(P.da_first, 1), rec, near: P.near });
+  $("#gradeinfo").textContent = t("sim.gradeinfo", "{n} families · {J} schools · {seats} seats ({ratio} per family)",
+    { n: nf(m.n), J: m.J, seats: nf(seatsTot), ratio: nf(seatsTot / m.n, 2) });
+  $("#ruleinfo").textContent = ruleInfo(cur);
 }
 
 function homeStyle(m, assign, i) {
-  const p = assign[i], col = RULE[state.rule].color;
+  const p = assign[i], col = RULE_EN[state.rule].color;
   if (p < 0) return { fill: "#e41a1c", stroke: "#e41a1c", r: 2.6, op: 0.9 };
   if (m.rol[i][0] === p) return { fill: col, stroke: col, r: 3, op: 0.85 };
   if (m.rol[i].includes(p)) return { fill: col, stroke: col, r: 2.6, op: 0.4 };
@@ -78,7 +87,7 @@ function homeStyle(m, assign, i) {
 function renderMap(m, res) {
   const assign = res.last[state.rule];
   homeLayer.clearLayers(); lineLayer.clearLayers();
-  const col = RULE[state.rule].color;
+  const col = RULE_EN[state.rule].color;
   const n = m.n, J = m.J;
   for (let i = 0; i < n; i++) {
     const s = homeStyle(m, assign, i);
@@ -95,12 +104,13 @@ function renderMap(m, res) {
   schoolLayer.clearLayers();
   const g = String(state.grade);
   const byId = new Map(schoolsJson.ref.schools.map(s => [s.id, s]));
+  const seatsWord = t("sim.tip.seats", "seats"), placedWord = t("sim.tip.placed", "placed"), bandWord = t("sim.tip.band", "desirability band");
   for (let j = 0; j < J; j++) {
     const s = byId.get(m.ids[j]); const band = s.grades[g].xi_band;
     const seats = m.caps[j];
     const filled = assign.reduce((c, p) => c + (p === j ? 1 : 0), 0);
     L.circleMarker([m.sLat[j], m.sLon[j]], { radius: 4 + Math.sqrt(seats) * 1.1, color: "#222", weight: 1.5, fillColor: BAND_COLORS[band - 1], fillOpacity: 0.85 })
-      .bindTooltip(`<b>${s.id}</b> · ${s.canton}<br>${seats} seats, ${filled} placed<br>desirability band ${band}/5`, { direction: "top" })
+      .bindTooltip(`<b>${s.id}</b> · ${s.canton}<br>${seats} ${seatsWord}, ${filled} ${placedWord}<br>${bandWord} ${band}/5`, { direction: "top" })
       .addTo(schoolLayer);
   }
   renderFamily(m, res);
@@ -118,31 +128,29 @@ function renderFamily(m, res) {
   const i = state.family;
   const card = $("#family");
   if (i === null || i >= m.n) {
-    card.innerHTML = `<div class=tiny>Click any family on the map, or <button class=btn id=randomfam>pick one at random</button>.</div>`;
+    card.innerHTML = `<div class=tiny>${t("fam.pick", "Click any family on the map, or")} <button class=btn id=randomfam>${t("fam.random", "pick one at random")}</button>.</div>`;
     $("#randomfam").addEventListener("click", () => selectFamily(Math.floor(Math.random() * m.n)));
     return;
   }
   const f = familyCard(m, i, res.last);
-  const J = m.J;
-  // highlight + links to first choice (dashed) and to each rule's placement
   L.circleMarker([m.aLat[i], m.aLon[i]], { radius: 7, color: "#111", weight: 2.5, fillColor: "#fff", fillOpacity: 0.9, interactive: false }).addTo(familyLayer);
   const first = m.rol[i][0];
   L.polyline([[m.aLat[i], m.aLon[i]], [m.sLat[first], m.sLon[first]]], { color: "#111", weight: 1.5, dashArray: "4 4", opacity: 0.9, interactive: false }).addTo(familyLayer);
   for (const r of ["dc", "da", "sic"]) {
     const p = res.last[r][i]; if (p < 0) continue;
-    L.polyline([[m.aLat[i], m.aLon[i]], [m.sLat[p], m.sLon[p]]], { color: RULE[r].color, weight: 3, opacity: 0.8, interactive: false }).addTo(familyLayer);
+    L.polyline([[m.aLat[i], m.aLon[i]], [m.sLat[p], m.sLon[p]]], { color: RULE_EN[r].color, weight: 3, opacity: 0.8, interactive: false }).addTo(familyLayer);
   }
-  const listRows = f.list.map((s, k) => `<tr><td>${k + 1}. ${s.school}${s.school === f.sib ? " (sibling)" : ""}</td><td>${fmt(s.km, 2)} km</td></tr>`).join("");
+  const listRows = f.list.map((s, k) => `<tr><td>${k + 1}. ${s.school}${s.school === f.sib ? t("fam.sibtag", " (sibling)") : ""}</td><td>${fmt(s.km, 2)} km</td></tr>`).join("");
   const outRows = ["dc", "da", "sic"].map(r => {
     const o = f.outcomes[r];
-    const where = o.school === null ? "unassigned" : (o.rank === 1 ? "first choice" : o.rank ? `choice #${o.rank}` : "unlisted school");
-    return `<tr><td style="color:${RULE[r].color};font-weight:600">${RULE[r].name}</td><td>${o.school ?? "—"}</td><td>${where}</td><td>${o.school === null ? "—" : fmt(o.km, 2) + " km"}</td><td>${o.school === null ? "—" : (o.lossKm < 0.005 ? "0" : "−" + fmt(o.lossKm, 2))}</td></tr>`;
+    const where = o.school === null ? t("fam.unassigned", "unassigned") : (o.rank === 1 ? t("fam.first", "first choice") : o.rank ? t("fam.choice", "choice #{r}", { r: o.rank }) : t("fam.unlisted", "unlisted school"));
+    return `<tr><td style="color:${RULE_EN[r].color};font-weight:600">${ruleName(r)}</td><td>${o.school ?? "—"}</td><td>${where}</td><td>${o.school === null ? "—" : fmt(o.km, 2) + " km"}</td><td>${o.school === null ? "—" : (o.lossKm < 0.005 ? "0" : "−" + fmt(o.lossKm, 2))}</td></tr>`;
   }).join("");
   card.innerHTML = `
-    <div class=sub><b>Family ${i + 1}</b> · nearest school ${f.nearest.school} at ${fmt(f.nearest.km, 2)} km · knows ${f.M} schools · listed ${f.K}${f.sib ? ` · sibling at ${f.sib}` : ""}</div>
-    <table style="margin-top:6px"><thead><tr><th>Their list</th><th>distance</th></tr></thead><tbody>${listRows}</tbody></table>
-    <table style="margin-top:8px"><thead><tr><th>Rule</th><th>placed at</th><th></th><th>distance</th><th>vs 1st, km-eq.</th></tr></thead><tbody>${outRows}</tbody></table>
-    <div class=tiny style="margin-top:6px">Last lottery draw. "vs 1st" is how far the placement falls short of the family's first choice in km-equivalent utility. Dashed line: first choice; solid lines: where each rule places them. <button class=btn id=randomfam>another family</button> <button class=btn id=clearfam>clear</button></div>`;
+    <div class=sub>${t("fam.head", "<b>Family {i}</b> · nearest school {s} at {km} km · knows {M} schools · listed {K}", { i: i + 1, s: f.nearest.school, km: fmt(f.nearest.km, 2), M: f.M, K: f.K })}${f.sib ? t("fam.sib", " · sibling at {s}", { s: f.sib }) : ""}</div>
+    <table style="margin-top:6px"><thead><tr><th>${t("fam.th.list", "Their list")}</th><th>${t("fam.th.dist", "distance")}</th></tr></thead><tbody>${listRows}</tbody></table>
+    <table style="margin-top:8px"><thead><tr><th>${t("fam.th.rule", "Rule")}</th><th>${t("fam.th.placed", "placed at")}</th><th></th><th>${t("fam.th.dist", "distance")}</th><th>${t("fam.th.vs", "vs 1st, km-eq.")}</th></tr></thead><tbody>${outRows}</tbody></table>
+    <div class=tiny style="margin-top:6px">${t("fam.note", "Last lottery draw. \"vs 1st\" is how far the placement falls short of the family's first choice in km-equivalent utility. Dashed line: first choice; solid lines: where each rule places them.")} <button class=btn id=randomfam>${t("fam.another", "another family")}</button> <button class=btn id=clearfam>${t("fam.clear", "clear")}</button></div>`;
   $("#randomfam").addEventListener("click", () => selectFamily(Math.floor(Math.random() * m.n)));
   $("#clearfam").addEventListener("click", () => { state.family = null; renderFamily(m, res); const url = new URL(location.href); url.searchParams.delete("family"); history.replaceState(null, "", url); });
 }
@@ -173,36 +181,40 @@ function initMap() {
 }
 
 function awareLabel() {
-  if (state.aware >= AWARE_ALL) return "every school";
-  if (state.aware === 0) return "only the nearest few (as many as they list)";
-  if (state.aware === markets[state.grade].baseAware) return `as estimated (≈${(1 + state.aware).toFixed(1)} nearest)`;
-  return `≈${(1 + state.aware).toFixed(1)} nearest schools`;
+  if (state.aware >= AWARE_ALL) return t("sim.aware.all", "every school");
+  if (state.aware === 0) return t("sim.aware.zero", "only the nearest few (as many as they list)");
+  const k = nf(1 + state.aware, 1);
+  if (state.aware === markets[state.grade].baseAware) return t("sim.aware.est", "as estimated (≈{k} nearest)", { k });
+  return t("sim.aware.k", "≈{k} nearest schools", { k });
+}
+
+function showSliders() {
+  const b = markets[state.grade].base;
+  $("#seats_o").textContent = `×${nf(state.seats, 2)}`;
+  $("#sxi_o").textContent = `×${nf(state.sxi, 2)} = ${nf(b.sxi * state.sxi, 2)} km`;
+  $("#seps_o").textContent = `×${nf(state.seps, 2)} = ${nf(b.seps * state.seps, 2)} km`;
+  $("#sgam_o").textContent = `×${nf(state.sgam, 2)} = ${nf(b.sgam * state.sgam, 2)}`;
+  $("#aware_o").textContent = awareLabel();
 }
 
 function wire() {
-  const show = () => {
-    $("#seats_o").textContent = `×${state.seats.toFixed(2)}`;
-    $("#sxi_o").textContent = `×${state.sxi.toFixed(2)} = ${(markets[state.grade].base.sxi * state.sxi).toFixed(2)} km`;
-    $("#seps_o").textContent = `×${state.seps.toFixed(2)} = ${(markets[state.grade].base.seps * state.seps).toFixed(2)} km`;
-    $("#sgam_o").textContent = `×${state.sgam.toFixed(2)} = ${(markets[state.grade].base.sgam * state.sgam).toFixed(2)}`;
-    $("#aware_o").textContent = awareLabel();
-  };
   $("#grades").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
-    state.grade = +b.dataset.grade; state.family = null; [...$("#grades").children].forEach(x => x.classList.toggle("on", x === b)); show(); run(); });
+    state.grade = +b.dataset.grade; state.family = null; [...$("#grades").children].forEach(x => x.classList.toggle("on", x === b)); showSliders(); run(); });
   $("#rules").addEventListener("click", e => { const b = e.target.closest("button"); if (!b) return;
     state.rule = b.dataset.rule; [...$("#rules").children].forEach(x => x.classList.toggle("on", x === b));
     if (lastRes) { renderMetrics(lastMarket, lastRes); renderMap(lastMarket, lastRes); } });
   for (const k of ["seats", "sxi", "seps", "sgam", "aware"]) {
     const el = $("#" + k);
-    el.addEventListener("input", () => { state[k] = +el.value; show(); run(4); });
-    el.addEventListener("change", () => { state[k] = +el.value; show(); run(); });
+    el.addEventListener("input", () => { state[k] = +el.value; showSliders(); run(4); });
+    el.addEventListener("change", () => { state[k] = +el.value; showSliders(); run(); });
   }
   $("#lines").addEventListener("change", e => { state.lines = e.target.checked; if (lastRes) renderMap(lastMarket, lastRes); });
-  $("#reset").addEventListener("click", () => { for (const k of ["seats", "sxi", "seps", "sgam"]) { state[k] = 1; $("#" + k).value = 1; } state.aware = markets[state.grade].baseAware; $("#aware").value = state.aware; show(); run(); });
-  show();
+  $("#reset").addEventListener("click", () => { for (const k of ["seats", "sxi", "seps", "sgam"]) { state[k] = 1; $("#" + k).value = 1; } state.aware = markets[state.grade].baseAware; $("#aware").value = state.aware; showSliders(); run(); });
+  window.addEventListener("langchange", () => { showSliders(); if (lastRes) { renderMetrics(lastMarket, lastRes); renderMap(lastMarket, lastRes); } });
+  showSliders();
 }
 
-// Scenario presets via the URL, e.g. ?grade=2&rule=dc&seats=0.6&sxi=0&aware=0&family=42&lines=0
+// Scenario presets via the URL, e.g. ?grade=2&rule=dc&seats=0.6&sxi=0&aware=0&family=42&lines=0&lang=es
 function applyPresets() {
   const q = new URLSearchParams(location.search);
   const num = (k, lo, hi) => { const v = parseFloat(q.get(k)); return Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : null; };
@@ -217,6 +229,8 @@ function applyPresets() {
   [...$("#rules").children].forEach(b => b.classList.toggle("on", b.dataset.rule === state.rule));
 }
 
+i18nInit(); mountToggle("#langtoggle");
+document.title = getLang() === "es" ? "Elige la regla — El valor de elegir" : document.title;
 loadData().then(() => { applyPresets(); initMap(); wire(); run(); }).catch(err => {
-  $("#headline").textContent = "Could not load data"; $("#headsub").textContent = String(err); console.error(err);
+  $("#headline").textContent = t("load.fail", "Could not load data"); $("#headsub").textContent = String(err); console.error(err);
 });

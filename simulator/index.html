@@ -8,10 +8,13 @@
 :root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--dc:#7b3294;--da:#21918c;--sic:#5ec962;--grey:#b8b8b8}
 *{box-sizing:border-box}body{font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
 a{color:inherit}
-header{padding:18px 22px 10px;max-width:1240px;margin:0 auto}
-header .crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase}
+header{padding:18px 22px 10px;max-width:1240px;margin:0 auto;position:relative}
+header .crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;padding-right:90px}
 header h1{font-size:26px;margin:4px 0 4px;letter-spacing:-.01em}
 header p{margin:0;color:#333;max-width:900px}
+.langtoggle{position:absolute;right:22px;top:16px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:#fff}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px;max-width:1240px;margin:0 auto;padding:8px 22px 40px}
 #map{height:600px;border:1px solid var(--line);border-radius:12px;background:#f4f4f4}
 aside{display:flex;flex-direction:column;gap:14px}
@@ -43,9 +46,10 @@ footer{max-width:1240px;margin:0 auto;padding:0 22px 60px;font-size:12px;color:v
 </style></head><body>
 
 <header>
-  <div class=crumb><a href="../">The Value of Choice in Centralized School Assignment</a> · interactive</div>
-  <h1>Choose the rule</h1>
-  <p>Manta's real schools, a synthetic population of families drawn from the paper's estimated model, and the three rules the paper compares.
+  <div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="sim.crumb.tag">interactive</span></div>
+  <div id=langtoggle></div>
+  <h1 data-i18n="sim.h1">Choose the rule</h1>
+  <p data-i18n="sim.lede">Manta's real schools, a synthetic population of families drawn from the paper's estimated model, and the three rules the paper compares.
   Switch the rule and watch who is placed where; then tighten the seats or change how families' tastes are distributed.</p>
 </header>
 
@@ -53,65 +57,65 @@ footer{max-width:1240px;margin:0 auto;padding:0 22px 60px;font-size:12px;color:v
   <div id=map></div>
   <aside>
     <div class=card>
-      <h2>Grade</h2>
+      <h2 data-i18n="sim.grade">Grade</h2>
       <div class=seg id=grades>
-        <button data-grade=2 class=on>Preschool 1</button><button data-grade=3>Preschool 2</button><button data-grade=4>Primary 1</button>
+        <button data-grade=2 class=on data-i18n="grade.2">Preschool 1</button><button data-grade=3 data-i18n="grade.3">Preschool 2</button><button data-grade=4 data-i18n="grade.4">Primary 1</button>
       </div>
       <div class=tiny id=gradeinfo style="margin-top:6px"></div>
     </div>
     <div class=card>
-      <h2>Assignment rule</h2>
+      <h2 data-i18n="sim.rule">Assignment rule</h2>
       <div class=seg id=rules>
-        <button data-rule=dc>Distance rule</button><button data-rule=da class=on>Deferred acceptance</button><button data-rule=sic>Benchmark</button>
+        <button data-rule=dc data-i18n="rule.dc">Distance rule</button><button data-rule=da class=on data-i18n="rule.da">Deferred acceptance</button><button data-rule=sic data-i18n="rule.sic">Benchmark</button>
       </div>
       <div class=tiny id=ruleinfo style="margin-top:6px"></div>
     </div>
     <div class=card>
-      <h2>Outcome under this rule</h2>
+      <h2 data-i18n="sim.outcome">Outcome under this rule</h2>
       <div class=big id=headline>—</div>
       <div class=sub id=headsub></div>
-      <table style="margin-top:8px"><thead><tr><th></th><th>Distance</th><th>DA</th><th>Benchmark</th></tr></thead>
+      <table style="margin-top:8px"><thead><tr><th></th><th data-i18n="sim.th.dc">Distance</th><th data-i18n="sim.th.da">DA</th><th data-i18n="sim.th.sic">Benchmark</th></tr></thead>
       <tbody id=metrics></tbody></table>
       <div class=tiny id=recovered style="margin-top:8px"></div>
       <div class=tiny id=paper style="margin-top:4px"></div>
     </div>
     <div class=card>
-      <h2>Play with the model</h2>
-      <div class=slider><label for=seats>Seats (congestion dial)</label><output id=seats_o>×1.00</output><input type=range id=seats min=0.4 max=2 step=0.05 value=1></div>
-      <div class=slider><label for=sxi>How different schools are (σ<sub>ξ</sub>)</label><output id=sxi_o></output><input type=range id=sxi min=0 max=3 step=0.05 value=1></div>
-      <div class=slider><label for=seps>Idiosyncratic taste (σ<sub>ε</sub>)</label><output id=seps_o></output><input type=range id=seps min=0.2 max=3 step=0.05 value=1></div>
-      <div class=slider><label for=sgam>Distance-taste heterogeneity (σ<sub>γ</sub>)</label><output id=sgam_o></output><input type=range id=sgam min=0 max=2 step=0.05 value=1></div>
-      <div class=slider><label for=aware>How many schools families know (awareness)</label><output id=aware_o></output><input type=range id=aware min=0 max=9 step=0.5 value=1.5></div>
+      <h2 data-i18n="sim.play">Play with the model</h2>
+      <div class=slider><label for=seats data-i18n="sim.seats">Seats (congestion dial)</label><output id=seats_o>×1.00</output><input type=range id=seats min=0.4 max=2 step=0.05 value=1></div>
+      <div class=slider><label for=sxi data-i18n="sim.sxi">How different schools are (σ<sub>ξ</sub>)</label><output id=sxi_o></output><input type=range id=sxi min=0 max=3 step=0.05 value=1></div>
+      <div class=slider><label for=seps data-i18n="sim.seps">Idiosyncratic taste (σ<sub>ε</sub>)</label><output id=seps_o></output><input type=range id=seps min=0.2 max=3 step=0.05 value=1></div>
+      <div class=slider><label for=sgam data-i18n="sim.sgam">Distance-taste heterogeneity (σ<sub>γ</sub>)</label><output id=sgam_o></output><input type=range id=sgam min=0 max=2 step=0.05 value=1></div>
+      <div class=slider><label for=aware data-i18n="sim.aware">How many schools families know (awareness)</label><output id=aware_o></output><input type=range id=aware min=0 max=9 step=0.5 value=1.5></div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-        <button class=btn id=reset>Reset</button>
-        <label class=chk><input type=checkbox id=lines checked> show a sample of home→school links</label>
+        <button class=btn id=reset data-i18n="sim.reset">Reset</button>
+        <label class=chk><input type=checkbox id=lines checked> <span data-i18n="sim.lines">show a sample of home→school links</span></label>
       </div>
-      <div class=tiny style="margin-top:6px">Sliders multiply the paper's estimates (×1 = Table 9). Utilities are re-composed from each family's own taste draws, so the same families are re-assigned under new tastes. Awareness sets how many of its nearest schools each family compares before listing (the survey suggests only a few); at the far right every family knows every school.</div>
+      <div class=tiny style="margin-top:6px" data-i18n="sim.play.note">Sliders multiply the paper's estimates (×1 = Table 9). Utilities are re-composed from each family's own taste draws, so the same families are re-assigned under new tastes. Awareness sets how many of its nearest schools each family compares before listing (the survey suggests only a few); at the far right every family knows every school.</div>
     </div>
     <div class=card>
-      <h2>Follow one family</h2>
+      <h2 data-i18n="sim.family">Follow one family</h2>
       <div id=family></div>
     </div>
     <div class=card>
-      <h2>Legend</h2>
+      <h2 data-i18n="sim.legend">Legend</h2>
       <div class=legend>
-        <span><i style="background:#333"></i>family placed in its first choice</span>
-        <span><i style="background:#999"></i>placed in another listed school</span>
-        <span><i style="background:#ddd;border:1px solid #bbb"></i>placed in an unlisted school</span>
-        <span><i style="background:#fff;border:2px solid #444"></i>school (size = seats, colour = desirability band)</span>
+        <span><i style="background:#333"></i><span data-i18n="sim.legend.first">family placed in its first choice</span></span>
+        <span><i style="background:#999"></i><span data-i18n="sim.legend.listed">placed in another listed school</span></span>
+        <span><i style="background:#ddd;border:1px solid #bbb"></i><span data-i18n="sim.legend.unlisted">placed in an unlisted school</span></span>
+        <span><i style="background:#fff;border:2px solid #444"></i><span data-i18n="sim.legend.school">school (size = seats, colour = desirability band)</span></span>
       </div>
     </div>
   </aside>
 </div>
 
 <div class=try>
-  <div class=card><h2>Try: switch the rule</h2><p>Go from the <a href="?grade=2&rule=dc">distance rule</a> to <a href="?grade=2&rule=da">deferred acceptance</a>. The share of families placed in a school they asked for jumps; the share placed in their first choice jumps more. Then switch to the <a href="?grade=2&rule=sic">benchmark</a> and notice how little changes — that gap is the value of the <em>algorithm</em>, and it is small.</p></div>
-  <div class=card><h2>Try: tighten the seats</h2><p>Drag seats below ×1 — or jump to <a href="?grade=2&rule=da&seats=0.6">seats ×0.6</a>. As congestion rises, the first-choice share under deferred acceptance falls and the gain over the distance rule shrinks. This is why <a href="?grade=4&rule=da">Primary 1</a>, the most congested grade, gains least in the paper.</p></div>
-  <div class=card><h2>Try: make families alike</h2><p>Turn idiosyncratic taste σ<sub>ε</sub> down to <a href="?grade=2&rule=da&seps=0.2">×0.2</a>: most families now want their nearest school, the distance rule nearly matches deferred acceptance, and the gain from choice shrinks from about 0.5 to 0.1 km per family. Turn it up to <a href="?grade=2&rule=da&seps=3">×3</a> and the gain triples. Now try σ<sub>ξ</sub> instead — making every school <a href="?grade=2&rule=dc&sxi=0">equally desirable</a> changes almost nothing, because families compare only a few nearby schools. The value of choice lives in what each family wants, not in a ranking of schools a planner could observe — the paper's imagery result, in one slider.</p></div>
-  <div class=card><h2>Try: follow one family</h2><p>Click any dot, or <a href="?grade=2&rule=dc&family=16">open family 16</a>, which lives 170 m from a school but wants one 590 m away: the distance rule sends it to its fourth choice, deferred acceptance to its first. Each family's card shows its list, the school next door, and where each rule sends it — with the shortfall from its first choice in km-equivalent. Then <a href="?grade=2&rule=da&aware=0">make families know only their nearest school</a> and watch nearly everyone ask for it, or <a href="?grade=2&rule=da&aware=all">let every family know every school</a> and watch the value of choice grow as lists reach further.</p></div>
+  <div class=card><h2 data-i18n="sim.try1.h">Try: switch the rule</h2><p data-i18n="sim.try1.p">Go from the <a href="?grade=2&rule=dc">distance rule</a> to <a href="?grade=2&rule=da">deferred acceptance</a>. The share of families placed in a school they asked for jumps; the share placed in their first choice jumps more. Then switch to the <a href="?grade=2&rule=sic">benchmark</a> and notice how little changes — that gap is the value of the <em>algorithm</em>, and it is small.</p></div>
+  <div class=card><h2 data-i18n="sim.try2.h">Try: tighten the seats</h2><p data-i18n="sim.try2.p">Drag seats below ×1 — or jump to <a href="?grade=2&rule=da&seats=0.6">seats ×0.6</a>. As congestion rises, the first-choice share under deferred acceptance falls and the gain over the distance rule shrinks. This is why <a href="?grade=4&rule=da">Primary 1</a>, the most congested grade, gains least in the paper.</p></div>
+  <div class=card><h2 data-i18n="sim.try3.h">Try: make families alike</h2><p data-i18n="sim.try3.p">Turn idiosyncratic taste σ<sub>ε</sub> down to <a href="?grade=2&rule=da&seps=0.2">×0.2</a>: most families now want their nearest school, the distance rule nearly matches deferred acceptance, and the gain from choice shrinks from about 0.5 to 0.1 km per family. Turn it up to <a href="?grade=2&rule=da&seps=3">×3</a> and the gain triples. Now try σ<sub>ξ</sub> instead — making every school <a href="?grade=2&rule=dc&sxi=0">equally desirable</a> changes almost nothing, because families compare only a few nearby schools. The value of choice lives in what each family wants, not in a ranking of schools a planner could observe — the paper's imagery result, in one slider.</p></div>
+  <div class=card><h2 data-i18n="sim.try4.h">Try: follow one family</h2><p data-i18n="sim.try4.p">Click any dot, or <a href="?grade=2&rule=dc&family=16">open family 16</a>, which lives 170 m from a school but wants one 590 m away: the distance rule sends it to its fourth choice, deferred acceptance to its first. Each family's card shows its list, the school next door, and where each rule sends it — with the shortfall from its first choice in km-equivalent. Then <a href="?grade=2&rule=da&aware=0">make families know only their nearest school</a> and watch nearly everyone ask for it, or <a href="?grade=2&rule=da&aware=all">let every family know every school</a> and watch the value of choice grow as lists reach further.</p></div>
 </div>
 
-<footer>Families are synthetic: drawn from the paper's estimated demand model over the real schools, with homes sampled from a coarse density grid — no real applicant appears. School desirability is shown as a quintile band only.
+<footer data-i18n="sim.footer">Families are synthetic: drawn from the paper's estimated demand model over the real schools, with homes sampled from a coarse density grid — no real applicant appears. School desirability is shown as a quintile band only.
 Rules follow the deployed design: deferred acceptance runs on the reported list with the remaining schools appended in distance order (priorities: sibling, reported, appended; one lottery per applicant–school pair); the distance rule assigns in distance order with one lottery per applicant; the benchmark applies stable improvement cycles to deferred acceptance (paper, Proposition 2). Basemap © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
