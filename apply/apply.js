@@ -291,7 +291,7 @@ function wireNext() {
     await submit(lie, { keepTruthful: true });
     const a = firstShare(truthful, "da"), b = firstShare(state.res, "da");
     const la = listedShare(truthful, "da"), lb = listedShare(state.res, "da");
-    noteHtml(t("ap.n.swap", "You got your real first choice in {b}% of lotteries, against {a}% when you told the truth. And hedging bought you nothing: you landed in some school you had listed {lb}% of the time, against {la}%. Under deferred acceptance a school you rank lower is still yours if you can get it, so there is never a reason to put a safe school first. The {toy} shows why in three families.",
+    noteHtml(t("ap.n.swap", "You got your real first choice in {b}% of lotteries, against {a}% when you told the truth. And hedging bought you nothing: you landed in some school you had listed {lb}% of the time, against {la}%. Under deferred acceptance a school you rank lower is still yours if you can get it, so in this configuration there is no reason to put a safe school first. The {toy} shows why in three families.",
       { a: nf(100 * a, 0), b: nf(100 * b, 0), la: nf(100 * la, 0), lb: nf(100 * lb, 0), toy: `<a href="../toy/">${t("ap.n.toy", "toy market")}</a>` }));
   });
   $("#awareness").addEventListener("click", async () => {

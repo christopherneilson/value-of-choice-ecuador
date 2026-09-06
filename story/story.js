@@ -112,7 +112,7 @@ const STEPS = {
     drawHomes(nearestFirstColor());
     const r = S.res;
     readout(big(t("story.r.nearest.h", "{p}% want a school that is not their nearest", { p: fmt(100 * (1 - r.nearestFirst)) }), C.away) +
-      sub(t("story.r.nearest.s", "{near}% rank their nearest school first; the rest accept a median {extra} km more travel for their first choice {src1}<br>Paper: 65% nearest-first in this grade; across grades more than a quarter choose elsewhere and pay a median 0.6 km for it {src2}",
+      sub(t("story.r.nearest.s", "{near}% rank their nearest school first; the rest accept a median {extra} km more travel for their first choice {src1}<br>Paper: across grades more than a quarter of families choose a school other than their nearest and pay a median 0.6 km for it {src2}. The 65% nearest-first figure for this grade is the authors' calculation from the application data, not a number the paper reports.",
         { near: fmt(100 * r.nearestFirst), extra: fmt(r.medianExtraKm, 2), src1: src1(), src2: src2() })));
   },
   distance() {

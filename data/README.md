@@ -25,13 +25,14 @@ band's expected value under N(0, σ_ξ²) with the paper's σ_ξ for that grade.
 ## `applicants_g2.json`, `applicants_g3.json`, `applicants_g4.json`
 ```
 { "grade": 2, "name": "Preschool 1",
-  "params": { "lam": 3.043, "sxi": 0.534, "seps": 1.034, "sgam": 1.273, "N": 1098, "sib": 0.056 },
+  "params": { "lam": 3.043, "sxi": 0.529, "seps": 1.016, "sgam": 1.225, "N": 1098, "sib": 0.056 },
   "gamma_cap": 1.0, "eps_scale": 1.0, "gamma_scale": 1.0, "aware": 1.5,
   "schools": ["S01", "S03", ...],                       # the in-market schools of this grade, in column order
   "applicants": [ { "id": "g2-0001", "lat": ..., "lon": ..., "gamma": -1.9122, "K": 2, "M": 2,
                     "sib": null, "rol": ["S56", "S63"], "u": [ ...one value per school in `schools` order... ] } ] }
 ```
-The synthetic families of one grade. `params` are the paper's published estimates (Table 9):
+The synthetic families of one grade. `params` are the paper's published estimates from Table 9, the
+main specification (not from either robustness table):
 sibling premium λ, and the standard deviations of school desirability σ_ξ, idiosyncratic taste
 σ_ε and the taste-for-distance heterogeneity σ_γ; `sib` is the sibling rate. Per family: a synthetic
 home (drawn uniformly inside a cell of the density grid, never a real point); `gamma`, its draw of

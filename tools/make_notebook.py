@@ -246,7 +246,7 @@ rol = [dist_order[i][:len(rol_true[i])] for i in range(n)]          # proximity-
 PREFS_p, PRIO_p = map(list, zip(*(deployed(i) for i in range(n))))
 rol = rol_true                                                      # metrics are judged on the TRUE lists and utilities
 rp = average(draws=5, prefs=PREFS_p, prio=PRIO_p)
-print(f"value of choice with proximity-only lists: +{rp['da']['utility (km-eq)'] - rp['dc']['utility (km-eq)']:.3f} km-equivalents "
+print(f"value of choice with proximity-only lists: {rp['da']['utility (km-eq)'] - rp['dc']['utility (km-eq)']:+.3f} km-equivalents "
       f"(with the reported lists: +{gain:.3f})")
 """)
 

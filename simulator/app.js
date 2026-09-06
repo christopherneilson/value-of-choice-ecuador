@@ -5,11 +5,14 @@ import { t, nf, init as i18nInit, mountToggle, getLang } from "../shared/i18n.js
 
 const GRADE_EN = { 2: "Preschool 1", 3: "Preschool 2", 4: "Primary 1" };
 const gradeName = g => t(`grade.${g}`, GRADE_EN[g]);
-// the paper's real-data numbers by grade, for context (assignment shares from the grade tables)
+// The paper's real-data numbers by grade, verbatim from tables/table_comparison_grade{2,3,4}.tex.
+// `near` is NOT one of them: the manuscript reports only the pooled share (28% do not rank their
+// nearest school first). The per-grade split is the authors' own calculation from the application
+// data, and the page labels it as such.
 const PAPER = {
-  2: { dc_listed: 64.7, da_listed: 96.1, da_first: 93.2, rec: "99.6%", near: 65 },
-  3: { dc_listed: 43.2, da_listed: 70.4, da_first: 58.2, rec: "82.3%", near: 63 },
-  4: { dc_listed: 26.1, da_listed: 46.4, da_first: 32.6, rec: "near zero (sensitive to conventions)", near: 54 },
+  2: { dc_listed: 64.80, da_listed: 96.31, da_first: 93.31, rec: "99.6%", near: 65 },
+  3: { dc_listed: 43.23, da_listed: 70.57, da_first: 58.30, rec: "82.3%", near: 63 },
+  4: { dc_listed: 26.29, da_listed: 46.81, da_first: 32.72, rec: "near zero (sensitive to conventions)", near: 54 },
 };
 const RULE_EN = {
   dc: { name: "Distance rule", color: "#7b3294", info: "The status quo: each family is offered its nearest school with a seat; ties by one lottery per family. Families' stated preferences play no role." },
@@ -89,8 +92,8 @@ function renderMetrics(m, res) {
     { rec: fmt(res.recoveredShare, 1), gain: fmt(res.gainKmDaOverDc, 2), near: fmt(100 * res.nearestFirst, 0), extra: fmt(res.medianExtraKm, 2), m: fmt(meanM, 1) });
   const P = PAPER[state.grade];
   const rec = state.grade === 4 ? t("sim.paper.rec.4", P.rec) : P.rec;
-  $("#paper").innerHTML = t("sim.paper", "<b>Paper, real data ({grade}):</b> distance rule {dcl}% listed · DA {dal}% listed, {daf}% first choice · DA closes {rec} of the range · {near}% rank nearest first.",
-    { grade: gradeName(state.grade), dcl: nf(P.dc_listed, 1), dal: nf(P.da_listed, 1), daf: nf(P.da_first, 1), rec, near: P.near });
+  $("#paper").innerHTML = t("sim.paper", "<b>Paper, real data ({grade}):</b> distance rule {dcl}% listed · DA {dal}% listed, {daf}% first choice · DA closes {rec} of the range. <i>Authors' calculation from the application data, not a figure in the paper:</i> {near}% rank their nearest school first.",
+    { grade: gradeName(state.grade), dcl: nf(P.dc_listed, 2), dal: nf(P.da_listed, 2), daf: nf(P.da_first, 2), rec, near: P.near });
   $("#gradeinfo").textContent = t("sim.gradeinfo", "{n} families · {J} schools · {seats} seats ({ratio} per family)",
     { n: nf(m.n), J: m.J, seats: nf(seatsTot), ratio: nf(seatsTot / m.n, 2) });
   $("#ruleinfo").textContent = ruleInfo(cur);

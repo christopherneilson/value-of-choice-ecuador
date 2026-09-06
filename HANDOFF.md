@@ -99,7 +99,7 @@ repo); if the domain ever changes, change it there, regenerate, and update READM
 - **Real:** school locations, cantons, per-grade regular seats (in-market programmes, `id_program.csv`
   joined to `ProgramsInfo.csv` and `Vacancies.csv`). Two zero-seat programmes per later grade are kept,
   as the deployed DA keeps them.
-- **Published parameters:** λ, σ_ξ, σ_ε, σ_γ from Table 9 (the centred run: 3.043/0.534/1.034/1.273
+- **Published parameters:** λ, σ_ξ, σ_ε, σ_γ from Table 9, the **main** specification (3.043/0.529/1.016/1.225
   for Preschool 1, etc.), list-length histograms, sibling rate and the sibling school's distance rank,
   canton mix from Table 1. *Do not read parameters from `sim_results/*/estimated_parameters_*.csv`* —
   those are the legacy MATLAB run.
@@ -275,11 +275,15 @@ landing page and appendix publication-ready · privacy checks.
    33.0% unaffected against 31.1%, 13.2% lose against 17.1%. The *gradient does not*: lowest-minus-
    highest quartile is +0.04 km here (±0.14) against +0.196 km in the paper, and it is flat in every
    grade (g3 +0.01 ± 0.13, g4 +0.25 ± 0.32; correlations of SES with gain −0.03, −0.00, −0.05). That
-   is expected and the page says so plainly: the generator draws every family's tastes and list length
-   independently of where it lives, so the only channel from status to gain is geography, and geography
-   alone produces nothing measurable. The paper's gradient is estimated on real families and says they
-   gain more than geography alone predicts — the part a status-blind model cannot invent. **Do not
-   "fix" this by tuning the generator**; a gradient manufactured that way would be an artefact.
+   is expected, and the page now states the reason correctly. `main_ej.tex:394` gives **two** mechanisms
+   for the progressive incidence: better-off families are better *located* relative to desirable schools,
+   **and** they are more distance-averse (the estimated γ falls with neighbourhood schooling). The
+   generator has the first — real homes, real schools — and not the second, because γ is drawn from one
+   distribution regardless of location. Location alone moves nothing here. (An earlier draft of the page
+   said the paper found gains "beyond what geography would predict"; the paper says the opposite, that
+   location is one of the two things producing the gradient. Corrected 2026-09-06.) **Do not "fix" the
+   flatness by tuning the generator**; the honest fix, if anyone wants one, is to make γ depend on the
+   cell's schooling as the paper estimates — and that is a modelling change to argue for, not a knob.
    If the GeoPackage does reappear, the useful upgrade is sampling homes from block populations and
    attaching a household-level measure, not forcing the gradient.
 7. **"Could a planner have guessed?"** *Done 2026-09-05* (`planner/`). Ten rounds: a real in-market

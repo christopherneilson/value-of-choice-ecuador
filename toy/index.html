@@ -53,7 +53,7 @@ th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;lett
 <div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="toy.crumb.tag">a toy market</span></div>
 <div id=langtoggle></div>
 <h1 data-i18n="toy.h1">Does lying pay?</h1>
-<p class=lede data-i18n="toy.lede">Three families, three schools, one seat each. Rank the schools for <b>your</b> family and see where two assignment rules send you. Under the <b>Boston mechanism</b> a school fills its seat as soon as someone ranks it first, so a family that aims high and misses can lose its safe option too — and may do better by <em>not</em> telling the truth. Under <b>deferred acceptance</b> nothing is locked in until the end, and no list ever does better than the truth. That is why the paper can treat Manta's lists as what families actually want.</p>
+<p class=lede data-i18n="toy.lede">Three families, three schools, one seat each. Rank the schools for <b>your</b> family and see where two assignment rules send you. Under the <b>Boston mechanism</b> a school fills its seat as soon as someone ranks it first, so a family that aims high and misses can lose its safe option too — and may do better by <em>not</em> telling the truth. Under <b>deferred acceptance</b> nothing is locked in until the end, and in the configuration the paper analyses no list does better than the truth. That is why the paper can treat Manta's lists as what families actually want.</p>
 
 <div class=grid>
   <div class=card>
@@ -81,7 +81,7 @@ th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;lett
 <div class=card style="margin-top:16px">
   <h2 data-i18n="toy.all">Every list you could submit</h2>
   <table class=all><thead><tr><th data-i18n="toy.th.list">Your list</th><th data-i18n="toy.th.bos">Boston gives you</th><th data-i18n="toy.th.da">DA gives you</th></tr></thead><tbody id=all></tbody></table>
-  <p class=tiny data-i18n="toy.all.note">Under deferred acceptance the truthful list is always among the best you can submit — that is what "strategy-proof" means, and it holds for any preferences, priorities and seats, not just this example (the paper's Proposition 1 states the form it takes with Manta's priorities). Under Boston, whether lying pays depends on what everyone else does, which is exactly the guessing game a good mechanism removes.</p>
+  <p class=tiny data-i18n="toy.all.note">Under deferred acceptance the truthful list is among the best you can submit whatever the other families do — that is what "strategy-proof" means. The paper proves it for the configuration it analyses (static sibling priority, one quota per school, school-specific tie-breaking) and notes it is not immediate from the textbook result, because here listing a school is itself what earns you priority there. The deployed platform also offered dynamic sibling priority and family linking, which can break it; the paper's counterfactuals switch both off. Under Boston, whether lying pays depends on what everyone else does, which is exactly the guessing game a good mechanism removes.</p>
 </div>
 
 <a class=cta href="../simulator/" data-i18n="toy.cta">Back to the full simulator →</a>
