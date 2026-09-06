@@ -5,13 +5,17 @@ import { simulate } from "../engine/engine.js";
 import { deriveMarket } from "../simulator/market.js";
 
 const norm = (base, j) => ({ aware: j.aware === undefined ? base.baseAware : j.aware, sxi: j.sxi ?? 1, seps: j.seps ?? 1, sgam: j.sgam ?? 1,
-                             seats: j.seats ?? 1, draws: j.draws ?? 10, seed: j.seed ?? 7 });
+                             seats: j.seats ?? 1, draws: j.draws ?? 10, seed: j.seed ?? 7,
+                             rules: j.rules ?? ["dc", "da", "sic"], perFamily: !!j.perFamily });
 
 export function runJobs(schools, apps, base, jobs, { useWorker = true } = {}) {
   const grade = apps.grade;
   const onMain = () => {
     const out = {};
-    for (const [k, j] of Object.entries(jobs)) { const q = norm(base, j); out[k] = simulate(deriveMarket(base, q), { draws: q.draws, seed: q.seed }); }
+    for (const [k, j] of Object.entries(jobs)) {
+      const q = norm(base, j);
+      out[k] = simulate(deriveMarket(base, q), { draws: q.draws, seed: q.seed, rules: q.rules, perFamily: q.perFamily });
+    }
     return out;
   };
   if (!useWorker || typeof Worker === "undefined" || new URLSearchParams(location.search).get("worker") === "0") return Promise.resolve(onMain());

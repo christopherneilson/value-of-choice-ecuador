@@ -73,6 +73,18 @@ for (const g of [2, 3, 4]) {
     `DA listed ${sim.rules.da.listed.toFixed(1)} (py ${c.da.listed.toFixed(1)}), DC listed ${sim.rules.dc.listed.toFixed(1)} (py ${c.dc.listed.toFixed(1)}) — ${tSim.toFixed(0)} ms`);
   console.log(`       recovered share ${sim.recoveredShare.toFixed(1)}% (py ${c.recovered_share.toFixed(1)}), gain ${sim.gainKmDaOverDc.toFixed(3)} km (py ${c.gain_km_da_over_dc.toFixed(3)}), nearest-first ${(100 * sim.nearestFirst).toFixed(0)}% (py ${(100 * c.nearest_first).toFixed(0)})`);
 
+  // per-family utilities: their mean over seated families must reproduce the aggregate utility
+  const pf = simulate(m, { draws: 4, seed: 11, rules: ["dc", "da"], perFamily: true });
+  const meanOf = a => { let s = 0, k = 0; for (const x of a) if (Number.isFinite(x)) { s += x; k++; } return s / k; };
+  const okPf = ["dc", "da"].every(r => Math.abs(meanOf(pf.perFamily[r]) - pf.rules[r].utility) < 0.02);
+  const gain = Array.from(pf.perFamily.da, (x, i) => x - pf.perFamily.dc[i]).filter(Number.isFinite);
+  const win = gain.filter(x => x > 0.01).length, lose = gain.filter(x => x < -0.01).length;
+  check(okPf, `per-family utilities average to the aggregate (DC ${meanOf(pf.perFamily.dc).toFixed(3)} vs ${pf.rules.dc.utility.toFixed(3)}, ` +
+    `DA ${meanOf(pf.perFamily.da).toFixed(3)} vs ${pf.rules.da.utility.toFixed(3)})`);
+  check(Math.abs(meanOf(gain) - (pf.rules.da.utility - pf.rules.dc.utility)) < 0.02,
+    `mean per-family gain equals the aggregate gain (${meanOf(gain).toFixed(3)} km); ` +
+    `${(100 * win / gain.length).toFixed(0)}% gain, ${(100 * lose / gain.length).toFixed(0)}% lose`);
+
   // awareness: identity at the generated default, monotone in the slider, lists re-form identically at default
   const mSame = withAwareness(m, m.baseAware);
   let sameM = 0; for (let i = 0; i < m.n; i++) if (mSame.M[i] === m.M[i]) sameM++;

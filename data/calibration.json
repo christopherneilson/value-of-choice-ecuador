@@ -12,9 +12,11 @@
    "0": {
     "n_cells": 187,
     "coverage": 0.718,
-    "applicants": 2372
+    "applicants": 2372,
+    "cells_with_ses": 180
    }
   },
+  "ses": "mean years of schooling among adults 25+ in the census blocks of the cell's real households (paper's socio-economic proxy); published only for cells where at least min_count households carry it",
   "source": "applicant homes aggregated to a grid; cells below the minimum count dropped"
  },
  "per_grade": {

@@ -405,14 +405,21 @@ function mulberry32(seed) {
 }
 
 // K lottery draws of the three mechanisms; means over draws, plus the last draw's assignments.
-export function simulate(market, { draws = 10, seed = 7, rules = ["dc", "da", "sic"] } = {}) {
-  const { n, J, caps, d, rol } = market;
+// With perFamily, also returns res.perFamily[rule] = each family's MEAN utility over the draws in
+// which it was seated (NaN if never seated). da minus dc is the family's gain from acting on
+// preferences, in km-equivalents — the "who gains" object.
+export function simulate(market, { draws = 10, seed = 7, rules = ["dc", "da", "sic"], perFamily = false } = {}) {
+  const { n, J, caps, d, rol, u } = market;
   const rng = mulberry32(seed);
   const { prefs, prio } = daStructure(market);
   const score = new Float64Array(n * J);
   const lotDc = new Float64Array(n);
   const acc = {}; const last = {};
-  for (const r of rules) acc[r] = { listed: 0, first: 0, km: 0, utility: 0, assigned: 0 };
+  const sumU = perFamily ? {} : null, cntU = perFamily ? {} : null;
+  for (const r of rules) {
+    acc[r] = { listed: 0, first: 0, km: 0, utility: 0, assigned: 0 };
+    if (perFamily) { sumU[r] = new Float64Array(n); cntU[r] = new Int32Array(n); }
+  }
   for (let s = 0; s < draws; s++) {
     for (let k = 0; k < n * J; k++) score[k] = prio[k] + rng() * 0.5;
     const out = {};
@@ -423,9 +430,14 @@ export function simulate(market, { draws = 10, seed = 7, rules = ["dc", "da", "s
       const m = metricsOf(market, out[r]);
       for (const k in m) acc[r][k] += m[k] / draws;
       last[r] = Int32Array.from({ length: n }, (_, i) => out[r].get(i) ?? -1);
+      if (perFamily) for (const [i, p] of out[r]) { sumU[r][i] += u[i * J + p]; cntU[r][i]++; }
     }
   }
   const res = { draws, seed, rules: acc, last };
+  if (perFamily) {
+    res.perFamily = {};
+    for (const r of rules) res.perFamily[r] = Float64Array.from(sumU[r], (s, i) => (cntU[r][i] ? s / cntU[r][i] : NaN));
+  }
   if (acc.dc && acc.da && acc.sic) {
     res.recoveredShare = 100 * (acc.da.utility - acc.dc.utility) / (acc.sic.utility - acc.dc.utility);
     res.gainKmDaOverDc = acc.da.utility - acc.dc.utility;

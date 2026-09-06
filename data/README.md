@@ -38,7 +38,8 @@ home (drawn uniformly inside a cell of the density grid, never a real point); `g
 the taste for distance (utility falls by `1 − gamma` per km; capped so that nobody prefers farther);
 `K`, the length of its list; `M`, the number of nearest schools it compared when forming the list
 (`max(K, 1 + Poisson(aware))`, plus the sibling's school); `sib`, the school where a sibling is
-enrolled, or `null`; `rol`, the list it submitted, best first; and `u`, its utility for every
+enrolled, or `null`; `rol`, the list it submitted, best first; `ses`, the mean adult schooling of the census blocks in
+its 300 m cell where that is published (see below); and `u`, its utility for every
 in-market school, from which the browser engine recovers the idiosyncratic ε and re-scales the
 parameters without a random-number generator:
 
@@ -46,10 +47,15 @@ parameters without a random-number generator:
 
 ## `home_density_cells.json`
 ```
-{ "meta": { "cell_m": 300.0, "min_count": 5, ... }, "grids": { "0": [ { "lat": ..., "lon": ..., "n": 7 }, ... ] } }
+{ "meta": { "cell_m": 300.0, "min_count": 5, "ses": "...", ... },
+  "grids": { "0": [ { "lat": ..., "lon": ..., "n": 7, "ses": 11.4 }, ... ] } }
 ```
 The 300 m grid of applicant homes from which synthetic homes are drawn: cell centres and counts,
 cells with fewer than `min_count` households removed. `grids["0"]` is the single pooled grid.
+`ses` is the mean years of schooling among adults 25+ in the census blocks of that cell's real
+households, the paper's socio-economic proxy; it appears only on cells where at least `min_count`
+households carry it, so it is an aggregate of an aggregate. Each synthetic family's `ses` in the
+applicant files is the value of the cell it was drawn from.
 
 ## `calibration.json`
 Synthetic-market moments beside their paper targets: `pooled` (all grades) and `per_grade`

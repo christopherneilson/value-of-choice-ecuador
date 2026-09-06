@@ -1,4 +1,4 @@
-name: engine tests and link check
+name: engine tests, syntax and link check
 
 on:
   push:
@@ -15,5 +15,7 @@ jobs:
           node-version: "20"
       - name: Engine reproduces the Python fixtures
         run: node engine/test_engine.mjs
+      - name: Every front-end module parses
+        run: node tools/check_syntax.mjs
       - name: Local links resolve
         run: node tools/check_links.mjs

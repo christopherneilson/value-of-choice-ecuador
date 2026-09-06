@@ -23,8 +23,9 @@ self.onmessage = e => {
       const base = markets[q.grade];
       if (!base) throw new Error(`grade ${q.grade} not loaded in the worker`);
       const m = deriveMarket(base, q);
-      const res = simulate(m, { draws: q.draws, seed: q.seed, rules: q.rules ?? ["dc", "da", "sic"] });
-      self.postMessage({ type: "result", id: q.id, res }, Object.values(res.last).map(a => a.buffer));
+      const res = simulate(m, { draws: q.draws, seed: q.seed, rules: q.rules ?? ["dc", "da", "sic"], perFamily: !!q.perFamily });
+      self.postMessage({ type: "result", id: q.id, res },
+        [...Object.values(res.last), ...Object.values(res.perFamily ?? {})].map(a => a.buffer));
     } catch (err) {
       self.postMessage({ type: "error", id: q.id, message: String(err && err.message || err) });
     }

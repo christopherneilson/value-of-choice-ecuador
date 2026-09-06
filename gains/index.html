@@ -1,0 +1,111 @@
+<!doctype html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1">
+<title>Who gains? — The Value of Choice</title>
+<meta name="description" content="The gain from acting on family preferences, family by family: a map of winners and losers, and the gain plotted against the schooling of the neighbourhood each family lives in.">
+<link rel="icon" href="data:,">
+<!-- og:start (tools/make_og.py) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Value of Choice">
+<meta property="og:url" content="https://www.christopher-neilson.com/value-of-choice-ecuador/gains/">
+<meta property="og:title" content="Who gains?">
+<meta property="og:description" content="The gain from acting on family preferences, family by family: a map of winners and losers, and the gradient by neighbourhood.">
+<meta property="og:image" content="https://www.christopher-neilson.com/value-of-choice-ecuador/og/gains.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Who gains?">
+<meta name="twitter:card" content="summary_large_image">
+<!-- og:end -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<style>
+:root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--win:#21918c;--lose:#b42318;--flat:#c9c9c9;--da:#21918c}
+*{box-sizing:border-box}body{font:15px/1.55 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
+a{color:inherit}
+header{padding:18px 22px 6px;max-width:1300px;margin:0 auto;position:relative}
+header .crumb{font-size:12px;color:var(--mut);letter-spacing:.05em;text-transform:uppercase;padding-right:90px}
+header h1{font-size:28px;margin:4px 0 5px;letter-spacing:-.01em}
+header p{margin:0;color:#333;max-width:920px}
+.langtoggle{position:absolute;right:22px;top:16px;display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.langtoggle button.on{background:var(--ink);color:#fff}
+.controls{max-width:1300px;margin:0 auto;padding:10px 22px 6px;display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center}
+.seg{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.seg .seglab{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);padding:0 10px;display:flex;align-items:center}
+.seg button{font:inherit;font-size:13px;padding:6px 11px;border:0;border-left:1px solid var(--line);background:#fff;color:#333;cursor:pointer}
+.seg button.on{background:var(--ink);color:#fff}
+.nline{font-size:13px;color:var(--mut)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 520px;gap:16px;max-width:1300px;margin:0 auto;padding:6px 22px 20px;align-items:start}
+#map{height:560px;border:1px solid var(--line);border-radius:12px;background:#f4f4f4}
+.card{border:1px solid var(--line);border-radius:12px;padding:13px 15px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+.panel{display:flex;flex-direction:column;gap:14px}
+#scatter{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:12px;color:#333;margin-top:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.legend b{display:inline-block;width:15px;height:0;border-top-width:2.5px;border-top-style:solid;margin-right:6px;vertical-align:4px}
+.ramp{display:inline-block;width:82px;height:10px;border-radius:5px;margin:0 6px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:right;padding:4px 6px;border-bottom:1px solid #f0f0f0}th:first-child,td:first-child{text-align:left}
+th{font-weight:600;color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
+td.big{font-weight:700}
+.tiny{font-size:11px;color:var(--mut)}
+.sub{font-size:12px;color:var(--mut)}
+.src{display:inline-block;font-size:11px;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:0 7px;margin-left:4px;vertical-align:1px}
+.head{font-size:17px;line-height:1.35;margin:0 0 4px}
+.reading{max-width:920px;margin:0 auto;padding:8px 22px 70px}
+.reading h2{font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin:22px 0 6px}
+.reading p{margin:8px 0}
+.ctas{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.cta{display:inline-block;font-size:14px;text-decoration:none;color:var(--ink);border:1px solid #ccc;border-radius:9px;padding:7px 12px}
+@media (max-width:1080px){.layout{grid-template-columns:1fr}#map{height:420px}}
+</style></head><body>
+
+<header>
+  <div class=crumb><a href="../" data-i18n="site.title">The Value of Choice in Centralized School Assignment</a> · <span data-i18n="wg.crumb.tag">who gains</span></div>
+  <div id=langtoggle></div>
+  <h1 data-i18n="wg.h1">Who gains?</h1>
+  <p data-i18n="wg.lede">The average gain hides its incidence. On the map, family by family: who is better off under preference-based assignment than under the distance rule, and who is not. This synthetic market reproduces the paper's incidence closely, concentrated on a half of families with most of the rest untouched. It does not reproduce the paper's other distributional finding, that the gains fall with a family's status, and the chart puts the two side by side because the reason it cannot is worth knowing.</p>
+</header>
+
+<div class=controls>
+  <div class=seg id=grades role=group aria-label="Grade"><span class=seglab data-i18n="wg.grade">Grade</span><button data-grade=2 class=on aria-pressed=true data-i18n="grade.2">Preschool 1</button><button data-grade=3 aria-pressed=false data-i18n="grade.3">Preschool 2</button><button data-grade=4 aria-pressed=false data-i18n="grade.4">Primary 1</button></div>
+  <div class=seg id=colour role=group aria-label="Colour the map by"><span class=seglab data-i18n="wg.colour">Colour by</span><button data-c=gain class=on aria-pressed=true data-i18n="wg.colour.gain">Gain from choice</button><button data-c=ses aria-pressed=false data-i18n="wg.colour.ses">Neighbourhood schooling</button></div>
+  <div class=nline id=nline></div>
+</div>
+
+<div class=layout>
+  <div>
+    <div id=map></div>
+    <div class=legend id=maplegend></div>
+    <p class=tiny id=mapnote></p>
+  </div>
+  <div class=panel>
+    <div class=card>
+      <h2 data-i18n="wg.grad.h">Gain by neighbourhood: the paper against this model</h2>
+      <svg id=scatter viewBox="0 0 490 320" role=img aria-label=""></svg>
+      <div class=legend id=scatlegend></div>
+      <p class=tiny id=scatnote></p>
+    </div>
+    <div class=card>
+      <h2 data-i18n="wg.inc.h">Concentrated, not uniform</h2>
+      <p class=head id=inchead></p>
+      <table><thead><tr><th></th><th data-i18n="wg.th.syn">here</th><th data-i18n="wg.th.paper">paper</th></tr></thead><tbody id=incrows></tbody></table>
+      <p class=tiny id=incnote></p>
+    </div>
+  </div>
+</div>
+
+<div class=reading>
+  <h2 data-i18n="wg.read.h">How to read this</h2>
+  <p data-i18n="wg.read.p1">The gain is each family's utility under deferred acceptance minus its utility under the distance rule, in kilometre-equivalents, averaged over lottery draws. A family gains when the rule that reads its list places it somewhere it prefers to the school proximity would have given it. Positive numbers are the value of being asked.</p>
+  <p data-i18n="wg.read.p2">The socioeconomic axis is the mean years of schooling of adults in the census blocks around a family's home. It is an ecological average, not a household measure: it says what kind of neighbourhood a family lives in, not how educated that family is. The paper is explicit that this supports a claim about the direction of incidence, less-advantaged families gain more, and not about its magnitude.</p>
+  <p data-i18n="wg.read.p3">Why this model's line is flat, and the paper's is not. Every synthetic family's tastes and list length are drawn from the same estimated distribution, independently of where it lives. The only route by which status can touch the gain here is geography: which schools happen to be nearby, and how crowded they are. That route on its own produces no measurable gradient. The paper's gradient is estimated on real families, so it says that families in less advantaged neighbourhoods gain more than geography alone would predict, which is exactly the part a status-blind model cannot invent. Read the flat line as a statement about this model, not about Manta.</p>
+  <p data-i18n="wg.read.p4">Two further limits. Synthetic families inherit the value of the 300 metre cell they were drawn from, so every family in a cell shares one socioeconomic value and the chart shows no within-neighbourhood variation. And the entry grades are where a gradient would mean something: in the congested Primary 1 the aggregate gain is near zero, the paper finds the gradient there indistinguishable from zero, and it scopes the distributional reading to the two preschool grades.</p>
+  <div class=ctas>
+    <a class=cta href="../simulator/" data-i18n="wg.cta.sim">Change the market and watch it move →</a>
+    <a class=cta href="../apply/" data-i18n="wg.cta.apply">See it from one family →</a>
+    <a class=cta href="../story/" data-i18n="wg.cta.story">Read the argument →</a>
+  </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script type=module src="gains.js"></script>
+</body></html>

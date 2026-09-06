@@ -189,10 +189,12 @@ against the private inputs on every regeneration; keep it in the loop.
 - Primary 1's "share of the range recovered" is not comparable to the paper's 3.9% (a convention-
   dependent, near-undefined ratio there; a well-defined one in the synthetic world). The congestion
   story is told by the first-choice share, which matches.
-- **No SES layer.** The census-block GeoPackage (`Blocks_Manta_Census2022_wgs84.gpkg`) is not on this
-  machine, so there is no NBI/schooling quintile for the "who gains" map and homes cannot be sampled
-  from block populations. When it is available: add a `--blocks` path to the generator, sample homes
-  by block population, attach the quintile to each synthetic family.
+- **The socio-economic layer is a cell average, and the gradient it produces is flat.** Synthetic
+  families inherit the mean block schooling of their 300 m cell, so there is no within-cell variation,
+  and because tastes are drawn independently of location the model reproduces the paper's *incidence*
+  but not its *progressivity* (roadmap item 6 has the numbers and the reason). The census-block
+  GeoPackage (`Blocks_Manta_Census2022_wgs84.gpkg`) is still absent, so homes cannot be sampled from
+  block populations and no household-level measure exists.
 - The awareness parameter is baked into each family's `M` at generation time. A live awareness slider
   can be done client-side — resample `M_i = max(K_i, 1 + Poisson(aware))` with a seeded RNG and let
   `rescale()` re-form the lists — without regenerating data.
@@ -256,9 +258,30 @@ landing page and appendix publication-ready · privacy checks.
    site).
 
 ### Phase 3 — more lenses (after Phase 2)
-6. **Who gains.** Requires the census-block layer. Gains by NBI quintile under the current sliders,
-   reproducing the paper's progressivity result on the synthetic population; *done when* the ordering
-   of quintile gains matches the paper's at default settings.
+6. **Who gains.** *Done 2026-09-05* (`gains/`), and the *done when* it was written with — "the ordering
+   of quintile gains matches the paper's" — turned out to be the wrong test. See below.
+   The census-block GeoPackage is still missing, but it was never needed: `output/tables/family_ses.csv`
+   (the cached output of `code/1_data_prep/family_ses.py`, 3,771 of 3,984 applicants) already carries
+   each applicant's block-level mean adult schooling. `build_density_grid` now averages it within each
+   300 m cell and publishes it as `ses` on cells that hold at least `min_count` households, and every
+   synthetic family inherits the value of the cell it was drawn from. Adding it did **not** disturb the
+   population: the draw order is preserved, and `applicants_g*.json` is byte-identical apart from the
+   new field.
+   The page runs the engine live with `simulate(..., {perFamily: true})` (new) over 30 draws and shows
+   each family's `u(DA) − u(DC)`: a map of winners, losers and the untouched, a second colouring by
+   neighbourhood schooling, a scatter with decile and quartile means, and the incidence table beside
+   the paper's.
+   **The result to know about.** The incidence reproduces well: 53.8% gain against the paper's 51.8%,
+   33.0% unaffected against 31.1%, 13.2% lose against 17.1%. The *gradient does not*: lowest-minus-
+   highest quartile is +0.04 km here (±0.14) against +0.196 km in the paper, and it is flat in every
+   grade (g3 +0.01 ± 0.13, g4 +0.25 ± 0.32; correlations of SES with gain −0.03, −0.00, −0.05). That
+   is expected and the page says so plainly: the generator draws every family's tastes and list length
+   independently of where it lives, so the only channel from status to gain is geography, and geography
+   alone produces nothing measurable. The paper's gradient is estimated on real families and says they
+   gain more than geography alone predicts — the part a status-blind model cannot invent. **Do not
+   "fix" this by tuning the generator**; a gradient manufactured that way would be an artefact.
+   If the GeoPackage does reappear, the useful upgrade is sampling homes from block populations and
+   attaching a household-level measure, not forcing the gradient.
 7. **"Could a planner have guessed?"** *Done 2026-09-05* (`planner/`). Ten rounds: a real in-market
    school's ten imagery-derived attributes (bars relative to the market, raw values beside), guess its
    band, reveal, then a summary against a "planner model" (OLS of band on the ten attributes,

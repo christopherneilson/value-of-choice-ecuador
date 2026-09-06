@@ -16,6 +16,7 @@ og/                                 social preview cards, one per page (generate
 value-of-choice-ecuador.pdf         the paper (the named build submitted to the journal)
 cite.bib                            BibTeX for the working paper
 apply/                              "Apply to school in Manta": your home, your ranked list, both rules, 25 lotteries
+gains/                              "Who gains?": per-family gains on the map, and against neighbourhood schooling
 story/                              scrollytelling walk through the argument, live model beside it
 simulator/index.html, app.js        "Choose the rule": map, rule toggle, metrics, sliders, awareness, family cards
 simulator/sim.worker.js, market.js  the lotteries run in a module worker; market.js derives "the market under the sliders"

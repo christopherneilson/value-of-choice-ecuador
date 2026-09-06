@@ -148,7 +148,7 @@ const STEPS = {
     drawSchools(S.m.caps);
     drawHomes(outcomeColor("da", S.res), null);
     readout(big(t("story.r.whogains.h", "The gains are progressive"), C.da) +
-      sub(t("story.r.whogains.s", "Mean gain by neighbourhood-schooling quartile, lowest to highest — Preschool 1: <b>+0.79, +0.68, +0.68, +0.59</b> km; Preschool 2: <b>+0.49, +0.38, +0.34, +0.15</b> km. Lowest-minus-highest: +0.20 km in Preschool 1 (95% interval +0.01 to +0.39). In Preschool 1, 51.8% of families gain, by about 1.4 km each {src2}<br>The synthetic population has no socioeconomic layer yet, so the map keeps the deferred-acceptance colouring.",
+      sub(t("story.r.whogains.s", "Mean gain by neighbourhood-schooling quartile, lowest to highest — Preschool 1: <b>+0.79, +0.68, +0.68, +0.59</b> km; Preschool 2: <b>+0.49, +0.38, +0.34, +0.15</b> km. Lowest-minus-highest: +0.20 km in Preschool 1 (95% interval +0.01 to +0.39). In Preschool 1, 51.8% of families gain, by about 1.4 km each {src2}<br>The <a href='../gains/'>who-gains page</a> maps this family by family and puts the paper’s gradient beside what this model can reproduce.",
         { src2: src2() })));
   },
   planner() {

@@ -25,6 +25,8 @@ PAGES = [
      "Welfare gains from acting on family preferences in Ecuador. Working paper and interactive materials.", "#22506b"),
     ("apply", "apply/", "Apply to school in Manta",
      "Put your home on the map, rank the schools around it, and see what each assignment rule gives you.", "#21918c"),
+    ("gains", "gains/", "Who gains?",
+     "The gain from acting on family preferences, family by family: a map of winners and losers, and the gradient by neighbourhood.", "#21918c"),
     ("story", "story/", "Why choice matters, step by step",
      "A guided walk through the argument with a live model of Manta beside it.", "#21918c"),
     ("simulator", "simulator/", "Choose the rule",
