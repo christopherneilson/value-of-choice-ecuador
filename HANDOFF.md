@@ -324,6 +324,31 @@ landing page and appendix publication-ready · privacy checks.
     calibration tables now scroll inside their card); **not yet on a real device**. Analytics: none,
     by default — an author decision (§7).
 
+### Phase 5 — first person
+14. **"Apply to school in Manta."** *Done 2026-09-05* (`apply/`). The visitor puts a home on the map
+    (click, or a draw from the published density grid), picks a grade, ranks the schools around it and
+    hands the list in. `withApplicant()` (engine) appends them to the market as applicant *n*, and
+    `shared/applyrun.js` runs 25 independent lotteries of both rules on the result, in the simulator's
+    worker. The page reports which of *their* choices each rule gave them, the distribution over the 25
+    draws, and three follow-ups: run the lottery again (risk is seats, not the algorithm), swap the top
+    two (it costs first choices and buys no extra safety — strategy-proofness, measured), and let every
+    family know every school (awareness as competition). `?lat=&lon=&grade=&list=&seed=&sib=` makes any
+    application a shareable link, and reloading one re-runs it.
+    *The one modelling choice worth knowing:* a visitor states an **order, not a scale**, so their
+    utility vector is an ordinal placeholder and the page never prints a welfare number for them, only
+    which choice they got. Never read `metricsOf().utility` off a market that contains a visitor, and
+    always add the visitor **last** — `rescale()` and `withAwareness()` would recompute their utilities
+    from ξ, γ and ε and throw the stated order away. The engine test covers all of this: the market
+    grows by exactly one, every existing family is untouched, with slack seats DA gives the visitor
+    their first choice while the distance rule gives them their nearest, and over twenty lotteries a
+    swapped top two never helps.
+15. **Social preview images.** Not done. Links to the site unfurl as bare text; a per-page
+    `og:image`/`twitter:card` is the cheapest reach win left. Needs a small generator in
+    `code/7_site/` and one PNG per page.
+16. **A landing hero.** Not done. The argument is currently one click below the abstract. An
+    autoplaying strip that shows the distance rule turning into deferred acceptance, before anyone
+    reads a word, would earn the click.
+
 ---
 
 ## 7. Open decisions for the authors

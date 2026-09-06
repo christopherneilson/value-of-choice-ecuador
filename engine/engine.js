@@ -137,6 +137,44 @@ export function rescale(market, p) {
   return { ...market, u, rol, params: { sxi, seps, sgam, lam } };
 }
 
+// One extra applicant appended to a market: a visitor who states a ranking of their own. They compete
+// for the same seats as everyone else, so their outcome is a real outcome of this market.
+//   list  school ids (or column indices) best first; sib  the school a sibling attends, or null.
+// A visitor states an ORDER, not a scale, so their utility vector is a placeholder consistent with that
+// order (descending over the list, below every listed school elsewhere) on the market's km scale. It is
+// enough for the mechanisms and for "which of my choices did I get", and never a welfare number: do not
+// read metricsOf().utility off a market that contains a visitor. Add the visitor LAST — rescale() and
+// withAwareness() would recompute their utilities from ξ, γ and ε and discard the stated order.
+export function withApplicant(market, { lat, lon, list, sib: sibId = null }) {
+  const { n, J, ids, sLat, sLon } = market;
+  const i = n;
+  const growJ = (A, C) => { const B = new C((n + 1) * J); B.set(A); return B; };
+  const grow1 = (A, C) => { const B = new C(n + 1); B.set(A); return B; };
+  const d = growJ(market.d, Float64Array), u = growJ(market.u, Float64Array), eps = growJ(market.eps, Float64Array);
+  const distOrder = growJ(market.distOrder, Int32Array), rank0 = growJ(market.rank0, Int32Array);
+  const aLat = grow1(market.aLat, Float64Array), aLon = grow1(market.aLon, Float64Array), gamma = grow1(market.gamma, Float64Array);
+  const K = grow1(market.K, Int32Array), M = grow1(market.M, Int32Array), sib = grow1(market.sib, Int32Array);
+  const idx = new Map(ids.map((id, j) => [id, j]));
+  const col = x => (typeof x === "number" ? x : (idx.has(x) ? idx.get(x) : -1));
+  const listed = [];
+  for (const x of list) { const j = col(x); if (j >= 0 && j < J && !listed.includes(j)) listed.push(j); }
+
+  aLat[i] = lat; aLon[i] = lon; gamma[i] = 0;
+  const order = [];
+  for (let j = 0; j < J; j++) { d[i * J + j] = haversineKm(lat, lon, sLat[j], sLon[j]); order.push(j); }
+  order.sort((a, b) => d[i * J + a] - d[i * J + b]);
+  for (let j = 0; j < J; j++) distOrder[i * J + j] = order[j];
+  rank0.fill(J, i * J, (i + 1) * J);
+  const floor = -0.5 * listed.length;
+  for (let j = 0; j < J; j++) u[i * J + j] = floor - d[i * J + j];
+  listed.forEach((j, k) => { rank0[i * J + j] = k; u[i * J + j] = -0.5 * k; });
+  sib[i] = sibId == null ? -1 : col(sibId);
+  K[i] = listed.length; M[i] = J;
+  const rol = market.rol.slice();
+  rol.push(Int32Array.from(listed));
+  return { ...market, n: n + 1, aLat, aLon, gamma, K, M, sib, d, u, eps, distOrder, rank0, rol, visitor: i };
+}
+
 // Everything the "walk a mile" panel needs about one family, given the last draw's assignments.
 export function familyCard(market, i, last) {
   const { J, d, u, rol, sib, K, M, distOrder, ids } = market;

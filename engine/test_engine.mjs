@@ -87,6 +87,47 @@ for (const g of [2, 3, 4]) {
   check(s0.nearestFirst > sim.nearestFirst && sim.nearestFirst > sAll.nearestFirst,
     `nearest-first falls as awareness rises: ${(100 * s0.nearestFirst).toFixed(0)}% (nearest only) → ${(100 * sim.nearestFirst).toFixed(0)}% (default) → ${(100 * sAll.nearestFirst).toFixed(0)}% (all)`);
 }
+// A visitor appended to a market: the "apply to school in Manta" page.
+{
+  const { withApplicant } = await import("./engine.js");
+  const g = 4;                                   // the congested grade, where competition bites
+  const m0 = buildMarket(schools, data(`applicants_g${g}.json`));
+  const home = { lat: m0.aLat[0], lon: m0.aLon[0] };
+  const near = k => m0.distOrder[k];             // applicant 0 shares this home, so its row is the visitor's
+  const truth = [near(2), near(0), near(1)];     // a real preference: the school next door is not first
+  const v = withApplicant(m0, { ...home, list: truth });
+  console.log(`\nVisitor applying in ${m0.name}`);
+  check(v.n === m0.n + 1 && v.rol.length === m0.n + 1 && v.K[v.visitor] === 3 && v.visitor === m0.n,
+    `market grows by exactly one applicant (n ${m0.n} → ${v.n})`);
+  let untouched = 0;
+  for (let i = 0; i < m0.n; i++)
+    if (v.rol[i] === m0.rol[i] && v.sib[i] === m0.sib[i] && v.K[i] === m0.K[i] &&
+        v.d[i * m0.J] === m0.d[i * m0.J] && v.u[i * m0.J] === m0.u[i * m0.J]) untouched++;
+  check(untouched === m0.n, `every existing family is left untouched (${untouched}/${m0.n})`);
+
+  const roomy = { ...v, caps: Int32Array.from(v.caps, () => 9999) };
+  const rr = simulate(roomy, { draws: 1, seed: 3, rules: ["dc", "da"] });
+  check(rr.last.da[v.visitor] === truth[0], "with seats for everyone, DA gives the visitor their first choice");
+  check(rr.last.dc[v.visitor] === near(0), "the distance rule gives the visitor the nearest school — it never reads the list");
+
+  // Strategy-proofness, on the deployed design: swapping the visitor's top two can only hurt them.
+  const tightCaps = Int32Array.from(v.caps, c => Math.max(0, Math.round(c * 0.5)));
+  const lie = [truth[1], truth[0], truth[2]];
+  const tTruth = { ...v, caps: tightCaps };
+  const tLie = { ...withApplicant(m0, { ...home, list: lie }), caps: tightCaps };
+  const rankIn = p => { const k = truth.indexOf(p); return k < 0 ? 9 : k; };
+  let harmed = 0, differed = 0, helped = 0;
+  for (let s = 1; s <= 20; s++) {
+    const a = simulate(tTruth, { draws: 1, seed: s, rules: ["da"] }).last.da[v.visitor];
+    const b = simulate(tLie, { draws: 1, seed: s, rules: ["da"] }).last.da[v.visitor];
+    if (a !== b) differed++;
+    if (rankIn(b) > rankIn(a)) harmed++;
+    if (rankIn(b) < rankIn(a)) helped++;
+  }
+  check(helped === 0, `misreporting never helps the visitor under DA: over 20 lotteries it changed the outcome ${differed} times, ` +
+    `left them worse off ${harmed} times, better off ${helped}`);
+}
+
 // Boston mechanism (toy only): the textbook case where a truthful report is punished.
 {
   const { bostonMechanism } = await import("./engine.js");

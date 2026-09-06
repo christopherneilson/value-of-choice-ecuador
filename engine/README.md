@@ -40,6 +40,7 @@ node -e "import('./engine/engine.js').then(async e => { const fs = await import(
 | `simulate(market, {draws, seed, rules})` | K lottery draws of the chosen rules; means of the paper's metrics (`listed`, `first`, `km`, `utility`, `assigned`), the recovered share of the DC→benchmark range, and the last draw's assignments |
 | `rescale(market, {sxi, seps, sgam, lam})` | new taste parameters → new utilities, lists re-formed inside each family's consideration set |
 | `withAwareness(market, aware)` | how many nearest schools each family considers (Poisson mean; `null` = all); call `rescale` after it |
+| `withApplicant(market, {lat, lon, list, sib})` | append one more applicant — a visitor with a ranking of their own — competing for the same seats; returns the market with `visitor` set to their index. Add them **last**: their utilities are an ordinal placeholder for the stated order, so `rescale`/`withAwareness` would overwrite it, and `metricsOf().utility` is not meaningful on a market that contains one |
 | `familyCard(market, i, last)` | one family's nearest school, list, and outcome under each rule |
 | `deferredAcceptance(prefs, score, caps, J)` | applicant-proposing DA; `score` lower = better, ties to the smaller id |
 | `distanceRule(market, lot)` | the status quo: DA over distance order, sibling priority, one lottery per family |
