@@ -10,7 +10,9 @@ Méndez & Neilson). Served as a static site via **GitHub Pages** at
 
 ## Structure
 ```
-index.html                          landing page: title, authors, JEL, abstract, links, cards (generated)
+index.html                          landing page: title, authors, JEL, hero, abstract, links, cards (generated)
+hero.js                             the landing hero: both rules over the same market, cross-fading
+og/                                 social preview cards, one per page (generated, committed)
 value-of-choice-ecuador.pdf         the paper (the named build submitted to the journal)
 cite.bib                            BibTeX for the working paper
 apply/                              "Apply to school in Manta": your home, your ranked list, both rules, 25 lotteries
@@ -29,7 +31,8 @@ engine/engine.js, README.md         the matching engines (DA, distance rule, sta
 engine/test_engine.mjs, fixtures/   validation against Python fixtures:  node engine/test_engine.mjs
 data/, data/README.md               the synthetic Manta + derived attributes + survey tabulations, documented field by field
 shared/i18n.js                      English/Spanish strings and the language toggle
-tools/                              check_links.mjs (CI), make_notebook.py (builds + executes the notebook)
+tools/                              check_links.mjs (CI), make_notebook.py (builds + executes the notebook),
+                                    make_hero.mjs (data/hero_lines.json), make_og.py (og/ cards + the meta tags)
 appendix/
   school-imagery/index.html         interactive online appendix: image types + CLIP embedding map
 .github/workflows/test.yml          CI: engine tests + link check on every push

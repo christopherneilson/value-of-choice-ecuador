@@ -345,6 +345,12 @@ const ES = {
   "dl.paper.h": "El artículo", "dl.cal.link": "Cómo se compara el mercado sintético con él",
   "dl.terms.h": "Condiciones",
   "dl.terms.p": "Estos archivos son materiales derivados y sintéticos de los autores, publicados junto al documento de trabajo para docencia e investigación; cita el artículo al usarlos. Los registros de postulación y las respuestas de la encuesta subyacentes son datos confidenciales del Ministerio de Educación y respuestas individuales; no están aquí y no pueden compartirse. Consultas y solicitudes: <a href=\"mailto:christopher.neilson@yale.edu\">christopher.neilson@yale.edu</a>.",
+  // ------------------------------------------------------------ landing hero
+  "hero.stat": "El <b>{p}%</b> queda en una escuela que la familia pidió",
+  "hero.note": "Un sorteo de la Manta sintética, con los tres grados de ingreso. Las cifras del propio artículo para esas dos proporciones son {a}% y {b}%.",
+  "hero.cta": "Postula tú mismo →",
+  "hero.leg.got": "familia ubicada donde pidió", "hero.leg.not": "ubicada donde no pidió", "hero.leg.school": "escuela",
+  "hero.alt": "Un mapa de la Manta sintética. Cada punto es una familia, coloreada cuando queda en una escuela que pidió y gris cuando no, con una línea hacia la escuela que le tocó. Mostrando: {r}.",
   // --------------------------------------------------------------- landing
   "land.materials": "Materiales",
   "land.kit.h": "Descargas y material didáctico →",

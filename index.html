@@ -12,6 +12,17 @@
 <meta name="citation_pdf_url" content="https://www.christopher-neilson.com/value-of-choice-ecuador/value-of-choice-ecuador.pdf">
 <link rel="canonical" href="https://www.christopher-neilson.com/value-of-choice-ecuador/">
 <link rel="icon" href="data:,">
+<!-- og:start (kept in step with tools/make_og.py, which renders og/landing.png) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Value of Choice">
+<meta property="og:url" content="https://www.christopher-neilson.com/value-of-choice-ecuador/">
+<meta property="og:title" content="The Value of Choice in Centralized School Assignment">
+<meta property="og:description" content="Welfare gains from acting on family preferences in Ecuador. Working paper and interactive materials.">
+<meta property="og:image" content="https://www.christopher-neilson.com/value-of-choice-ecuador/og/landing.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Value of Choice in Centralized School Assignment">
+<meta name="twitter:card" content="summary_large_image">
+<!-- og:end -->
 <style>
 :root{--ink:#1a1a1a;--mut:#666;--line:#e3e3e3;--bg:#fff;--accent:#234}
 *{box-sizing:border-box}body{font:16px/1.6 -apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;background:var(--bg)}
@@ -35,6 +46,19 @@ pre{font-size:12px;background:#f6f6f6;border:1px solid var(--line);border-radius
 .card .tag{font-size:11px;color:var(--accent);font-weight:600}
 footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}
 .tiny{font-size:12px;color:var(--mut)}
+.hero{display:grid;grid-template-columns:330px minmax(0,1fr);gap:24px;align-items:center;margin:24px 0 8px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero svg{width:100%;height:auto;display:block}
+.hero .hg{transition:opacity .7s ease}
+#herobar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+#herobar button{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;color:var(--mut)}
+#herobar button.on{border-color:currentColor;font-weight:600}
+#herostat{font-size:19px;line-height:1.35;margin:0 0 8px}
+#heronote{font-size:12px;color:var(--mut);margin:0 0 12px}
+.hero .cta{font-size:14px;text-decoration:none;color:var(--ink);border:1px solid #ccc;border-radius:9px;padding:6px 11px;display:inline-block}
+.hero .leg{font-size:11px;color:var(--mut);margin:10px 0 0;display:flex;gap:12px;flex-wrap:wrap}
+.hero .leg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
+.hero .cta:hover{border-color:#bbb}
+@media (max-width:620px){.hero{grid-template-columns:1fr}}
 #langtoggle{float:right;margin:2px 0 0 12px}
 .langtoggle{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .langtoggle button{font:inherit;font-size:12px;padding:4px 9px;border:0;background:#fff;color:var(--mut);cursor:pointer}
@@ -47,6 +71,20 @@ footer{margin-top:48px;padding-top:16px;border-top:1px solid var(--line);font-si
 <p class=tagline data-i18n="land.tagline">Welfare Gains from Acting on Family Preferences in Ecuador</p>
 <p class=authors>Gregory Elacqua (IDB) · Isabel Jacas (ConsiliumBots) · Thomas Krussig (UC Berkeley) · Carolina Méndez (IDB) · Christopher A. Neilson (Yale)</p>
 <p class=meta>JEL: C78, D47, I20, I21 · <span data-i18n="land.keywords">Keywords: mechanism design; centralized student assignment; school choice; Ecuador</span></p>
+
+<div class=hero id=hero hidden>
+  <svg id=herosvg viewBox="0 0 330 330" role=img aria-label=""></svg>
+  <div>
+    <div id=herobar role=group aria-label="Assignment rule">
+      <button type=button data-rule=dc aria-pressed=false data-i18n="rule.dc">Distance rule</button>
+      <button type=button data-rule=da aria-pressed=false data-i18n="rule.da">Deferred acceptance</button>
+    </div>
+    <p id=herostat></p>
+    <p id=heronote></p>
+    <a class=cta href="apply/" data-i18n="hero.cta">Apply yourself &rarr;</a>
+    <p class=leg id=heroleg></p>
+  </div>
+</div>
 
 <p class=abstract data-i18n="land.abstract">We study a 2021 reform in Manta, Ecuador, that replaced one centralized assignment rule with another: a rule minimizing home-to-school distance gave way to deferred acceptance acting on families&#x27; reported rank-ordered preferences, which the mechanism&#x27;s incentive properties give them no reason to misstate. Because a single coordinated algorithm cleared the market both before and after, what principally changed was the objective, isolating the value of acting on preferences while holding coordination fixed—the counterfactual for the many systems that assign by proximity. A distance rule looks nearly optimal—most families rank their nearest school first—yet more than a quarter do not. Acting on their preferences raises the share of applicants placed in a listed school from 50% to 78%, and in their first choice from 42% to 70%, at a cost of 0.32 km of additional travel. Estimating preferences from the submitted rankings, we find that deferred acceptance closes about 99.6% of the distance between the distance rule and the constrained-efficient benchmark in the entry grade, while further efficiency-enhancing mechanisms add almost nothing: there, the gains come from eliciting preferences, not from the choice of algorithm. They are also progressive, and they echo the evidence from New York City&#x27;s move to coordinated assignment in a very different setting.</p>
 
@@ -147,4 +185,5 @@ Ministry of Education records and cannot be redistributed; the authors will faci
 
 </div>
 <script type=module>import * as I from "./shared/i18n.js"; I.init(); I.mountToggle("#langtoggle");</script>
+<script type=module src="hero.js"></script>
 </body></html>

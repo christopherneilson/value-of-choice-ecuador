@@ -342,12 +342,24 @@ landing page and appendix publication-ready · privacy checks.
     grows by exactly one, every existing family is untouched, with slack seats DA gives the visitor
     their first choice while the distance rule gives them their nearest, and over twenty lotteries a
     swapped top two never helps.
-15. **Social preview images.** Not done. Links to the site unfurl as bare text; a per-page
-    `og:image`/`twitter:card` is the cheapest reach win left. Needs a small generator in
-    `code/7_site/` and one PNG per page.
-16. **A landing hero.** Not done. The argument is currently one click below the abstract. An
-    autoplaying strip that shows the distance rule turning into deferred acceptance, before anyone
-    reads a word, would earn the click.
+15. **Social preview images.** *Done 2026-09-05.* `python tools/make_og.py` renders eleven 1200×630
+    cards into `og/` (Playwright on the installed Edge, the same tool the verification scripts use) and
+    rewrites the `<!-- og:start … og:end -->` block in every hand-written page's head; `index.html` and
+    the imagery appendix carry their own copy of that block, written by their generators, and the
+    script checks both are present and point at a card that exists. The cards share one motif, the real
+    school locations of Manta as a tinted dot field, so a shared link is recognisably from this site.
+    The PNGs are committed — nobody needs Playwright to serve the site. Rerun the script after adding
+    or renaming a page; its `PAGES` table is where a page's share title and one-line description live.
+16. **A landing hero.** *Done 2026-09-05* (`hero.js`, markup and CSS in `make_landing.py`). Above the
+    abstract, the same market under both rules, cross-fading every 3.6 s: each dot is a family, filled
+    in the rule's colour when it is placed in a school it asked for and grey when it is not, with a
+    faint line to the school it got; schools are hollow rings so the colour belongs to the families.
+    The caption follows the picture — 53% under the distance rule, 76% under deferred acceptance — and
+    the note gives the paper's own 50% and 78% beside them. Clicking a rule takes control and stops the
+    loop; `prefers-reduced-motion` shows deferred acceptance and never animates. It ships
+    `data/hero_lines.json` (19 KB, one lottery draw of all three grades, 560 families sampled, from
+    `node tools/make_hero.mjs`) rather than the market and the engine, so the front door stays light.
+    Regenerate it whenever `data/` changes.
 
 ---
 
