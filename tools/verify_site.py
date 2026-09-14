@@ -59,8 +59,10 @@ PAGES = {
                ["No home yet", "Your application never leaves the browser", "remember your choice of language"],
                ["Todavía no hay casa", "nunca sale del navegador", "recuerda tu elección de idioma"]),
     "gains/": ("() => window.VOC && window.VOC.gains",
-               ["the gain falls with status", "0.196", "two reasons for the gradient", "51.8"],
-               ["dos razones para el gradiente", "aversión a la distancia crece", "plano"]),
+               # defaults to the entry grade, where the paper prints quartile means but reads no gradient
+               ["does not read a gradient here", "0.196", "scopes the finding to Preschool 2",
+                "two reasons for the gradient", "51.8"],
+               ["no lee un gradiente aquí", "acota el hallazgo a Inicial 2", "dos razones para el gradiente"]),
     "story/": ("() => window.VOC && window.VOC.story === true",
                ["3.3% of the welfare range", "in Manta, 0.3%"],
                ["3,3%"]),

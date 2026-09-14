@@ -12,12 +12,15 @@ const DRAWS = 30, CAP = 2; // colour scale saturates at +/- CAP km
 const WIN = "#21918c", LOSE = "#b42318", FLAT = "#c9c9c9";
 const SES_RAMP = ["#f3e79b", "#c9d98a", "#8ec5a0", "#5aa8b0", "#3d7fa6", "#37518f"];
 
-// The paper's own figures (Section 6, "Who gains"). Preschool 2 and Primary 1 report only the losing
-// share and the gradient; the paper scopes the quartile reading to the two preschool grades.
+// The paper's own figures (Section 6, "Who gains"). `reads` is whether the paper reads a gradient in
+// that grade at all: since 2026-09-14 it does so only in Preschool 2. It prints the entry grade's
+// quartile means but declines to read a gradient there, because the contrast covers zero once
+// resampling respects the census block the proxy varies at; Primary 1 has never been read.
 const PAPER = {
-  2: { gain: 51.8, same: 31.1, lose: 17.1, gainKm: 1.43, loseKm: 0.32, q: [0.79, 0.68, 0.68, 0.59], grad: 0.196, ci: [0.011, 0.385] },
-  3: { lose: 33.7, q: [0.49, 0.38, 0.34, 0.15], grad: 0.335, ci: [0.116, 0.545] },
-  4: { lose: 57.4, q: null, grad: 0.075, ci: [-0.354, 0.485] },
+  2: { gain: 51.8, same: 31.1, lose: 17.1, gainKm: 1.43, loseKm: 0.32, reads: false,
+       q: [0.79, 0.68, 0.68, 0.59], grad: 0.196, ci: [-0.010, 0.374], p: 0.075 },
+  3: { lose: 33.7, reads: true, q: [0.49, 0.38, 0.34, 0.15], grad: 0.335, ci: [0.093, 0.614], p: 0.010 },
+  4: { lose: 57.4, reads: false, q: null, grad: 0.075, ci: [-0.354, 0.485] },
 };
 
 const state = { grade: 2, colour: "gain" };
@@ -169,10 +172,13 @@ function drawScatter() {
     (P && P.q ? `<span><b style="border-top-style:dashed;border-top-color:#222"></b>${t("wg.leg.qp", "the paper, by quartile")}</span>` : "") +
     `<span><b style="border-top-color:${WIN}"></b>${t("wg.leg.q", "this model, by quartile (±2 standard errors)")}</span>` +
     `<span><b style="border-top-color:#6a6a6a"></b>${t("wg.leg.dec", "this model, by decile")}</span>`;
-  $("#scatnote").innerHTML = (P && P.q
-    ? t("wg.grad.note", "In the paper the gain falls with status: <b>{paper} km</b> from the lowest quartile to the highest (95% interval {lo} to {hi}). In this model the same contrast is <b>{here} km</b>, give or take {se}, so it is <b>flat</b>. That is what a synthetic population can be expected to show — see below.",
-        { here: nf(here, 2), se: nf(2 * seHere, 2), paper: nf(P.grad, 3), lo: nf(P.ci[0], 3), hi: nf(P.ci[1], 3) })
-    : t("wg.grad.note4", "The paper's gradient for this grade is {paper} km and not distinguishable from zero (95% interval {lo} to {hi}); the aggregate gain here is near zero too, and the paper scopes its distributional reading to the two preschool grades. In this model the contrast is {here} km, give or take {se}.",
+  $("#scatnote").innerHTML = (P && P.q && P.reads
+    ? t("wg.grad.note", "In the paper the gain falls with the schooling of the neighbourhood: <b>{paper} km</b> from the lowest quartile to the highest (95% interval {lo} to {hi}, permutation p = {p}). In this model the same contrast is <b>{here} km</b>, give or take {se}, so it is <b>not distinguishable from zero</b>. That is what a synthetic population can be expected to show — see below.",
+        { here: nf(here, 2), se: nf(2 * seHere, 2), paper: nf(P.grad, 3), lo: nf(P.ci[0], 3), hi: nf(P.ci[1], 3), p: nf(P.p, 3) })
+    : P && P.q
+    ? t("wg.grad.note2", "The paper prints these quartile means for the entry grade but <b>does not read a gradient here</b>: the contrast is {paper} km and covers zero once resampling respects the census block the proxy varies at (95% interval {lo} to {hi}, permutation p = {p}). It scopes the finding to Preschool 2. In this model the contrast is {here} km, give or take {se}.",
+        { here: nf(here, 2), se: nf(2 * seHere, 2), paper: nf(P.grad, 3), lo: nf(P.ci[0], 3), hi: nf(P.ci[1], 3), p: nf(P.p, 3) })
+    : t("wg.grad.note4", "The paper's gradient for this grade is {paper} km and not distinguishable from zero (95% interval {lo} to {hi}); the aggregate gain here is near zero too, and the paper scopes its distributional reading to Preschool 2 alone. In this model the contrast is {here} km, give or take {se}.",
         { here: nf(here, 2), se: nf(2 * seHere, 2), paper: nf(P.grad, 3), lo: nf(P.ci[0], 3), hi: nf(P.ci[1], 3) })) +
     ` <span class=src>${t("src.syn", "synthetic population")}</span> <span class=src>${t("src.paper", "paper, real data")}</span>`;
   $("#scatter").setAttribute("aria-label", t("wg.scat.alt",
