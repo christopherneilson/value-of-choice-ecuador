@@ -1,7 +1,9 @@
 # `data/` — the public data behind the site
 
 Everything here is synthetic, derived or aggregated. No real home location, applicant identifier,
-individual survey answer, school name or continuous desirability value appears in any file. The
+individual survey answer, school name or continuous desirability value appears in any file in this
+directory. (School names are public and do appear in the imagery appendix, which is built
+separately; the ids used here are anonymised so that nothing in `data/` can be joined to them.) The
 files are generated in the research repository (`ecuador-cambio-algo/code/7_site/`) and pass
 `check_site_data.py` — which compares them against the private inputs — before they are copied here.
 Cite the paper when you use them.

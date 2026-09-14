@@ -1,13 +1,16 @@
 # Handoff and roadmap — *The Value of Choice* project website
 
-*Written 2026-09-04. Everything below was built and verified on Chris's machine; commit hashes are
-local and unpushed unless stated.*
+*Started 2026-09-04, current as of 2026-09-13. Everything below is built, verified and pushed
+unless it says otherwise.*
 
 The website turns the paper's mechanism comparison into something policymakers and students can run
-themselves. It has three layers, all done: a **synthetic Manta** generated from the estimated model,
-a **browser engine** validated against the research pipeline, and a first **interactive exhibit**.
+themselves. Three layers underpin it — a **synthetic Manta** generated from the paper's estimated
+model, a **browser engine** validated applicant-by-applicant against the research pipeline, and a
+**Spanish/English** string layer — and eleven pages sit on top: `apply/` (hand in your own ranked
+list), `gains/` (who wins and loses, and the gradient against the paper's), `story/`, `simulator/`,
+`toy/`, `planner/`, `survey/`, `ladder/`, `calibration/`, `downloads/` and the imagery `appendix/`.
 This document says what exists, how to regenerate and verify each piece, which decisions were taken
-and why, what is known to be imperfect, and what to build next in what order.
+and why, what is known to be imperfect, and what is left.
 
 ---
 
@@ -16,20 +19,19 @@ and why, what is known to be imperfect, and what to build next in what order.
 Two repositories. The research repo holds everything private and every generator; the site repo
 holds only what can be public.
 
-| | `ecuador-cambio-algo` (research, private) | `value-of-choice-ecuador` (site, private until launch) |
+| | `ecuador-cambio-algo` (research, private) | `value-of-choice-ecuador` (site, **public and live**) |
 |---|---|---|
 | purpose | paper, pipeline, private data, generators | static site served by GitHub Pages |
-| site code | `code/7_site/` | `simulator/`, `engine/`, `data/` |
+| site code | `code/7_site/` | the eleven page directories, `engine/`, `shared/`, `data/`, `tools/` |
+| checks | `check_site_data.py` (disclosure) | `engine/test_engine.mjs`, `tools/check_syntax.mjs`, `tools/check_links.mjs` — all three in CI |
 | appendix | `build_public_appendix.py` + `build_public_appendix_content.json` | `appendix/school-imagery/index.html` (built artifact) |
 | landing page | `code/7_site/make_landing.py` | `index.html`, `cite.bib`, `value-of-choice-ecuador.pdf` |
 | synthetic data | `output/site_data/` (tracked) | `data/` (copy) |
 | validation | `code/7_site/make_fixture.py`, `validate_js_sic.py` | `engine/test_engine.mjs`, `engine/fixtures/` |
 | preview | `.claude/launch.json` → server `website` (python `http.server` on 8012 serving the site dir) | — |
 
-Recent commits, newest first — site: `2fe23f8` simulator · `cfd1272` engine + data · `2478915`
-public-ready landing page, appendix rewrite, privacy check · `d62c4ee` June skeleton. Research:
-`eb5eaff` landing generator · `64219c0` fixtures + Python judge · `a04ddcf` synthetic generator ·
-`4f9f43d` cover-letter fix, appendix prose recovered and versioned.
+Commit hashes move constantly and are not listed here; `git log --oneline -15` in either repo
+is the current answer. Both repos are pushed and CI is green.
 
 **Live since 2026-09-04 at `https://www.christopher-neilson.com/value-of-choice-ecuador/`.** The
 site repo is public and Pages deploys from `main` / root; because the user site
@@ -72,11 +74,29 @@ python code/7_site/validate_js_sic.py <site repo>/engine/fixtures   # Python jud
 Expected: `ALL CHECKS PASSED` and `JS SIC VALID`. If DA differs from Python for even one applicant,
 the port has drifted — do not ship.
 
+Then the pages themselves, in a real browser (needs `pip install playwright` and
+`playwright install msedge` once):
+```
+python tools/verify_site.py                  # all eleven pages, English and Spanish
+python tools/verify_site.py --only gains,apply
+```
+81 assertions: every data file and the PDF are served, the published sigmas are Table 9's, each
+page renders its load-bearing numbers in both languages, and no page logs a console error. These
+checks used to live in a temp directory and were lost when it was cleaned; keep them in the repo.
+
 ### 2.3 Landing page
 `python code/7_site/make_landing.py` reads the manuscript's verified `ABSTRACT_for_portal.txt`,
 copies `main_ej.pdf`, and writes `index.html` + `cite.bib` in the site repo. Never hand-edit the
 abstract on the site; change the paper and regenerate. The "Last updated" date is a constant in
-the script — bump it when regenerating.
+the script — bump it when regenerating. `make_landing.py` also copies `main_ej.pdf` over the site's
+public copy, so **run it after any manuscript rebuild** and confirm the two match
+(`md5sum` both) — the submission checklist's step 6 depends on it.
+
+Two more generators live in the site repo and are run from there:
+`node tools/make_hero.mjs` rebuilds `data/hero_lines.json` for the landing hero (**run it whenever
+`data/` changes**, or the hero silently shows the old market), and `python tools/make_og.py`
+re-renders the eleven social preview cards and rewrites the meta block in every hand-written page
+(only needed when a page is added or its share title changes).
 
 ### 2.4 Imagery appendix
 Edit `build_public_appendix_content.json` (lede, Sections 3–4, disclosures), run
