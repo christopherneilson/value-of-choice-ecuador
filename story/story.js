@@ -147,8 +147,8 @@ const STEPS = {
   whogains() {
     drawSchools(S.m.caps);
     drawHomes(outcomeColor("da", S.res), null);
-    readout(big(t("story.r.whogains.h", "The gains are progressive"), C.da) +
-      sub(t("story.r.whogains.s", "Mean gain by neighbourhood-schooling quartile, lowest to highest — Preschool 1: <b>+0.79, +0.68, +0.68, +0.59</b> km; Preschool 2: <b>+0.49, +0.38, +0.34, +0.15</b> km. Lowest-minus-highest: +0.20 km in Preschool 1 (95% interval +0.01 to +0.39). In Preschool 1, 51.8% of families gain, by about 1.4 km each {src2}<br>The <a href='../gains/'>who-gains page</a> maps this family by family and puts the paper’s gradient beside what this model can reproduce.",
+    readout(big(t("story.r.whogains.h", "Progressive in Preschool 2"), C.da) +
+      sub(t("story.r.whogains.s", "Mean gain by neighbourhood-schooling quartile, lowest to highest — Preschool 2: <b>+0.49, +0.38, +0.34, +0.15</b> km, a lowest-minus-highest contrast of +0.34 km (95% interval +0.09 to +0.61 resampling census blocks; permutation p = 0.010). Preschool 1: <b>+0.79, +0.68, +0.68, +0.59</b> km, a contrast of +0.20 km that covers zero once resampling respects the block (−0.01 to +0.37; p = 0.075), so the paper reads no gradient there. In Preschool 1, 51.8% of families gain, by about 1.4 km each {src2}<br>The <a href='../gains/'>who-gains page</a> maps this family by family and puts the paper’s gradient beside what this model can reproduce.",
         { src2: src2() })));
   },
   planner() {
