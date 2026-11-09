@@ -1,0 +1,125 @@
+codebook:
+  id: schools_urban_context_v1
+  description: >
+    Objective, parent-observable built- and natural-environment attributes around school
+    points in Manta, Ecuador, derived from open building footprints (Overture), Sentinel-2
+    NDVI, and LLM annotation of Mapillary street imagery + a Sentinel-2 true-color chip.
+    Intended as additional school observables (controls) in a discrete-choice demand model.
+  defaults:
+    null_allowed: true
+  attributes:
+
+    # ---------- footprint (auto; Overture via DuckDB; no key) ----------
+    - key: building_footprint_m2
+      description: Total building footprint area within the radius.
+      type: continuous
+      range: [0, 50000]
+      unit: m2
+      source: footprint
+      method: auto
+      auto: { feature: footprint_area_sum, params: { radius_m: 75 } }
+
+    - key: building_count
+      description: Number of distinct building footprints within the radius.
+      type: continuous
+      range: [0, 500]
+      source: footprint
+      method: auto
+      auto: { feature: footprint_count, params: { radius_m: 75 } }
+
+    - key: built_up_density
+      description: Share of the buffer covered by building footprints.
+      type: continuous
+      range: [0.0, 1.0]
+      source: footprint
+      method: auto
+      auto: { feature: footprint_coverage_ratio, params: { radius_m: 100 } }
+
+    # ---------- ndvi / greenery (auto; Sentinel-2 via STAC; no key) ----------
+    - key: greenery_ndvi_mean
+      description: Mean Sentinel-2 NDVI in the buffer (cloud-masked, nearest clear scene).
+      type: continuous
+      range: [-1.0, 1.0]
+      unit: index_-1_1
+      source: ndvi
+      method: auto
+      auto: { feature: ndvi_mean, params: { radius_m: 150, max_cloud_pct: 20 } }
+
+    - key: green_space_present
+      description: Whether substantial vegetation (park/field) is present in the buffer.
+      type: binary
+      source: ndvi
+      method: auto
+      auto: { feature: ndvi_threshold_any, params: { radius_m: 150, ndvi_min: 0.4 } }
+
+    # ---------- LLM over STREET imagery (Mapillary) ----------
+    - key: road_pavement
+      description: Surface of the main road fronting the school.
+      type: categorical
+      values: [paved, partially_paved, unpaved, indeterminate]
+      source: street
+      method: llm
+      prompt: Classify the surface of the main road directly in front of this location.
+      extraction_hints: >
+        Judge the through-road, not driveways. 'partially_paved' = patchy asphalt or
+        cobblestone. Use 'indeterminate' if the road is not clearly visible.
+
+    - key: sidewalk_quality
+      description: Pedestrian sidewalk condition on the school-facing side of the street.
+      type: ordinal
+      values: [none, poor, fair, good]
+      source: street
+      method: llm
+      prompt: Rate the sidewalk on the building's side of the street.
+      extraction_hints: "'none' = no dedicated sidewalk. Consider continuity, width, obstructions."
+
+    - key: building_condition
+      description: Apparent physical condition of the school building facade.
+      type: ordinal
+      values: [poor, fair, good]
+      source: street
+      method: llm
+      prompt: Rate the physical condition of the most prominent school/institutional building visible.
+      extraction_hints: >
+        Consider wall finish, paint, visible damage/disrepair. Ignore vehicles and people.
+        If no institutional building is visible, return unsure.
+
+    - key: visible_commercial_activity
+      description: Presence of shops/markets/vendors in the street view.
+      type: binary
+      source: street
+      method: llm
+      prompt: Is there visible commercial activity (storefronts, market stalls, street vendors)?
+      extraction_hints: Residential garages and homes do not count.
+
+    - key: street_safety_cues
+      description: Pedestrian-safety infrastructure visible from the street.
+      type: ordinal
+      values: [none, minimal, moderate, substantial]
+      source: street
+      method: llm
+      prompt: Assess visible pedestrian-safety features near the location.
+      extraction_hints: Count crosswalks, speed bumps, traffic signals, fencing, crossing guards.
+
+    # ---------- LLM over SATELLITE chip (our own Sentinel-2 true-color) ----------
+    - key: open_recreation_space
+      description: Adjacent open recreation area (yard, court, or field) from above.
+      type: binary
+      source: satellite
+      method: llm
+      prompt: >
+        From this top-down image, is there an adjacent open recreation space (sports court,
+        playground, or sports field) within the highlighted area?
+      extraction_hints: Rooftops and parking lots are NOT recreation space. At ~10 m resolution, look for large open green/cleared areas.
+
+    # ---------- LLM using BOTH views ----------
+    - key: surrounding_landuse
+      description: Dominant land use immediately surrounding the school.
+      type: categorical
+      values: [residential, commercial, industrial, institutional, agricultural, mixed, indeterminate]
+      source: both
+      method: llm
+      prompt: >
+        Using the street-level and satellite images together, classify the dominant
+        surrounding land use.
+      extraction_hints: Weight the satellite view for extent and the street view for building type.

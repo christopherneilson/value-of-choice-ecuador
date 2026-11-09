@@ -94,6 +94,31 @@ Every published cell is `{ "n": count, "pct": share }`; a cell whose count would
 stated beliefs to the realised assignment (all matched respondents); `representativeness` is the
 online appendix's surveyed-vs-not table.
 
+## `school_characteristics.csv`
+One row per school in the Manta market (114 schools; `inmarket` flags the 80 with in-market
+programs): `point_id` (the paper's numeric school id), `name`, `amie`, `lon`, `lat`, and for each
+imagery-derived attribute four columns, `<attribute>`, `<attribute>__confidence`,
+`<attribute>__source` (`footprint`, `ndvi`, `street`, `satellite`, `both`) and `<attribute>__date`
+(capture date of the imagery read). The ten attributes the paper uses are `building_footprint_m2`,
+`building_count`, `built_up_density`, `greenery_ndvi_mean`, `open_recreation_space`,
+`building_condition`, `sidewalk_quality`, `road_pavement`, `street_safety_cues` and
+`visible_commercial_activity`; `green_space_present` and `surrounding_landuse` are measured but
+unused. Footprint attributes come from Overture building footprints, greenery from Sentinel-2 NDVI,
+the rest from LLM coding of street-level and satellite imagery. Derived values only; the imagery is
+not redistributed, and the per-school application counts in the source table are omitted. Unlike
+`school_attributes.json`, schools are named, not anonymised: locations are public facts and no
+desirability measure is attached here.
+
+## `school_image_embeddings.csv`
+`school_id` (as `point_id` above), `n_photos` (six per school) and `img_pc1` … `img_pc8`: the
+standardised principal components of per-school mean CLIP ViT-B/32 image features over the
+school's facade and interior photographs, for the 107 schools with photographs. These are the
+"learned image dimensions" the paper enters in the prior on school desirability.
+
+## `school_characteristics_codebook.yaml`
+The codebook the extraction pipeline ran against: each attribute's source, method, radius, type,
+allowed values and, for the coded attributes, the prompt and extraction hints.
+
 ## Regenerating
 In the research repository: `make_synthetic_manta.py` (schools, applicants, grid, calibration),
 `make_school_attributes.py`, `make_survey_aggregates.py`; then `check_site_data.py` must print
